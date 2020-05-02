@@ -27,7 +27,7 @@ class TypeInput {
 
         }
 
-        this.typeRenderer = new TypeRenderer;
+        this.typeRenderer = new TypeRenderer();
         this.typeRenderer.setup(this.textColor);
 
     }
@@ -51,7 +51,7 @@ class TypeInput {
     draw()
     {
 
-        if (this.typeRenderer != null)
+        if (this.typeRenderer)
         {
 
             this.typeRenderer.draw();

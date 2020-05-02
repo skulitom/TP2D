@@ -10,7 +10,7 @@ socket.on("heartbeat", (game) => {
 
 socket.on("disconnect", playerId => removePlayer(playerId));
 
-let tInput = new TypeInput;
+let tInput = new TypeInput();
 
 function setup() {
   createCanvas(400, 400);
@@ -36,9 +36,11 @@ function updateEnemies(serverEnemies) {
 function updatePlayers(serverPlayers) {
   for (let i = 0; i < serverPlayers.length; i++) {
     let playerFromServer = serverPlayers[i];
-    if (!playerExists(playerFromServer)) {
+    if (!playerExists(playerFromServer))
+    {
       let newPlayer = new Player(playerFromServer);
       tInput.setup(newPlayer, 0);
+      console.log("player push");
       players.push(newPlayer);
     }
   }
@@ -46,7 +48,7 @@ function updatePlayers(serverPlayers) {
 
 function playerExists(playerFromServer) {
   for (let i = 0; i < players.length; i++) {
-    if (players[i].id === playerFromServer) {
+    if (players[i].id === playerFromServer.id) {
       return true;
     }
   }
