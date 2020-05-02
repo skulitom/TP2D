@@ -1,5 +1,7 @@
 /node_modules
 
+.idea/**
+
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
