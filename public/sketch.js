@@ -1,4 +1,4 @@
-const socket = io.connect('25.91.191.83');
+const socket = io.connect('http://localhost');
 
 let players = [];
 let enemies = [];
@@ -10,6 +10,7 @@ socket.on("heartbeat", (game) => {
 
 socket.on("disconnect", playerId => removePlayer(playerId));
 
+let tInput = new TypeInput;
 
 function setup() {
   createCanvas(400, 400);
@@ -19,6 +20,10 @@ function draw() {
   background(220);
   players.forEach(player => player.draw());
   enemies.forEach(enemy => enemy.draw());
+  
+  tInput.draw();
+  //text("text", 10, 30);
+  
 }
 
 function updateEnemies(serverEnemies) {
@@ -32,7 +37,9 @@ function updatePlayers(serverPlayers) {
   for (let i = 0; i < serverPlayers.length; i++) {
     let playerFromServer = serverPlayers[i];
     if (!playerExists(playerFromServer)) {
-      players.push(new Player(playerFromServer));
+      let newPlayer = new Player(playerFromServer);
+      tInput.setup(newPlayer, 0);
+      players.push(newPlayer);
     }
   }
 }
@@ -52,4 +59,11 @@ function removePlayer(playerId) {
 
 function removeEnemy(enemyId) {
   enemies = enemies.filter(enemy => enemy.id !== enemyId);
+}
+
+function keyTyped()
+{
+
+  tInput.updateInKey(key);
+
 }
