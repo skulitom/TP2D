@@ -37,7 +37,9 @@ function updateEnemies(serverEnemies) {
   for (let i = 0; i < serverEnemies.length; i++) {
     let enemyFromServer = serverEnemies[i];
     if (!enemyExists(enemyFromServer)) {
-      enemies.push(new Enemy(enemyFromServer));
+      let newEnemy = new Enemy(enemyFromServer);
+      tManager.register(newEnemy);
+      enemies.push(newEnemy);
     }
   }
 }

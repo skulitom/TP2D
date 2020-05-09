@@ -14,6 +14,9 @@ class TypeManager
     {
 
         this.targetWords.set(enemy.getId(), enemy.getWords());
+        console.log("New enemy registered");
+        console.log(enemy.getId());
+        console.log(enemy.getWords());
 
     }
 
