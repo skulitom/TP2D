@@ -2,6 +2,7 @@ class TypeManager
 {
 
     targetWords;
+    currentEnemyId;
 
     constructor()
     {
@@ -13,10 +14,24 @@ class TypeManager
     register(enemy)
     {
 
-        this.targetWords.set(enemy.getId(), enemy.getWords());
+        this.targetWords.set(enemy.getId(), enemy);
         console.log("New enemy registered");
         console.log(enemy.getId());
-        console.log(enemy.getWords());
+        console.log(enemy);
+
+    }
+
+    resetTyping()
+    {
+
+        if (this.currentEnemyId)
+        {
+        
+            const en = this.targetWords.get(this.currentEnemyId);
+            en.setTypedText("");
+            this.currentEnemyId = undefined;
+
+        }
 
     }
 
@@ -28,14 +43,28 @@ class TypeManager
         let inText = join(text, '');
         //console.log(inText);
 
-        for (let [key, enWords] of this.targetWords.entries())
+        for (let [key, enemy] of this.targetWords.entries())
         {
         
+            const enWords = enemy.getWords();
+
             if (enWords == inText)
             {
-                console.log("Enemy matched:");    
+                console.log("Enemy matched:"); 
+                enemy.setTypedText(inText);
+                enemy.kill();
+                this.currentEnemyId = undefined; 
                 //console.log(text);
                 return true;
+            }
+            else if (enWords.includes(inText))
+            {
+            
+                //console.log("Partial Enemy matched:");
+                enemy.setTypedText(inText);
+                this.currentEnemyId = enemy.getId();
+                return false;
+
             }
 
         }

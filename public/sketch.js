@@ -94,7 +94,7 @@ function keyPressed()
 
   if (keyCode  == BACKSPACE)
   {
-    tInput.popSymbol();  
+    tInput.resetInput();  
   }
 
 }
