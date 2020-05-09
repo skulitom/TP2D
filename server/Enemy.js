@@ -2,8 +2,16 @@ const randomWords = require('random-words');
 
 class Enemy {
     constructor(id) {
-        this.x = Math.random() * 400 + 1;
-        this.y = Math.random() * 400 + 1;
+        if(Math.random() >= 0.5){
+            this.x = 0;
+        } else {
+            this.x = 401
+        }
+        if(Math.random() >= 0.5){
+            this.y = 0;
+        } else {
+            this.y = 401
+        }
         this.id = id;
         this.words = randomWords();
         this.speed = 1;

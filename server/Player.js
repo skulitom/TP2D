@@ -3,6 +3,7 @@ class Player {
     this.x = Math.random() * 400 + 1;
     this.y = Math.random() * 400 + 1;
     this.id = id;
+    this.weapon = 'pistol';
 
     this.rgb = {
       r: Math.random() * 255,
