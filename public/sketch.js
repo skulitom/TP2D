@@ -58,7 +58,7 @@ function updatePlayers(serverPlayers) {
     let playerFromServer = serverPlayers[i];
     if (!playerExists(playerFromServer)) {
       let newPlayer = new Player(playerFromServer);
-      tInput.setup(newPlayer, 0);
+      tInput.setup(newPlayer, 0, tManager);
       console.log("player push");
       players.push(newPlayer);
     }
@@ -86,5 +86,15 @@ function keyTyped()
 {
 
   tInput.updateInKey(key);
+
+}
+
+function keyPressed()
+{
+
+  if (keyCode  == BACKSPACE)
+  {
+    tInput.popSymbol();  
+  }
 
 }

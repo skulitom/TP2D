@@ -23,16 +23,24 @@ class TypeManager
     setTyping(text)
     {
 
+        //console.log("typing text");
+        //console.log(text);
+        let inText = join(text, '');
+        //console.log(inText);
+
         for (let [key, enWords] of this.targetWords.entries())
         {
         
-            if (enWords == text)
+            if (enWords == inText)
             {
                 console.log("Enemy matched:");    
                 console.log(text);
+                return true;
             }
 
         }
+
+        return false;
 
     }
 
