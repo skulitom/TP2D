@@ -53,7 +53,8 @@ class TypeManager
                 console.log("Enemy matched:"); 
                 enemy.setTypedText(inText);
                 enemy.kill();
-                this.currentEnemyId = undefined; 
+                this.currentEnemyId = undefined;
+                this.targetWords.delete(key);
                 //console.log(text);
                 return true;
             }

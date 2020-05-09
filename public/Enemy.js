@@ -51,8 +51,17 @@ class Enemy {
     }
   
     draw() {
-        fill(this.rgb.r, this.rgb.g, this.rgb.b);
+        if (this.bDead){
+            fill(this.rgb.r * 0.5, this.rgb.g * 0.5, this.rgb.b * 0.5);
+        } else {
+            fill(this.rgb.r, this.rgb.g, this.rgb.b);
+        }
+        
         circle(this.x, this.y, 20);
+        
+        if (this.bDead)
+            return;
+        
         fill(0, 0, 0);
         text(this.words, this.x-50, this.y+50);
         fill(255, 0, 0);
