@@ -12,6 +12,8 @@ socket.on("disconnect", playerId => removePlayer(playerId));
 
 let tInput = new TypeInput();
 
+let tManager = new TypeManager();
+
 function setup() {
   createCanvas(400, 400);
 }
