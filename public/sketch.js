@@ -17,6 +17,7 @@ function setup() {
 }
 
 function draw() {
+  update();
   background(220);
   players.forEach(player => player.draw());
   enemies.forEach(enemy => enemy.draw());
@@ -24,6 +25,10 @@ function draw() {
   tInput.draw();
   //text("text", 10, 30);
   
+}
+
+function update() {
+  enemies.forEach(enemy => enemy.update(players[0].getX(), players[0].getY()));
 }
 
 function updateEnemies(serverEnemies) {
