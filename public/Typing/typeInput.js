@@ -60,11 +60,12 @@ class TypeInput {
 
     }
 
-    popSymbol()
+    resetInput()
     {
     
-        this.currInput.pop();
+        this.currInput = [];
         this.typeRenderer.setText(this.currInput);
+        this.tManager.resetTyping();
         //console.log("pop input");
         //console.log(this.currInput);
     

@@ -79,8 +79,11 @@ function keyTyped() {
   tInput.updateInKey(key);
 }
 
-function keyPressed() {
-  if (keyCode  == BACKSPACE) {
-    tInput.popSymbol();  
+function keyPressed()
+{
+
+  if (keyCode  == BACKSPACE)
+  {
+    tInput.resetInput();  
   }
 }
