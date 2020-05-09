@@ -37,6 +37,8 @@ class Enemy {
     draw() {
       fill(this.rgb.r, this.rgb.g, this.rgb.b);
       circle(this.x, this.y, 20);
+      fill(0, 0, 0);
+      text(this.words, this.x-50, this.y+50);
     }
   
 }

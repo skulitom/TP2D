@@ -42,7 +42,7 @@ function updateEnemies(serverEnemies) {
 
 function enemyExists(enemyFromServer) {
   for (let i = 0; i < enemies.length; i++) {
-    if (players[i].id === enemyFromServer.id) {
+    if (enemies[i].id === enemyFromServer.id) {
       return true;
     }
   }
