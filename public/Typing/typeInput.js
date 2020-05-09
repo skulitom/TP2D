@@ -8,8 +8,12 @@ class TypeInput {
     
     textColor = { "r": 0, "g": 0, "b": 0 };
 
-    setup(inOwner, side)
+    tManager
+
+    setup(inOwner, side, tManager)
     {
+
+        this.tManager = tManager;
 
         this.owner = inOwner;
         this.side = side;
@@ -37,16 +41,34 @@ class TypeInput {
 
         if (((key >= 'a') && (key <= 'z')) || ((key >= 'A') && (key <= 'Z')) || (key == ' '))
         {
+
             this.currInput.push(key);
-            console.log("new input");
-            console.log(this.currInput);
+            //console.log("new input");
+            //console.log(this.currInput);
 
             this.typeRenderer.setText(this.currInput);
+            const bMatched = this.tManager.setTyping(this.currInput);
+            if (bMatched)
+            {
+            
+                this.currInput = [];
+                this.typeRenderer.setText(this.currInput);
+
+            }
 
         }
 
     }
-  
+
+    popSymbol()
+    {
+    
+        this.currInput.pop();
+        this.typeRenderer.setText(this.currInput);
+        //console.log("pop input");
+        //console.log(this.currInput);
+    
+    }
   
     draw()
     {

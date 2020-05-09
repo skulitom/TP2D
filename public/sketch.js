@@ -12,6 +12,8 @@ socket.on("disconnect", playerId => removePlayer(playerId));
 
 let tInput = new TypeInput();
 
+let tManager = new TypeManager();
+
 function setup() {
   createCanvas(400, 400);
 }
@@ -35,7 +37,9 @@ function updateEnemies(serverEnemies) {
   for (let i = 0; i < serverEnemies.length; i++) {
     let enemyFromServer = serverEnemies[i];
     if (!enemyExists(enemyFromServer)) {
-      enemies.push(new Enemy(enemyFromServer));
+      let newEnemy = new Enemy(enemyFromServer);
+      tManager.register(newEnemy);
+      enemies.push(newEnemy);
     }
   }
 }
@@ -54,7 +58,7 @@ function updatePlayers(serverPlayers) {
     let playerFromServer = serverPlayers[i];
     if (!playerExists(playerFromServer)) {
       let newPlayer = new Player(playerFromServer);
-      tInput.setup(newPlayer, 0);
+      tInput.setup(newPlayer, 0, tManager);
       console.log("player push");
       players.push(newPlayer);
     }
@@ -82,5 +86,15 @@ function keyTyped()
 {
 
   tInput.updateInKey(key);
+
+}
+
+function keyPressed()
+{
+
+  if (keyCode  == BACKSPACE)
+  {
+    tInput.popSymbol();  
+  }
 
 }
