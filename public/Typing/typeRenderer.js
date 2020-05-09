@@ -18,8 +18,8 @@ class TypeRenderer {
     {
 
         this.textToRender = join(text, '');
-        console.log("set text");
-        console.log(this.textToRender);
+        //console.log("set text");
+        //console.log(this.textToRender);
 
     }
 

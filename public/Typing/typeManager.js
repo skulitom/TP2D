@@ -34,7 +34,7 @@ class TypeManager
             if (enWords == inText)
             {
                 console.log("Enemy matched:");    
-                console.log(text);
+                //console.log(text);
                 return true;
             }
 
