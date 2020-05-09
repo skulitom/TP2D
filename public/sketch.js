@@ -36,15 +36,25 @@ function update() {
 function updateEnemies(serverEnemies) {
   for (let i = 0; i < serverEnemies.length; i++) {
     let enemyFromServer = serverEnemies[i];
-    enemies.push(new Enemy(enemyFromServer));
+    if (!enemyExists(enemyFromServer)) {
+      enemies.push(new Enemy(enemyFromServer));
+    }
   }
+}
+
+function enemyExists(enemyFromServer) {
+  for (let i = 0; i < enemies.length; i++) {
+    if (players[i].id === enemyFromServer.id) {
+      return true;
+    }
+  }
+  return false;
 }
 
 function updatePlayers(serverPlayers) {
   for (let i = 0; i < serverPlayers.length; i++) {
     let playerFromServer = serverPlayers[i];
-    if (!playerExists(playerFromServer))
-    {
+    if (!playerExists(playerFromServer)) {
       let newPlayer = new Player(playerFromServer);
       tInput.setup(newPlayer, 0);
       console.log("player push");
