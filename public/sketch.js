@@ -1,7 +1,7 @@
 const socket = io.connect('http://localhost');
 
-let players = [];
-let enemies = [];
+let players = new Map();
+let enemies = new Map();
 
 socket.on("heartbeat", (game) => {
   updatePlayers(game.players);
@@ -21,6 +21,7 @@ function setup() {
 function draw() {
   update();
   background(220);
+  console.log(players);
   players.forEach(player => player.draw());
   enemies.forEach(enemy => enemy.draw());
   
@@ -39,18 +40,13 @@ function updateEnemies(serverEnemies) {
     if (!enemyExists(enemyFromServer)) {
       let newEnemy = new Enemy(enemyFromServer);
       tManager.register(newEnemy);
-      enemies.push(newEnemy);
+      enemies.set(newEnemy.id, newEnemy);
     }
   }
 }
 
 function enemyExists(enemyFromServer) {
-  for (let i = 0; i < enemies.length; i++) {
-    if (enemies[i].id === enemyFromServer.id) {
-      return true;
-    }
-  }
-  return false;
+    return enemies.has(enemyFromServer.id);
 }
 
 function updatePlayers(serverPlayers) {
@@ -60,41 +56,29 @@ function updatePlayers(serverPlayers) {
       let newPlayer = new Player(playerFromServer);
       tInput.setup(newPlayer, 0, tManager);
       console.log("player push");
-      players.push(newPlayer);
+      players.set(newPlayer.id, newPlayer);
     }
   }
 }
 
 function playerExists(playerFromServer) {
-  for (let i = 0; i < players.length; i++) {
-    if (players[i].id === playerFromServer.id) {
-      return true;
-    }
-  }
-  return false;
+  return players.has(playerFromServer.id);
 }
 
 function removePlayer(playerId) {
-  players = players.filter(player => player.id !== playerId);
+  players = players.delete(playerId);
 }
 
 function removeEnemy(enemyId) {
-  enemies = enemies.filter(enemy => enemy.id !== enemyId);
+  enemies = enemies.delete(enemyId);
 }
 
-function keyTyped()
-{
-
+function keyTyped() {
   tInput.updateInKey(key);
-
 }
 
-function keyPressed()
-{
-
-  if (keyCode  == BACKSPACE)
-  {
+function keyPressed() {
+  if (keyCode  == BACKSPACE) {
     tInput.popSymbol();  
   }
-
 }

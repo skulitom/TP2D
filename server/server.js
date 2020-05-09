@@ -40,8 +40,8 @@ io.sockets.on("disconnect", socket => {
 
 function updateGame() {
   timer++;
-  if(timer-1000 > 0) {
-    timer-=1000;
+  if(timer-100 > 0) {
+    timer-=100;
     game.enemies.push(new Enemy(shortid.generate()));
   }
   io.sockets.emit("heartbeat", game);

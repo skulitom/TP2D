@@ -5,6 +5,7 @@ class Player {
     this.id = player.id;
     this.rgb = player.rgb;
     this.weapon = player.weapon;
+    this.health = player.health;
   }
 
   getX() {
