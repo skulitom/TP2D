@@ -6,6 +6,14 @@ class Player {
     this.rgb = player.rgb;
   }
 
+  getX() {
+    return this.x;
+  }
+
+  getY() {
+    return this.y;
+  }
+
 
   draw() {
     fill(this.rgb.r, this.rgb.g, this.rgb.b);

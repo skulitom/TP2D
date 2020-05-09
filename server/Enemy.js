@@ -6,6 +6,7 @@ class Enemy {
         this.y = Math.random() * 400 + 1;
         this.id = id;
         this.words = randomWords();
+        this.speed = 1;
 
         this.rgb = {
             r: 255,
