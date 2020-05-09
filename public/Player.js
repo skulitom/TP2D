@@ -19,6 +19,8 @@ class Player {
   draw() {
     fill(this.rgb.r, this.rgb.g, this.rgb.b);
     circle(this.x, this.y, 20);
+    fill(0, 0, 0);
+    rect(this.x-10, this.y-10, 5, 5);
   }
 
 }
