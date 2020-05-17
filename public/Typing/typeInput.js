@@ -47,13 +47,16 @@ class TypeInput {
             //console.log(this.currInput);
 
             this.typeRenderer.setText(this.currInput);
-            const bMatched = this.tManager.setTyping(this.currInput);
-            if (bMatched)
+            const result = this.tManager.setTyping(this.currInput);
+            //console.log(result);
+            if ((result == TM_TYPING_FULLMATCH) || (result == TM_TYPING_TYPO_RESET))
             {
-            
                 this.currInput = [];
                 this.typeRenderer.setText(this.currInput);
-
+            }
+            else if (result == TM_TYPING_TYPO)
+            {
+                this.currInput.pop();
             }
 
         }

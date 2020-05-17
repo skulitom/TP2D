@@ -21,7 +21,7 @@ function setup() {
 function draw() {
   update();
   background(220);
-  console.log(players);
+  //console.log(players);
   players.forEach(player => player.draw());
   enemies.forEach(enemy => enemy.draw());
   
