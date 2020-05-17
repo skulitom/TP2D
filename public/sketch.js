@@ -15,13 +15,12 @@ let tInput = new TypeInput();
 let tManager = new TypeManager();
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(1366, 768);
 }
 
 function draw() {
   update();
   background(220);
-  console.log(players);
   players.forEach(player => player.draw());
   enemies.forEach(enemy => enemy.draw());
   

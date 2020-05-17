@@ -9,7 +9,6 @@ let timer = 0;
 let server = app.listen(80);
 app.use(express.static("public"));
 
-
 let io = socket(server);
 
 let game = {
@@ -18,6 +17,11 @@ let game = {
 };
 
 setInterval(updateGame, 16);
+
+app.get('/killEnemy/:id', (req, res) => {
+  game.enemies = game.enemies.filter(enemy.id !== req.params.id);
+  res.send('Success');
+});
 
 io.sockets.on("connection", socket => {
   console.log(`New connection ${socket.id}`);
@@ -40,8 +44,8 @@ io.sockets.on("disconnect", socket => {
 
 function updateGame() {
   timer++;
-  if(timer-100 > 0) {
-    timer-=100;
+  if(timer-200 > 0) {
+    timer-=200;
     game.enemies.push(new Enemy(shortid.generate()));
   }
   io.sockets.emit("heartbeat", game);

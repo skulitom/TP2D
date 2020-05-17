@@ -2,15 +2,19 @@ const randomWords = require('random-words');
 
 class Enemy {
     constructor(id) {
-        if(Math.random() >= 0.5){
+        let random = Math.random();
+        if(random <= 0.25){
             this.x = 0;
-        } else {
-            this.x = 401
-        }
-        if(Math.random() >= 0.5){
+            this.y = Math.random()*768 + 1;
+        } else if(random <= 0.5) {
+            this.x = 1367;
+            this.y = Math.random()* 768 + 1;
+        } else if(random <= 0.75) {
             this.y = 0;
+            this.x = Math.random()*1366 +1;
         } else {
-            this.y = 401
+            this.y = 769;
+            this.x = Math.random()*1366 +1;
         }
         this.id = id;
         this.words = randomWords();
