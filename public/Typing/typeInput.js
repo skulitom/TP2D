@@ -46,7 +46,7 @@ class TypeInput {
             //console.log("new input");
             //console.log(this.currInput);
 
-            this.typeRenderer.setText(this.currInput);
+            //this.typeRenderer.setText(this.currInput);
             const result = this.tManager.setTyping(this.currInput);
             //console.log(result);
             if ((result == TM_TYPING_FULLMATCH) || (result == TM_TYPING_TYPO_RESET))
@@ -54,7 +54,7 @@ class TypeInput {
                 this.currInput = [];
                 this.typeRenderer.setText(this.currInput);
             }
-            else if (result == TM_TYPING_TYPO)
+            else if ((result == TM_TYPING_TYPO) || (result == TM_TYPING_TYPO_NO_MATCH))
             {
                 this.currInput.pop();
             }

@@ -2,7 +2,8 @@ const TM_TYPING_FULLMATCH = 0;
 const TM_TYPING_PARTMATCH = 1;
 const TM_TYPING_TYPO = 2;
 const TM_TYPING_TYPO_RESET = 3;
-const TM_TYPING_NOTHING = 4;
+const TM_TYPING_TYPO_NO_MATCH = 4;
+const TM_TYPING_NOTHING = 5;
 
 class TypeManager
 {
@@ -50,7 +51,7 @@ class TypeManager
         //console.log("typing text");
         //console.log(text);
         let inText = join(text, '');
-        console.log(inText);
+        //console.log(inText);
         //console.log(this.currentEnemyId);
         for (let [key, enemy] of this.targetWords.entries())
         {
@@ -96,8 +97,8 @@ class TypeManager
             }
 
         }
-
-        return TM_TYPING_NOTHING;
+        console.log("No match");
+        return TM_TYPING_TYPO_NO_MATCH;
 
     }
 
