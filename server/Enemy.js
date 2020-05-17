@@ -19,6 +19,7 @@ class Enemy {
         this.id = id;
         this.words = randomWords();
         this.speed = 1;
+        this.bDead = false;
 
         this.rgb = {
             r: 255,
