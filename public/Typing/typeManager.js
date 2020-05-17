@@ -69,7 +69,7 @@ class TypeManager
                 //console.log(text);
                 return TM_TYPING_FULLMATCH;
             }
-            else if (enWords.includes(inText) && ((this.currentEnemyId == key) || (this.currentEnemyId == null)))
+            else if (enWords.startsWith(inText) && ((this.currentEnemyId == key) || (this.currentEnemyId == null)))
             {
             
                 console.log("Partial Enemy matched:");
