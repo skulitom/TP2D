@@ -10,9 +10,6 @@ socket.on("heartbeat", (game) => {
 
 socket.on("disconnect", playerId => removePlayer(playerId));
 
-let tInput = new TypeInput();
-
-let tManager = new TypeManager();
 
 function setup() {
   createCanvas(1366, 768);
@@ -23,8 +20,7 @@ function draw() {
   background(220);
   players.forEach(player => player.draw());
   enemies.forEach(enemy => enemy.draw());
-  
-  tInput.draw();
+
   //text("text", 10, 30);
   
 }
@@ -40,7 +36,6 @@ function updateEnemies(serverEnemies) {
     let enemyFromServer = serverEnemies[i];
     if (!enemyExists(enemyFromServer)) {
       let newEnemy = new Enemy(enemyFromServer);
-      tManager.register(newEnemy);
       enemies.set(newEnemy.id, newEnemy);
     }
   }
@@ -55,7 +50,6 @@ function updatePlayers(serverPlayers) {
     let playerFromServer = serverPlayers[i];
     if (!playerExists(playerFromServer)) {
       let newPlayer = new Player(playerFromServer);
-      tInput.setup(newPlayer, 0, tManager);
       console.log("player push");
       players.set(newPlayer.id, newPlayer);
     }
@@ -75,14 +69,10 @@ function removeEnemy(enemyId) {
 }
 
 function keyTyped() {
-  tInput.updateInKey(key);
-}
-
-function keyPressed()
-{
-
-  if (keyCode  == BACKSPACE)
-  {
-    tInput.resetInput();  
-  }
+  fetch('/registerKey/'+key+'/'+socket.id)
+      .then( res => {
+        console.log(res);
+      }).catch(err => {
+    console.log('Fetch Error :-S', err);
+  });
 }

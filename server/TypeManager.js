@@ -1,9 +1,4 @@
-const TM_TYPING_FULLMATCH = 0;
-const TM_TYPING_PARTMATCH = 1;
-const TM_TYPING_TYPO = 2;
-const TM_TYPING_TYPO_RESET = 3;
-const TM_TYPING_TYPO_NO_MATCH = 4;
-const TM_TYPING_NOTHING = 5;
+const consts = require('./constants/TypingConstants');
 
 class TypeManager
 {
@@ -12,7 +7,7 @@ class TypeManager
     currentEnemyId;
     numOfTypos = 0;
 
-    
+
 
     constructor()
     {
@@ -36,7 +31,7 @@ class TypeManager
 
         if (this.currentEnemyId)
         {
-        
+
             const en = this.targetWords.get(this.currentEnemyId);
             en.setTypedText("");
             this.currentEnemyId = undefined;
@@ -50,55 +45,55 @@ class TypeManager
 
         //console.log("typing text");
         //console.log(text);
-        let inText = join(text, '');
+        let inText = text.join( '');
         //console.log(inText);
         //console.log(this.currentEnemyId);
         for (let [key, enemy] of this.targetWords.entries())
         {
-        
+
             const enWords = enemy.getWords();
 
             if ((enWords == inText) && ((this.currentEnemyId == key)))
             {
-                console.log("Enemy matched:"); 
+                console.log("Enemy matched:");
                 this.numOfTypos = 0;
-                
+
                 enemy.setTypedText(inText);
                 enemy.kill();
                 this.currentEnemyId = undefined;
                 this.targetWords.delete(key);
                 //console.log(text);
-                return TM_TYPING_FULLMATCH;
+                return consts.TM_TYPING_FULLMATCH;
             }
             else if (enWords.startsWith(inText) && ((this.currentEnemyId == key) || (this.currentEnemyId == null)))
             {
-            
+
                 console.log("Partial Enemy matched:");
                 this.numOfTypos = 0;
-                
+
                 enemy.setTypedText(inText);
                 this.currentEnemyId = enemy.getId();
-                return TM_TYPING_PARTMATCH;
+                return consts.TM_TYPING_PARTMATCH;
 
             }
             else if (this.currentEnemyId == key)
             {
-                
+
                 this.numOfTypos = this.numOfTypos + 1;
                 if (this.numOfTypos >= 3)
                 {
                     this.numOfTypos = 0;
-                    this.resetTyping();    
+                    this.resetTyping();
                     this.currentEnemyId = undefined;
-                    return TM_TYPING_TYPO_RESET;
+                    return consts.TM_TYPING_TYPO_RESET;
                 }
-                return TM_TYPING_TYPO;
+                return consts.TM_TYPING_TYPO;
 
             }
 
         }
         console.log("No match");
-        return TM_TYPING_TYPO_NO_MATCH;
+        return consts.TM_TYPING_TYPO_NO_MATCH;
 
     }
 
@@ -110,3 +105,5 @@ class TypeManager
     }
 
 }
+
+module.exports = TypeManager;

@@ -5,9 +5,9 @@ class Enemy {
         this.id = enemy.id;
         this.rgb = enemy.rgb;
         this.words = enemy.words;
-        this.typedWords = "";
+        this.typedWords = enemy.typedWords;
         this.speed = enemy.speed;
-        this.bDead = false;
+        this.bDead = enemy.bDead;
     }
 
     getId() {

@@ -19,6 +19,7 @@ class Enemy {
         this.id = id;
         this.words = randomWords();
         this.speed = 1;
+        this.typedWords = "";
         this.bDead = false;
 
         this.rgb = {
@@ -26,6 +27,32 @@ class Enemy {
             g: 0,
             b: 0,
         }
+    }
+
+    getId() {
+        return this.id;
+    }
+
+    getWords() {
+        return this.words;
+    }
+
+    getSpeed() {
+        return this.speed;
+    }
+
+    setTypedText(text) {
+        this.typedWords = text;
+    }
+
+    kill() {
+        fetch('/killEnemy/'+this.id)
+            .then( res => {
+                console.log(res);
+            }).catch(err => {
+            console.log('Fetch Error :-S', err);
+        });
+        this.bDead = true;
     }
 }
 
