@@ -1,8 +1,17 @@
+const TM_TYPING_FULLMATCH = 0;
+const TM_TYPING_PARTMATCH = 1;
+const TM_TYPING_TYPO = 2;
+const TM_TYPING_TYPO_RESET = 3;
+const TM_TYPING_NOTHING = 4;
+
 class TypeManager
 {
 
     targetWords;
     currentEnemyId;
+    numOfTypos = 0;
+
+    
 
     constructor()
     {
@@ -15,9 +24,9 @@ class TypeManager
     {
 
         this.targetWords.set(enemy.getId(), enemy);
-        console.log("New enemy registered");
-        console.log(enemy.getId());
-        console.log(enemy);
+        //console.log("New enemy registered");
+        //console.log(enemy.getId());
+        //console.log(enemy);
 
     }
 
@@ -41,36 +50,54 @@ class TypeManager
         //console.log("typing text");
         //console.log(text);
         let inText = join(text, '');
-        //console.log(inText);
-
+        console.log(inText);
+        //console.log(this.currentEnemyId);
         for (let [key, enemy] of this.targetWords.entries())
         {
         
             const enWords = enemy.getWords();
 
-            if (enWords == inText)
+            if ((enWords == inText) && ((this.currentEnemyId == key)))
             {
                 console.log("Enemy matched:"); 
+                this.numOfTypos = 0;
+                
                 enemy.setTypedText(inText);
                 enemy.kill();
                 this.currentEnemyId = undefined;
                 this.targetWords.delete(key);
                 //console.log(text);
-                return true;
+                return TM_TYPING_FULLMATCH;
             }
-            else if (enWords.includes(inText))
+            else if (enWords.includes(inText) && ((this.currentEnemyId == key) || (this.currentEnemyId == null)))
             {
             
-                //console.log("Partial Enemy matched:");
+                console.log("Partial Enemy matched:");
+                this.numOfTypos = 0;
+                
                 enemy.setTypedText(inText);
                 this.currentEnemyId = enemy.getId();
-                return false;
+                return TM_TYPING_PARTMATCH;
+
+            }
+            else if (this.currentEnemyId == key)
+            {
+                
+                this.numOfTypos = this.numOfTypos + 1;
+                if (this.numOfTypos >= 3)
+                {
+                    this.numOfTypos = 0;
+                    this.resetTyping();    
+                    this.currentEnemyId = undefined;
+                    return TM_TYPING_TYPO_RESET;
+                }
+                return TM_TYPING_TYPO;
 
             }
 
         }
 
-        return false;
+        return TM_TYPING_NOTHING;
 
     }
 
