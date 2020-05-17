@@ -19,7 +19,7 @@ let game = {
 setInterval(updateGame, 16);
 
 app.get('/killEnemy/:id', (req, res) => {
-  game.enemies = game.enemies.filter(enemy.id !== req.params.id);
+  game.enemies = game.enemies.filter(enemy => enemy.id !== req.params.id);
   res.send('Success');
 });
 
@@ -37,7 +37,7 @@ io.sockets.on("connection", socket => {
 io.sockets.on("disconnect", socket => {
   io.sockets.emit("disconnect", socket.id);
 
-  game.players = game.players.filter(player.id !== socket.id);
+  game.players = game.players.filter(player => player.id !== socket.id);
 });
 
 
