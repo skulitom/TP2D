@@ -37,6 +37,9 @@ function updateEnemies(serverEnemies) {
     if (!enemyExists(enemyFromServer)) {
       let newEnemy = new Enemy(enemyFromServer);
       enemies.set(newEnemy.id, newEnemy);
+    } else {
+      let modEnemy = enemies.get(enemyFromServer.id);
+      modEnemy.modify(enemyFromServer);
     }
   }
 }
@@ -57,7 +60,11 @@ function updatePlayers(serverPlayers) {
 }
 
 function playerExists(playerFromServer) {
-  return players.has(playerFromServer.id);
+  if(players) {
+    return players.has(playerFromServer.id);
+  } else {
+    return false;
+  }
 }
 
 function removePlayer(playerId) {

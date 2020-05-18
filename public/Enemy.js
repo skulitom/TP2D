@@ -10,6 +10,12 @@ class Enemy {
         this.bDead = enemy.bDead;
     }
 
+    modify(enemy) {
+        this.typedWords = enemy.typedWords;
+        this.speed = enemy.speed;
+        this.bDead = enemy.bDead;
+    }
+
     getId() {
         return this.id;
     }

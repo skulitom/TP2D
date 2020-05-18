@@ -22,13 +22,14 @@ setInterval(updateGame, 16);
 
 app.get('/killEnemy/:id', (req, res) => {
   game.enemies = game.enemies.filter(enemy => enemy.id !== req.params.id);
-  res.send('Success');
+  res.sendStatus(200);
 });
 
 app.get('/registerKey/:key/:id', (req, res) => {
   const playerIndex = game.players.findIndex(player => player.id === req.params.id);
   const result = game.players[playerIndex].setKey(req.params.key);
-  res.send(result);
+  res.writeHead(200, { 'Content-Type': 'text/xml' });
+  res.end(result.toString());
 });
 
 io.sockets.on("connection", socket => {

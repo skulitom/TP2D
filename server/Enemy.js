@@ -46,13 +46,8 @@ class Enemy {
     }
 
     kill() {
-        fetch('/killEnemy/'+this.id)
-            .then( res => {
-                console.log(res);
-            }).catch(err => {
-            console.log('Fetch Error :-S', err);
-        });
         this.bDead = true;
+        this.speed = 0;
     }
 }
 
