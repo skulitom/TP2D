@@ -55,6 +55,9 @@ function updatePlayers(serverPlayers) {
       let newPlayer = new Player(playerFromServer);
       console.log("player push");
       players.set(newPlayer.id, newPlayer);
+    } else {
+      let modPlayer = players.get(playerFromServer.id);
+      modPlayer.modify(playerFromServer);
     }
   }
 }

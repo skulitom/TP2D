@@ -8,11 +8,20 @@ class Player {
     this.weapon = 'pistol';
     this.health = 100;
     this.typeInput = new TypeInput(0, tManager);
+    this.bDead = false;
 
     this.rgb = {
       r: Math.random() * 255,
       g: Math.random() * 255,
       b: Math.random() * 255,
+    }
+  }
+
+  hit(damage) {
+    if(this.health<=damage){
+      this.health=0;
+    } else {
+      this.health-=damage;
     }
   }
 

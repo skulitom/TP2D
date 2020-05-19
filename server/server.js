@@ -58,6 +58,9 @@ function updateGame() {
       game.enemies.forEach((value, key) => {
         let player = game.players.entries().next().value[1];
         value.update(player.x, player.y);
+        if(value.getIsInHitArea()){
+          player.hit(value.getHitPower());
+        }
       });
     }
   }

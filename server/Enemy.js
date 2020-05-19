@@ -21,6 +21,8 @@ class Enemy {
         this.speed = 1;
         this.typedWords = "";
         this.bDead = false;
+        this.inHitArea = false;
+        this.hitPower = 1;
 
         this.rgb = {
             r: 255,
@@ -41,6 +43,14 @@ class Enemy {
         return this.speed;
     }
 
+    getIsInHitArea() {
+        return this.inHitArea;
+    }
+
+    getHitPower() {
+        return this.hitPower;
+    }
+
     setTypedText(text) {
         this.typedWords = text;
     }
@@ -49,6 +59,9 @@ class Enemy {
         const rotation = Math.atan2(playerPosY - this.y, playerPosX - this.x);
         this.x += Math.cos(rotation) * this.speed;
         this.y += Math.sin(rotation) * this.speed;
+        if(Math.abs(playerPosY-this.y) < 5 && Math.abs(playerPosX-this.x) < 5) {
+            this.inHitArea = true;
+        }
     }
 
     kill() {
