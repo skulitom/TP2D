@@ -56,6 +56,9 @@ class Enemy {
     }
 
     update(playerPosX, playerPosY){
+        if(this.bDead) {
+            return;
+        }
         const rotation = Math.atan2(playerPosY - this.y, playerPosX - this.x);
         this.x += Math.cos(rotation) * this.speed;
         this.y += Math.sin(rotation) * this.speed;
@@ -67,6 +70,8 @@ class Enemy {
     kill() {
         this.bDead = true;
         this.speed = 0;
+        this.hitPower = 0;
+        this.inHitArea = false;
     }
 }
 

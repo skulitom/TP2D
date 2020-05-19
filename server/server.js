@@ -49,20 +49,22 @@ io.sockets.on("disconnect", socket => {
   game.players = game.players.filter(player => player.id !== socket.id);
 });
 
-
+function distributeDamage(timer, enemy, player) {
+  if(Math.floor(timer%10)===0) {
+    if(enemy.getIsInHitArea()){
+      player.hit(enemy.getHitPower());
+    }
+  }
+}
 
 function updateGame() {
   timer++;
-  if(game.enemies && game.players) {
-    if(game.players.entries().next().value) {
-      game.enemies.forEach((value, key) => {
-        let player = game.players.entries().next().value[1];
-        value.update(player.x, player.y);
-        if(value.getIsInHitArea()){
-          player.hit(value.getHitPower());
-        }
-      });
-    }
+  if(game.players.entries().next().value) {
+    game.enemies.forEach((value, key) => {
+      let player = game.players.entries().next().value[1];
+      value.update(player.x, player.y);
+      distributeDamage(timer, value, player);
+    });
   }
   if(timer-200 > 0) {
     timer-=200;
