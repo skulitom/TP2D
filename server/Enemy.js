@@ -46,19 +46,9 @@ class Enemy {
     }
 
     update(playerPosX, playerPosY){
-        if(Math.random() >= 0.5) {
-            if (this.x - playerPosX > 0) {
-                this.x -= this.speed;
-            } else if (this.x - playerPosX < 0) {
-                this.x += this.speed;
-            }
-        } else {
-            if (this.y - playerPosY > 0) {
-                this.y -= this.speed;
-            } else if (this.y - playerPosY < 0) {
-                this.y += this.speed;
-            }
-        }
+        const rotation = Math.atan2(playerPosY - this.y, playerPosX - this.x);
+        this.x += Math.cos(rotation) * this.speed;
+        this.y += Math.sin(rotation) * this.speed;
     }
 
     kill() {
