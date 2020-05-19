@@ -14,6 +14,8 @@ class Enemy {
         this.typedWords = enemy.typedWords;
         this.speed = enemy.speed;
         this.bDead = enemy.bDead;
+        this.x = enemy.x;
+        this.y = enemy.y;
     }
 
     getId() {
@@ -42,24 +44,9 @@ class Enemy {
         this.bDead = true;
     }
 
-    update(playerPosX, playerPosY) {
-
+    update() {
         if (this.bDead)
             return;
-
-        if(Math.random() >= 0.5) {
-            if (this.x - playerPosX > 0) {
-                this.x -= this.speed;
-            } else if (this.x - playerPosX < 0) {
-                this.x += this.speed;
-            }
-        } else {
-            if (this.y - playerPosY > 0) {
-                this.y -= this.speed;
-            } else if (this.y - playerPosY < 0) {
-                this.y += this.speed;
-            }
-        }
     }
   
     draw() {

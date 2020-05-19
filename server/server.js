@@ -53,6 +53,14 @@ io.sockets.on("disconnect", socket => {
 
 function updateGame() {
   timer++;
+  if(game.enemies && game.players) {
+    if(game.players.entries().next().value) {
+      game.enemies.forEach((value, key) => {
+        let player = game.players.entries().next().value[1];
+        value.update(player.x, player.y);
+      });
+    }
+  }
   if(timer-200 > 0) {
     timer-=200;
     let enemy = new Enemy(shortid.generate());

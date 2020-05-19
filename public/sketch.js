@@ -27,7 +27,7 @@ function draw() {
 
 function update() {
   enemies.forEach(enemy => {
-    enemy.update(players.values().next().value.getX(), players.values().next().value.getY())
+    enemy.update()
   });
 }
 

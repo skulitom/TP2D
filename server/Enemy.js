@@ -45,6 +45,22 @@ class Enemy {
         this.typedWords = text;
     }
 
+    update(playerPosX, playerPosY){
+        if(Math.random() >= 0.5) {
+            if (this.x - playerPosX > 0) {
+                this.x -= this.speed;
+            } else if (this.x - playerPosX < 0) {
+                this.x += this.speed;
+            }
+        } else {
+            if (this.y - playerPosY > 0) {
+                this.y -= this.speed;
+            } else if (this.y - playerPosY < 0) {
+                this.y += this.speed;
+            }
+        }
+    }
+
     kill() {
         this.bDead = true;
         this.speed = 0;
