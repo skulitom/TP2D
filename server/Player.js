@@ -1,13 +1,13 @@
 let TypeInput = require('./TypeInput');
 
 class Player {
-  constructor(id, tManager) {
+  constructor(id, side, tManager) {
     this.x = Math.floor(1366/2);
     this.y = Math.floor(768/2);
     this.id = id;
     this.weapon = 'pistol';
     this.health = 100;
-    this.typeInput = new TypeInput(0, tManager);
+    this.typeInput = new TypeInput(side, tManager);
     this.bDead = false;
 
     this.rgb = {
@@ -24,6 +24,14 @@ class Player {
     } else {
       this.health-=damage;
     }
+  }
+
+  moveAway() {
+    this.x -= 100;
+  }
+
+  moveBack() {
+    this.x += 100;
   }
 
   setKey(key) {

@@ -13,6 +13,8 @@ class Player {
     this.weapon = player.weapon;
     this.health = player.health;
     this.bDead = player.bDead;
+    this.x = player.x;
+    this.y = player.y;
   }
 
   getX() {

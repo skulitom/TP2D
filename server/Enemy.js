@@ -24,12 +24,17 @@ class Enemy {
         this.inHitArea = false;
         this.hitPower = 1;
         this.size = 20;
+        this.fillRGB = {
+            r: 255,
+            g: 0,
+            b: 0,
+        };
 
         this.rgb = {
             r: 255,
             g: 0,
             b: 0,
-        }
+        };
     }
 
     getId() {
@@ -42,6 +47,10 @@ class Enemy {
 
     getSpeed() {
         return this.speed;
+    }
+
+    setFillRgb(rgb) {
+        this.fillRGB = rgb;
     }
 
     getIsInHitArea() {

@@ -40,7 +40,7 @@ class TypeManager
 
     }
 
-    setTyping(text)
+    setTyping(rgb, text)
     {
 
         //console.log("typing text");
@@ -72,6 +72,7 @@ class TypeManager
                 console.log("Partial Enemy matched:");
                 this.numOfTypos = 0;
 
+                enemy.setFillRgb(rgb);
                 enemy.setTypedText(inText);
                 this.currentEnemyId = enemy.getId();
                 return consts.TM_TYPING_PARTMATCH;

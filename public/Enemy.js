@@ -4,6 +4,7 @@ class Enemy {
         this.y = enemy.y;
         this.id = enemy.id;
         this.rgb = enemy.rgb;
+        this.fillRGB = enemy.fillRGB;
         this.words = enemy.words;
         this.typedWords = enemy.typedWords;
         this.speed = enemy.speed;
@@ -13,6 +14,7 @@ class Enemy {
 
     modify(enemy) {
         this.typedWords = enemy.typedWords;
+        this.fillRGB = enemy.fillRGB;
         this.speed = enemy.speed;
         this.bDead = enemy.bDead;
         this.x = enemy.x;
@@ -64,7 +66,7 @@ class Enemy {
         
         fill(0, 0, 0);
         text(this.words, this.x-50, this.y+50);
-        fill(255, 0, 0);
+        fill(this.fillRGB.r, this.fillRGB.g, this.fillRGB.b);
         text(this.typedWords, this.x - 50, this.y + 50);
     }
   

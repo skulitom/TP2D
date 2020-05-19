@@ -18,11 +18,8 @@ function setup() {
 function draw() {
   update();
   background(220);
-  players.forEach(player => player.draw());
   enemies.forEach(enemy => enemy.draw());
-
-  //text("text", 10, 30);
-  
+  players.forEach(player => player.draw());
 }
 
 function update() {

@@ -35,10 +35,12 @@ app.get('/registerKey/:key/:id', (req, res) => {
 
 io.sockets.on("connection", socket => {
   console.log(`New connection ${socket.id}`);
-  game.players.push(new Player(socket.id, tManager));
+  game.players.forEach(player => player.moveAway());
+  game.players.push(new Player(socket.id, game.players.length, tManager));
 
   socket.on("disconnect", () => {
     io.sockets.emit("disconnect", socket.id);
+    game.players.forEach(player => player.moveBack());
     game.players = game.players.filter(player => player.id !== socket.id);
   });
 });
