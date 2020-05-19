@@ -4,6 +4,7 @@ const app = express();
 const shortid = require('shortid');
 let Player = require('./Player');
 let Enemy = require('./Enemy');
+let Loot = require('./Loot');
 let BossEnemy = require('./BossEnemy');
 let TypeManager = require('./TypeManager');
 let timer = 0;
@@ -17,6 +18,7 @@ let tManager = new TypeManager();
 let game = {
   'players': [],
   'enemies': [],
+  'loot': []
 };
 
 setInterval(updateGame, 16);
@@ -66,6 +68,7 @@ function updateGame() {
     let enemy = new BossEnemy(shortid.generate());
     game.enemies.push(enemy);
     tManager.register(enemy);
+    //game.loot.push(new Loot(shortid.generate()));
   }
   if(game.players.entries().next().value) {
     game.enemies.forEach((value, key) => {

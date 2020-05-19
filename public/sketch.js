@@ -2,10 +2,12 @@ const socket = io.connect('http://localhost');
 
 let players = new Map();
 let enemies = new Map();
+let lootList = new Map();
 
 socket.on("heartbeat", (game) => {
   updatePlayers(game.players);
   updateEnemies(game.enemies);
+  updateLoot(game.loot)
 });
 
 socket.on("disconnect", playerId => removePlayer(playerId));
@@ -19,6 +21,7 @@ function draw() {
   update();
   background(220);
   enemies.forEach(enemy => enemy.draw());
+  lootList.forEach(loot => loot.draw());
   players.forEach(player => player.draw());
 }
 
@@ -56,6 +59,27 @@ function updatePlayers(serverPlayers) {
       let modPlayer = players.get(playerFromServer.id);
       modPlayer.modify(playerFromServer);
     }
+  }
+}
+
+function updateLoot(serverLoot) {
+  for (let i = 0; i < serverLoot.length; i++) {
+    let lootFromServer = serverLoot[i];
+    if (!lootExists(lootFromServer)) {
+      let newLoot = new Loot(lootFromServer);
+      lootList.set(newLoot.id, newLoot);
+    } else {
+      let modLoot = lootList.get(lootFromServer.id);
+      modLoot.modify(lootFromServer);
+    }
+  }
+}
+
+function lootExists(lootFromServer) {
+  if(lootList) {
+    return lootList.has(lootFromServer.id);
+  } else {
+    return false;
   }
 }
 
