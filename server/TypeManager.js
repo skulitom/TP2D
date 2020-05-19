@@ -45,15 +45,16 @@ class TypeManager
 
         //console.log("typing text");
         //console.log(text);
-        let inText = text.join( '');
+        let inText = text.join( '').trim();
         //console.log(inText);
         //console.log(this.currentEnemyId);
         for (let [key, enemy] of this.targetWords.entries())
         {
 
             const enWords = enemy.getWords();
+            this.currentEnemyId = enemy.getId();
 
-            if ((enWords == inText) && ((this.currentEnemyId == key)))
+            if ((enWords === inText) && ((this.currentEnemyId === key)))
             {
                 console.log("Enemy matched:");
                 this.numOfTypos = 0;
@@ -65,7 +66,7 @@ class TypeManager
                 //console.log(text);
                 return consts.TM_TYPING_FULLMATCH;
             }
-            else if (enWords.startsWith(inText) && ((this.currentEnemyId == key) || (this.currentEnemyId == null)))
+            else if (enWords.startsWith(inText) && ((this.currentEnemyId === key) || (this.currentEnemyId == null)))
             {
 
                 console.log("Partial Enemy matched:");
@@ -76,7 +77,7 @@ class TypeManager
                 return consts.TM_TYPING_PARTMATCH;
 
             }
-            else if (this.currentEnemyId == key)
+            else if (this.currentEnemyId === key)
             {
 
                 this.numOfTypos = this.numOfTypos + 1;

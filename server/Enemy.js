@@ -1,4 +1,4 @@
-const randomWords = require('random-words');
+const consts = require('./constants/EnemyConstants');
 
 class Enemy {
     constructor(id) {
@@ -17,12 +17,13 @@ class Enemy {
             this.x = Math.random()*1366 +1;
         }
         this.id = id;
-        this.words = randomWords();
+        this.words = consts.CHARACTERS.charAt(Math.floor(Math.random() * consts.CHARACTERS.length));
         this.speed = 1;
         this.typedWords = "";
         this.bDead = false;
         this.inHitArea = false;
         this.hitPower = 1;
+        this.size = 20;
 
         this.rgb = {
             r: 255,

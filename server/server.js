@@ -4,6 +4,7 @@ const app = express();
 const shortid = require('shortid');
 let Player = require('./Player');
 let Enemy = require('./Enemy');
+let BossEnemy = require('./BossEnemy');
 let TypeManager = require('./TypeManager');
 let timer = 0;
 
@@ -59,6 +60,11 @@ function distributeDamage(timer, enemy, player) {
 
 function updateGame() {
   timer++;
+  if(Math.floor(timer%1000)===0) {
+    let enemy = new BossEnemy(shortid.generate());
+    game.enemies.push(enemy);
+    tManager.register(enemy);
+  }
   if(game.players.entries().next().value) {
     game.enemies.forEach((value, key) => {
       let player = game.players.entries().next().value[1];
@@ -66,11 +72,13 @@ function updateGame() {
       distributeDamage(timer, value, player);
     });
   }
-  if(timer-200 > 0) {
-    timer-=200;
+  if(Math.floor(timer%200)===0) {
     let enemy = new Enemy(shortid.generate());
     game.enemies.push(enemy);
     tManager.register(enemy);
+  }
+  if(timer > 100000){
+    timer -= 100000;
   }
   io.sockets.emit("heartbeat", game);
 }

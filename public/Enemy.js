@@ -8,6 +8,7 @@ class Enemy {
         this.typedWords = enemy.typedWords;
         this.speed = enemy.speed;
         this.bDead = enemy.bDead;
+        this.size = enemy.size;
     }
 
     modify(enemy) {
@@ -56,7 +57,7 @@ class Enemy {
             fill(this.rgb.r, this.rgb.g, this.rgb.b);
         }
         
-        circle(this.x, this.y, 20);
+        circle(this.x, this.y, this.size);
         
         if (this.bDead)
             return;
