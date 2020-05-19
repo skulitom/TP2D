@@ -52,9 +52,7 @@ class TypeManager
         {
 
             const enWords = enemy.getWords();
-            this.currentEnemyId = enemy.getId();
-
-            if ((enWords === inText) && ((this.currentEnemyId === key)))
+            if ((enWords === inText) && ((this.currentEnemyId === key) || (this.currentEnemyId == null) ))
             {
                 console.log("Enemy matched:");
                 this.numOfTypos = 0;
