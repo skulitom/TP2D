@@ -20,13 +20,18 @@ class Player {
   hit(damage) {
     if(this.health<=damage){
       this.health=0;
+      this.bDead = true;
     } else {
       this.health-=damage;
     }
   }
 
   setKey(key) {
-    return this.typeInput.updateInKey(key);
+    if(!this.bDead) {
+      return this.typeInput.updateInKey(key);
+    } else {
+      return 'player dead';
+    }
   }
 
 }

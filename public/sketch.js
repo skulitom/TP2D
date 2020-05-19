@@ -81,7 +81,7 @@ function removeEnemy(enemyId) {
 function keyTyped() {
   fetch('/registerKey/'+key+'/'+socket.id)
       .then( res => {
-        console.log(res);
+
       }).catch(err => {
     console.log('Fetch Error :-S', err);
   });
