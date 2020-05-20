@@ -57,6 +57,11 @@ class Enemy {
             return;
 
         textAlign(LEFT, TOP);
+        strokeWeight(2);
+        stroke(51);
+        fill(255, 255, 255);
+        rect(this.x - this.words.length*2 -8, this.y +5+ this.size, this.words.length*8 + 10, 20);
+        strokeWeight(1);
         fill(0, 0, 0);
         text(this.words, this.x - 5, this.y +10+ this.size);
         fill(this.fillRGB.r, this.fillRGB.g, this.fillRGB.b);
