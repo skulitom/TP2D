@@ -8,6 +8,7 @@ let Loot = require('./Loot');
 let BossEnemy = require('./BossEnemy');
 let TypeManager = require('./TypeManager');
 let timer = 0;
+let freqCoef = 200;
 
 let server = app.listen(80);
 app.use(express.static("public"));
@@ -62,12 +63,24 @@ function distributeDamage(timer, enemy, player) {
   }
 }
 
+function updateFrequencyCoef(){
+  if(freqCoef<=1){
+    freqCoef=1;
+  } else {
+    freqCoef-=10;
+    if(freqCoef <= 1) {
+      freqCoef = 1;
+    }
+  }
+}
+
 function updateGame() {
   timer++;
-  if(Math.floor(timer%1000)===0) {
+  if(Math.floor(timer%(freqCoef*5))===0) {
     let enemy = new BossEnemy(shortid.generate());
     game.enemies.push(enemy);
     tManager.register(enemy);
+    updateFrequencyCoef()
     //game.loot.push(new Loot(shortid.generate()));
   }
   if(game.players.entries().next().value) {
@@ -77,7 +90,7 @@ function updateGame() {
       distributeDamage(timer, value, player);
     });
   }
-  if(Math.floor(timer%200)===0) {
+  if(Math.floor(timer%freqCoef)===0) {
     let enemy = new Enemy(shortid.generate());
     game.enemies.push(enemy);
     tManager.register(enemy);
