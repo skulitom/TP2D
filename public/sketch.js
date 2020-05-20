@@ -3,9 +3,16 @@ const socket = io.connect('http://localhost');
 let players = new Map();
 let enemies = new Map();
 let lootList = new Map();
+let loaded = false;
+let angle = 0;
+let song;
 
 socket.on("heartbeat", (game) => {
-  if(players instanceof Map && enemies instanceof Map && lootList instanceof Map) {
+  if(players instanceof Map &&
+      enemies instanceof Map &&
+      lootList instanceof Map &&
+      loaded
+  ) {
     updatePlayers(game.players);
     updateEnemies(game.enemies);
     updateLoot(game.loot)
@@ -14,17 +21,32 @@ socket.on("heartbeat", (game) => {
 
 socket.on("disconnect", playerId => removePlayer(playerId));
 
+function songLoaded(loadedSong) {
+  loaded = true;
+  loadedSong.setVolume(0.25);
+  loadedSong.play();
+}
 
 function setup() {
   createCanvas(1366, 768);
+  song = loadSound('assets/music/DST-BetaTron.mp3', songLoaded);
 }
 
 function draw() {
-  update();
   background(220);
-  enemies.forEach(enemy => enemy.draw());
-  lootList.forEach(loot => loot.draw());
-  players.forEach(player => player.draw());
+  if(loaded) {
+    update();
+    enemies.forEach(enemy => enemy.draw());
+    lootList.forEach(loot => loot.draw());
+    players.forEach(player => player.draw());
+  } else {
+    translate(1366/2, 768/2);
+    rotate(angle);
+    strokeWeight(4);
+    stroke(255,0,255);
+    line(0,0,100,0);
+    angle += 0.1;
+  }
 }
 
 function update() {
