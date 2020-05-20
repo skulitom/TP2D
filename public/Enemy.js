@@ -29,14 +29,6 @@ class Enemy {
         return this.words;
     }
 
-    getSpeed() {
-        return this.speed;
-    }
-
-    setTypedText(text) {
-        this.typedWords = text;
-    }
-
     kill(){
         fetch('/killEnemy/'+this.id)
             .then( res => {
@@ -63,11 +55,12 @@ class Enemy {
         
         if (this.bDead)
             return;
-        
+
+        textAlign(LEFT, TOP);
         fill(0, 0, 0);
-        text(this.words, this.x-50, this.y+50);
+        text(this.words, this.x - 5, this.y +10+ this.size);
         fill(this.fillRGB.r, this.fillRGB.g, this.fillRGB.b);
-        text(this.typedWords, this.x - 50, this.y + 50);
+        text(this.typedWords, this.x - 5, this.y +10+ this.size);
     }
   
 }

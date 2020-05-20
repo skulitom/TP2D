@@ -5,9 +5,11 @@ let enemies = new Map();
 let lootList = new Map();
 
 socket.on("heartbeat", (game) => {
-  updatePlayers(game.players);
-  updateEnemies(game.enemies);
-  updateLoot(game.loot)
+  if(players instanceof Map && enemies instanceof Map && lootList instanceof Map) {
+    updatePlayers(game.players);
+    updateEnemies(game.enemies);
+    updateLoot(game.loot)
+  }
 });
 
 socket.on("disconnect", playerId => removePlayer(playerId));
@@ -45,7 +47,11 @@ function updateEnemies(serverEnemies) {
 }
 
 function enemyExists(enemyFromServer) {
-    return enemies.has(enemyFromServer.id);
+    if(enemies instanceof Map) {
+      return enemies.has(enemyFromServer.id);
+    } else {
+      return false;
+    }
 }
 
 function updatePlayers(serverPlayers) {
@@ -76,7 +82,7 @@ function updateLoot(serverLoot) {
 }
 
 function lootExists(lootFromServer) {
-  if(lootList) {
+  if(lootList instanceof Map) {
     return lootList.has(lootFromServer.id);
   } else {
     return false;
@@ -84,7 +90,7 @@ function lootExists(lootFromServer) {
 }
 
 function playerExists(playerFromServer) {
-  if(players) {
+  if(players instanceof Map) {
     return players.has(playerFromServer.id);
   } else {
     return false;
@@ -92,11 +98,15 @@ function playerExists(playerFromServer) {
 }
 
 function removePlayer(playerId) {
-  players = players.delete(playerId);
+  if(players instanceof Map) {
+    players = players.delete(playerId);
+  }
 }
 
 function removeEnemy(enemyId) {
-  enemies = enemies.delete(enemyId);
+  if(enemies instanceof Map) {
+    enemies = enemies.delete(enemyId);
+  }
 }
 
 function keyTyped() {
