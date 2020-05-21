@@ -9,12 +9,12 @@ class TypeInput {
 
     tManager;
 
-    constructor(side, tManager)
+    constructor(side, tManager, playerId)
     {
 
         this.tManager = tManager;
-
         this.side = side;
+        this.playerId = playerId;
 
         if (side === 0)
         {
@@ -45,7 +45,7 @@ class TypeInput {
             //console.log("new input");
             //console.log(this.currInput);
 
-            const result = this.tManager.setTyping(this.textColor, this.currInput);
+            const result = this.tManager.setTyping(this.textColor, this.currInput, this.playerId);
             //console.log(result);
             if ((result == consts.TM_TYPING_FULLMATCH) || (result == consts.TM_TYPING_TYPO_RESET))
             {
@@ -66,7 +66,7 @@ class TypeInput {
     {
 
         this.currInput = [];
-        this.tManager.resetTyping();
+        this.tManager.resetTyping(this.playerId);
         //console.log("pop input");
         //console.log(this.currInput);
 

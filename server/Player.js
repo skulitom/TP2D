@@ -7,7 +7,7 @@ class Player {
     this.id = id;
     this.weapon = 'pistol';
     this.health = 100;
-    this.typeInput = new TypeInput(side, tManager);
+    this.typeInput = new TypeInput(side, tManager, id);
     this.bDead = false;
 
     this.rgb = {
