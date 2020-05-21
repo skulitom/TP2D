@@ -10,9 +10,13 @@ class Enemy {
         this.speed = enemy.speed;
         this.bDead = enemy.bDead;
         this.size = enemy.size;
+        this.shot = false;
     }
 
     modify(enemy) {
+        if(this.typedWords.length < enemy.typedWords.length){
+            this.shot = true;
+        }
         this.typedWords = enemy.typedWords;
         this.fillRGB = enemy.fillRGB;
         this.speed = enemy.speed;
@@ -39,9 +43,12 @@ class Enemy {
         this.bDead = true;
     }
 
-    update() {
-        if (this.bDead)
-            return;
+    update(sound) {
+        if (this.shot) {
+            sound.loop = false;
+            sound.play();
+            this.shot = false;
+        }
     }
   
     draw() {

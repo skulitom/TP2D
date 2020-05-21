@@ -64,12 +64,12 @@ function distributeDamage(timer, enemy, player) {
 }
 
 function updateFrequencyCoef(){
-  if(freqCoef<=1){
-    freqCoef=1;
+  if(freqCoef<=10){
+    freqCoef=10;
   } else {
     freqCoef-=10;
-    if(freqCoef <= 1) {
-      freqCoef = 1;
+    if(freqCoef <= 10) {
+      freqCoef = 10;
     }
   }
 }

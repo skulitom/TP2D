@@ -5,7 +5,7 @@ let enemies = new Map();
 let lootList = new Map();
 let loaded = false;
 let angle = 0;
-let song;
+let gunSound;
 
 socket.on("heartbeat", (game) => {
   if(players instanceof Map &&
@@ -29,7 +29,8 @@ function songLoaded(loadedSong) {
 
 function setup() {
   createCanvas(1366, 768);
-  song = loadSound('assets/music/DST-BetaTron.mp3', songLoaded);
+  gunSound = loadSound('assets/sfx/gun-shot.mp3');
+  loadSound('assets/music/DST-BetaTron.mp3', songLoaded);
 }
 
 function draw() {
@@ -51,7 +52,7 @@ function draw() {
 
 function update() {
   enemies.forEach(enemy => {
-    enemy.update()
+    enemy.update(gunSound);
   });
 }
 
