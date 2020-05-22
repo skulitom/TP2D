@@ -43,10 +43,8 @@ class Enemy {
         this.bDead = true;
     }
 
-    update(sound) {
+    update() {
         if (this.shot) {
-            sound.loop = false;
-            sound.play();
             this.shot = false;
         }
     }

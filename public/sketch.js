@@ -23,13 +23,18 @@ socket.on("disconnect", playerId => removePlayer(playerId));
 
 function songLoaded(loadedSong) {
   loaded = true;
-  loadedSong.setVolume(0.25);
+  loadedSong.setVolume(0.2);
   loadedSong.play();
+}
+
+function gunSoundfun(sound) {
+  sound.setVolume(0.1);
+  sound.loop = false;
 }
 
 function setup() {
   createCanvas(1366, 768);
-  gunSound = loadSound('assets/sfx/gun-shot.mp3');
+  gunSound = loadSound('assets/sfx/gun-shot.mp3', gunSoundfun);
   loadSound('assets/music/DST-BetaTron.mp3', songLoaded);
 }
 
@@ -52,7 +57,7 @@ function draw() {
 
 function update() {
   enemies.forEach(enemy => {
-    enemy.update(gunSound);
+    enemy.update();
   });
 }
 
@@ -133,6 +138,7 @@ function removeEnemy(enemyId) {
 }
 
 function keyTyped() {
+  gunSound.play();
   fetch('/registerKey/'+key+'/'+socket.id)
       .then( res => {
 
