@@ -74,28 +74,33 @@ function updateFrequencyCoef(){
   }
 }
 
+function getRandomItem(arrayOfItems) {
+  return arrayOfItems[Math.floor(Math.random() * arrayOfItems.length)];
+}
+
 function updateGame() {
   timer++;
-  if(Math.floor(timer%(freqCoef*5))===0) {
-    let enemy = new BossEnemy(shortid.generate());
-    game.enemies.push(enemy);
-    tManager.register(enemy);
-    updateFrequencyCoef()
-    //game.loot.push(new Loot(shortid.generate()));
-  }
-  if(game.players.entries().next().value) {
-    game.enemies.forEach((value, key) => {
-      let player = game.players.entries().next().value[1];
-      value.update(player.x, player.y);
-      distributeDamage(timer, value, player);
+  if (game.players[0]) {
+    if (Math.floor(timer % (freqCoef * 5)) === 0) {
+      let enemy = new BossEnemy(shortid.generate(), getRandomItem(game.players));
+      game.enemies.push(enemy);
+      tManager.register(enemy);
+      updateFrequencyCoef()
+      //game.loot.push(new Loot(shortid.generate()));
+    }
+    game.enemies.forEach((enemy) => {
+      let player = game.players[0];
+      enemy.update();
+      distributeDamage(timer, enemy, player);
     });
+
+    if (Math.floor(timer % freqCoef) === 0) {
+      let enemy = new Enemy(shortid.generate(), getRandomItem(game.players));
+      game.enemies.push(enemy);
+      tManager.register(enemy);
+    }
   }
-  if(Math.floor(timer%freqCoef)===0) {
-    let enemy = new Enemy(shortid.generate());
-    game.enemies.push(enemy);
-    tManager.register(enemy);
-  }
-  if(timer > 100000){
+  if (timer > 100000) {
     timer -= 100000;
   }
   io.sockets.emit("heartbeat", game);

@@ -1,7 +1,7 @@
 const consts = require('./constants/EnemyConstants');
 
 class Enemy {
-    constructor(id) {
+    constructor(id, player) {
         let random = Math.random();
         if(random <= 0.25){
             this.x = 0;
@@ -24,6 +24,9 @@ class Enemy {
         this.inHitArea = false;
         this.hitPower = 1;
         this.size = 20;
+        console.log(player);
+        this.playerX = player.x;
+        this.playerY = player.y;
         this.fillRGB = {
             r: 255,
             g: 0,
@@ -65,14 +68,14 @@ class Enemy {
         this.typedWords = text;
     }
 
-    update(playerPosX, playerPosY){
+    update(){
         if(this.bDead) {
             return;
         }
-        const rotation = Math.atan2(playerPosY - this.y, playerPosX - this.x);
+        const rotation = Math.atan2(this.playerY - this.y, this.playerX - this.x);
         this.x += Math.cos(rotation) * this.speed;
         this.y += Math.sin(rotation) * this.speed;
-        if(Math.abs(playerPosY-this.y) < 5 && Math.abs(playerPosX-this.x) < 5) {
+        if(Math.abs(this.playerY-this.y) < 5 && Math.abs(this.playerX-this.x) < 5) {
             this.inHitArea = true;
         }
     }
