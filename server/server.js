@@ -55,10 +55,14 @@ io.sockets.on("disconnect", socket => {
   game.players = game.players.filter(player => player.id !== socket.id);
 });
 
-function distributeDamage(timer, enemy, player) {
+function distributeDamage(timer, enemy) {
   if(Math.floor(timer%10)===0) {
     if(enemy.getIsInHitArea()){
-      player.hit(enemy.getHitPower());
+      game.players.forEach(player => {
+        if(player.id === enemy.getPlayerId()){
+          player.hit(enemy.getHitPower());
+        }
+      });
     }
   }
 }
@@ -89,9 +93,8 @@ function updateGame() {
       //game.loot.push(new Loot(shortid.generate()));
     }
     game.enemies.forEach((enemy) => {
-      let player = game.players[0];
       enemy.update();
-      distributeDamage(timer, enemy, player);
+      distributeDamage(timer, enemy);
     });
 
     if (Math.floor(timer % freqCoef) === 0) {

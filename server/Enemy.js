@@ -24,9 +24,9 @@ class Enemy {
         this.inHitArea = false;
         this.hitPower = 1;
         this.size = 20;
-        console.log(player);
         this.playerX = player.x;
         this.playerY = player.y;
+        this.playerId = player.id;
         this.fillRGB = {
             r: 255,
             g: 0,
@@ -42,6 +42,10 @@ class Enemy {
 
     getId() {
         return this.id;
+    }
+
+    getPlayerId() {
+        return this.playerId;
     }
 
     getWords() {
