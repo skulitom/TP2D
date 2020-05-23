@@ -61,6 +61,7 @@ class Enemy {
         if (this.bDead)
             return;
 
+        textSize(16);
         textAlign(LEFT, TOP);
         strokeWeight(2);
         stroke(51);
