@@ -1,5 +1,6 @@
 const express = require('express');
 const socket = require('socket.io');
+const consts = require('./constants/TypingConstants');
 const app = express();
 const shortid = require('shortid');
 let Player = require('./Player');
@@ -32,6 +33,9 @@ app.get('/killEnemy/:id', (req, res) => {
 app.get('/registerKey/:key/:id', (req, res) => {
   const playerIndex = game.players.findIndex(player => player.id === req.params.id);
   const result = game.players[playerIndex].setKey(req.params.key);
+  if(result===consts.TM_TYPING_FULLMATCH){
+    game.players[playerIndex].registerKill(1);
+  }
   res.writeHead(200, { 'Content-Type': 'text/xml' });
   res.end(result.toString());
 });

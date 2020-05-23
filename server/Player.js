@@ -9,12 +9,17 @@ class Player {
     this.health = 100;
     this.typeInput = new TypeInput(side, tManager, id);
     this.bDead = false;
+    this.score = 0;
 
     this.rgb = {
       r: Math.random() * 255,
       g: Math.random() * 255,
       b: Math.random() * 255,
     }
+  }
+
+  registerKill(level) {
+    this.score += level;
   }
 
   hit(damage) {
