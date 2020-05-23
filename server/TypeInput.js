@@ -59,7 +59,7 @@ class TypeInput {
             return result;
 
         }
-        return undefined;
+        return consts.TM_TYPING_NOTHING;
 
     }
 
