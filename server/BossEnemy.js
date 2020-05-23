@@ -4,7 +4,7 @@ let Enemy = require('./Enemy');
 class BossEnemy extends Enemy {
     constructor(id, player) {
         super(id, player);
-        this.words = randomWords();
+        this.words = randomWords().toUpperCase();
         this.size = 30;
         this.rgb = {
             r: 0,

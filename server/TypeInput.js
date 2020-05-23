@@ -35,10 +35,11 @@ class TypeInput {
 
     }
 
-    updateInKey(key)
+    updateInKey(keyB)
     {
+        const key = keyB.toUpperCase();
 
-        if (((key >= 'a') && (key <= 'z')) || ((key >= 'A') && (key <= 'Z')) || (key == ' '))
+        if (((key >= 'A') && (key <= 'Z')) || (key == ' '))
         {
 
             this.currInput.push(key);
