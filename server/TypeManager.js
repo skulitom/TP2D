@@ -71,7 +71,7 @@ class TypeManager {
                 if (this.numOfTypos >= 3) {
                     this.numOfTypos = 0;
                     this.resetTyping(playerId);
-                    this.currentEnemyIdList.remove(playerId);
+                    this.currentEnemyIdList.delete(playerId);
                     return consts.TM_TYPING_TYPO_RESET;
                 }
                 return consts.TM_TYPING_TYPO;
