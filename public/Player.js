@@ -34,6 +34,8 @@ class Player {
       rect(this.x - 25, this.y + 30, 50, 5);
       fill(255, 0, 0);
       rect(this.x - 25, this.y + 30, this.health / 2, 5);
+//      console.log(this.x);
+//      console.log(this.y);
     } else {
       fill(0, 0, 255);
       circle(this.x, this.y, 20);

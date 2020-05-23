@@ -44,6 +44,12 @@ class TypeManager {
         //console.log(this.currentEnemyId);
         if(this.currentEnemyIdList.has(playerId)) {
             const enemy = this.targetWords.get(this.currentEnemyIdList.get(playerId));
+            if (enemy == undefined)
+            {
+                this.numOfTypos = 0;
+                this.currentEnemyIdList.delete(playerId);
+                return consts.TM_TYPING_TYPO_NO_MATCH;
+            }
             const enWords = enemy.getWords();
             const key = enemy.getId();
             if ((enWords === inText) && ((this.currentEnemyIdList.get(playerId) === key))) {

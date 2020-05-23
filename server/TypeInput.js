@@ -48,11 +48,12 @@ class TypeInput {
 
             const result = this.tManager.setTyping(this.textColor, this.currInput, this.playerId);
             //console.log(result);
-            if ((result == consts.TM_TYPING_FULLMATCH) || (result == consts.TM_TYPING_TYPO_RESET))
+            if ((result == consts.TM_TYPING_FULLMATCH) || (result == consts.TM_TYPING_TYPO_RESET) ||
+                (result == consts.TM_TYPING_TYPO_NO_MATCH))
             {
                 this.currInput = [];
             }
-            else if ((result == consts.TM_TYPING_TYPO) || (result == consts.TM_TYPING_TYPO_NO_MATCH))
+            else if ((result == consts.TM_TYPING_TYPO))
             {
                 this.currInput.pop();
             }

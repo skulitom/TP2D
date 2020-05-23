@@ -1,4 +1,4 @@
-const socket = io.connect('http://localhost');
+const socket = io.connect('25.91.39.201:80');
 
 let players = new Map();
 let enemies = new Map();
@@ -36,6 +36,7 @@ function setup() {
   createCanvas(1366, 768);
   gunSound = loadSound('assets/sfx/gun-shot.mp3', gunSoundfun);
   loadSound('assets/music/DST-BetaTron.mp3', songLoaded);
+  loaded = true;
 }
 
 function draw() {
@@ -44,6 +45,7 @@ function draw() {
     update();
     enemies.forEach(enemy => enemy.draw());
     lootList.forEach(loot => loot.draw());
+//    console.log(players);
     players.forEach(player => player.draw());
   } else {
     translate(1366/2, 768/2);
@@ -127,13 +129,13 @@ function playerExists(playerFromServer) {
 
 function removePlayer(playerId) {
   if(players instanceof Map) {
-    players = players.delete(playerId);
+    players.delete(playerId);
   }
 }
 
 function removeEnemy(enemyId) {
   if(enemies instanceof Map) {
-    enemies = enemies.delete(enemyId);
+    enemies.delete(enemyId);
   }
 }
 

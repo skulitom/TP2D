@@ -72,6 +72,10 @@ class Enemy {
         this.typedWords = text;
     }
 
+    getIsDead() {
+        return this.bDead;
+    }
+
     update(){
         if(this.bDead) {
             return;
