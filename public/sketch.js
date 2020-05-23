@@ -6,6 +6,7 @@ let lootList = new Map();
 let loaded = false;
 let angle = 0;
 let gunSound;
+let gui = new GUI(players);
 
 socket.on("heartbeat", (game) => {
   if(players instanceof Map &&
@@ -55,6 +56,7 @@ function draw() {
     line(0,0,100,0);
     angle += 0.1;
   }
+  gui.draw();
 }
 
 function update() {

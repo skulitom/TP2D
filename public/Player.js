@@ -7,6 +7,7 @@ class Player {
     this.weapon = player.weapon;
     this.health = player.health;
     this.bDead = player.bDead;
+    this.score = 0;
   }
 
   modify(player) {
@@ -15,6 +16,7 @@ class Player {
     this.bDead = player.bDead;
     this.x = player.x;
     this.y = player.y;
+    this.score = player.score;
   }
 
   getX() {
@@ -23,6 +25,14 @@ class Player {
 
   getY() {
     return this.y;
+  }
+
+  getScore() {
+    return this.score;
+  }
+
+  getColor() {
+    return this.rgb;
   }
 
   draw() {
