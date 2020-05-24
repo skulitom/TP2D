@@ -1,4 +1,4 @@
-const socket = io.connect('localhost');
+const socket = io.connect('25.91.39.201:80');
 
 let players = new Map();
 let enemies = new Map();
