@@ -88,11 +88,12 @@ class Enemy {
         }
     }
 
-    kill() {
+    kill(killerColor) {
         this.bDead = true;
         this.speed = 0;
         this.hitPower = 0;
         this.inHitArea = false;
+        this.killerColor = killerColor;
     }
 }
 

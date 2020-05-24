@@ -12,6 +12,7 @@ class Enemy {
         this.size = enemy.size;
         this.shot = false;
         this.fxManager = fxManager;
+        this.killerColor = enemy.killerColor;
     }
 
     modify(enemy) {
@@ -23,10 +24,11 @@ class Enemy {
         this.speed = enemy.speed;
         this.x = enemy.x;
         this.y = enemy.y;
+        this.killerColor = enemy.killerColor;
         if (enemy.bDead && !this.bDead)
         {
             this.bDead = enemy.bDead;
-            this.fxManager.createExplosion(this.x, this.y, this.fillRGB);
+            this.fxManager.createExplosion(this.x, this.y, this.killerColor);
         }
     }
 

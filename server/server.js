@@ -60,7 +60,9 @@ app.get('/registerKey/:key/:id', (req, res) => {
 io.sockets.on("connection", socket => {
   console.log(`New connection ${socket.id}`);
   game.players.forEach(player => player.moveAway());
-  game.players.push(new Player(socket.id, game.players.length, tManager));
+  let newPlayer = new Player(socket.id, game.players.length, tManager);
+  tManager.registerPlayer(newPlayer);
+  game.players.push(newPlayer);
 
   socket.on("disconnect", () => {
     io.sockets.emit("disconnect", socket.id);
@@ -109,13 +111,14 @@ function updateGame() {
     if (Math.floor(timer % (freqCoef * 5)) === 0) {
       let enemy = new BossEnemy(shortid.generate(), getRandomItem(game.players));
       game.enemies.push(enemy);
-      tManager.register(enemy);
+      tManager.registerTypeble(enemy);
       updateFrequencyCoef()
 
     }else if(Math.floor(timer % (freqCoef * 6)) === 0) {
       let loot = new Loot(shortid.generate());
+      //tManager.registerTypeble(loot);
       game.loot.push(loot);
-      tManager.register(loot);
+      tManager.registerTypeble(loot);
     }
     game.enemies.forEach((enemy) => {
       enemy.update();
@@ -125,7 +128,7 @@ function updateGame() {
     if (Math.floor(timer % freqCoef) === 0) {
       let enemy = new Enemy(shortid.generate(), getRandomItem(game.players));
       game.enemies.push(enemy);
-      tManager.register(enemy);
+      tManager.registerTypeble(enemy);
     }
   }
   if (timer > 100000) {

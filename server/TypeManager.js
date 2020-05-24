@@ -2,34 +2,32 @@ const consts = require('./constants/TypingConstants');
 
 class TypeManager {
 
-    targetWords;
-    currentEnemyIdList;
-    numOfTypos = 0;
-
-
-
     constructor() {
-        this.currentEnemyIdList = new Map();
-        this.targetWords = new Map();
+        this.playerTypeblesList = new Map();
+        this.typebleList = new Map();
+        this.playersList = new Map();
+        this.numOfTypos = 0;
+    }
+
+    registerTypeble(value) {
+
+        this.typebleList.set(value.getId(), value);
 
     }
 
-    register(value) {
+    registerPlayer(value) {
 
-        this.targetWords.set(value.getId(), value);
-        //console.log("New enemy registered");
-        //console.log(enemy.getId());
-        //console.log(enemy);
+        this.playersList.set(value.getId(), value);
 
     }
 
     resetTyping(playerId) {
 
-        if (this.currentEnemyIdList.has(playerId)) {
+        if (this.playerTypeblesList.has(playerId)) {
 
-            const en = this.targetWords.get(this.currentEnemyIdList.get(playerId));
+            const en = this.typebleList.get(this.playerTypeblesList.get(playerId));
             en.setTypedText("");
-            this.currentEnemyIdList.delete(playerId);
+            this.playerTypeblesList.delete(playerId);
 
         }
 
@@ -39,30 +37,31 @@ class TypeManager {
 
         //console.log("typing text");
         //console.log(text);
-        let inText = text.join( '').trim();
+        let inText = text.join('').trim();
+        let player = this.playersList.get(playerId);
         //console.log(inText);
         //console.log(this.currentEnemyId);
-        if(this.currentEnemyIdList.has(playerId)) {
-            const enemy = this.targetWords.get(this.currentEnemyIdList.get(playerId));
+        if(this.playerTypeblesList.has(playerId)) {
+            const enemy = this.typebleList.get(this.playerTypeblesList.get(playerId));
             if (enemy == undefined)
             {
                 this.numOfTypos = 0;
-                this.currentEnemyIdList.delete(playerId);
+                this.playerTypeblesList.delete(playerId);
                 return consts.TM_TYPING_TYPO_NO_MATCH;
             }
             const enWords = enemy.getWords();
             const key = enemy.getId();
-            if ((enWords === inText) && ((this.currentEnemyIdList.get(playerId) === key))) {
+            if ((enWords === inText) && ((this.playerTypeblesList.get(playerId) === key))) {
                 console.log("Enemy matched:");
                 this.numOfTypos = 0;
 
                 enemy.setTypedText(inText);
-                enemy.kill();
-                this.currentEnemyIdList.delete(playerId);
-                this.targetWords.delete(key);
+                enemy.kill(player.getColor());
+                this.playerTypeblesList.delete(playerId);
+                this.typebleList.delete(key);
                 //console.log(text);
                 return consts.TM_TYPING_FULLMATCH;
-            } else if (enWords.startsWith(inText) && ((this.currentEnemyIdList.get(playerId) === key))) {
+            } else if (enWords.startsWith(inText) && ((this.playerTypeblesList.get(playerId) === key))) {
 
                 console.log("Partial Enemy matched:");
                 this.numOfTypos = 0;
@@ -71,13 +70,13 @@ class TypeManager {
                 enemy.setTypedText(inText);
                 return consts.TM_TYPING_PARTMATCH;
 
-            } else if (this.currentEnemyIdList.get(playerId) === key) {
+            } else if (this.playerTypeblesList.get(playerId) === key) {
 
                 this.numOfTypos = this.numOfTypos + 1;
                 if (this.numOfTypos >= 3) {
                     this.numOfTypos = 0;
                     this.resetTyping(playerId);
-                    this.currentEnemyIdList.delete(playerId);
+                    this.playerTypeblesList.delete(playerId);
                     return consts.TM_TYPING_TYPO_RESET;
                 }
                 return consts.TM_TYPING_TYPO;
@@ -85,15 +84,15 @@ class TypeManager {
             }
 
         } else {
-            for (let [key, enemy] of this.targetWords.entries()) {
+            for (let [key, enemy] of this.typebleList.entries()) {
                 if(enemy.getWords() === inText) {
                     console.log("Enemy matched:");
                     this.numOfTypos = 0;
 
                     enemy.setTypedText(inText);
-                    enemy.kill();
-                    this.currentEnemyIdList.delete(playerId);
-                    this.targetWords.delete(key);
+                    enemy.kill(player.getColor());
+                    this.playerTypeblesList.delete(playerId);
+                    this.typebleList.delete(key);
                     //console.log(text);
                     return consts.TM_TYPING_FULLMATCH;
                 }
@@ -104,7 +103,7 @@ class TypeManager {
 
                     enemy.setFillRgb(rgb);
                     enemy.setTypedText(inText);
-                    this.currentEnemyIdList.set(playerId, enemy.getId());
+                    this.playerTypeblesList.set(playerId, enemy.getId());
                     return consts.TM_TYPING_PARTMATCH;
 
                 }
