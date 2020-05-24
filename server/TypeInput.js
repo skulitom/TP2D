@@ -38,29 +38,22 @@ class TypeInput {
     updateInKey(keyB)
     {
         const key = keyB.toUpperCase();
+        this.currInput.push(key);
+        //console.log("new input");
+        //console.log(this.currInput);
 
-        if (((key >= 'A') && (key <= 'Z')) || (key == ' '))
+        const result = this.tManager.setTyping(this.textColor, this.currInput, this.playerId);
+        //console.log(result);
+        if ((result == consts.TM_TYPING_FULLMATCH) || (result == consts.TM_TYPING_TYPO_RESET) ||
+            (result == consts.TM_TYPING_TYPO_NO_MATCH))
         {
-
-            this.currInput.push(key);
-            //console.log("new input");
-            //console.log(this.currInput);
-
-            const result = this.tManager.setTyping(this.textColor, this.currInput, this.playerId);
-            //console.log(result);
-            if ((result == consts.TM_TYPING_FULLMATCH) || (result == consts.TM_TYPING_TYPO_RESET) ||
-                (result == consts.TM_TYPING_TYPO_NO_MATCH))
-            {
-                this.currInput = [];
-            }
-            else if ((result == consts.TM_TYPING_TYPO))
-            {
-                this.currInput.pop();
-            }
-            return result;
-
+            this.currInput = [];
         }
-        return consts.TM_TYPING_NOTHING;
+        else if ((result == consts.TM_TYPING_TYPO))
+        {
+            this.currInput.pop();
+        }
+        return result;
 
     }
 

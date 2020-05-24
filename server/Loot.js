@@ -38,7 +38,7 @@ class Loot {
         this.typedWords = text;
     }
 
-    open() {
+    kill() {
         this.isOpen = true;
     }
 }

@@ -19,6 +19,10 @@ class Player {
   }
 
   registerKill(level) {
+    if(this.score+level<=0){
+      this.score = 0;
+      return;
+    }
     this.score += level;
   }
 
