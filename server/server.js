@@ -35,8 +35,23 @@ app.get('/registerKey/:key/:id', (req, res) => {
   if (playerIndex === -1)
     return "err";
   const result = game.players[playerIndex].setKey(req.params.key);
-  if(result===consts.TM_TYPING_FULLMATCH){
-    game.players[playerIndex].registerKill(1);
+  console.log(result);
+  switch(result) {
+    case consts.TM_TYPING_FULLMATCH:
+      game.players[playerIndex].registerKill(2);
+      break;
+    case consts.TM_TYPING_PARTMATCH:
+      game.players[playerIndex].registerKill(1);
+      break;
+    case consts.TM_TYPING_TYPO:
+      game.players[playerIndex].registerKill(-1);
+      break;
+    case consts.TM_TYPING_TYPO_RESET:
+      game.players[playerIndex].registerKill(-2);
+      break;
+    case consts.TM_TYPING_TYPO_NO_MATCH:
+      game.players[playerIndex].registerKill(-0.5);
+      break;
   }
   res.writeHead(200, { 'Content-Type': 'text/xml' });
   res.end(result.toString());
@@ -96,7 +111,11 @@ function updateGame() {
       game.enemies.push(enemy);
       tManager.register(enemy);
       updateFrequencyCoef()
-      //game.loot.push(new Loot(shortid.generate()));
+
+    }else if(Math.floor(timer % (freqCoef * 6)) === 0) {
+      let loot = new Loot(shortid.generate());
+      game.loot.push(loot);
+      tManager.register(loot);
     }
     game.enemies.forEach((enemy) => {
       enemy.update();

@@ -71,7 +71,7 @@ class Enemy {
         strokeWeight(2);
         stroke(51);
         fill(255, 255, 255);
-        rect(this.x - this.words.length*2 -8, this.y +5+ this.size, this.words.length*8 + 10, 20);
+        rect(this.x - this.words.length*2 -8, this.y +5+ this.size, this.words.length*14 + 10, 20);
         strokeWeight(1);
 
         fill(0, 0, 0);
