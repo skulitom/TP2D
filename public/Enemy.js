@@ -1,5 +1,5 @@
 class Enemy {
-    constructor(enemy) {
+    constructor(enemy, fxManager) {
         this.x = enemy.x;
         this.y = enemy.y;
         this.id = enemy.id;
@@ -11,6 +11,7 @@ class Enemy {
         this.bDead = enemy.bDead;
         this.size = enemy.size;
         this.shot = false;
+        this.fxManager = fxManager;
     }
 
     modify(enemy) {
@@ -20,9 +21,13 @@ class Enemy {
         this.typedWords = enemy.typedWords;
         this.fillRGB = enemy.fillRGB;
         this.speed = enemy.speed;
-        this.bDead = enemy.bDead;
         this.x = enemy.x;
         this.y = enemy.y;
+        if (enemy.bDead && !this.bDead)
+        {
+            this.bDead = enemy.bDead;
+            this.fxManager.createExplosion(this.x, this.y, this.fillRGB);
+        }
     }
 
     getId() {

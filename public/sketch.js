@@ -7,6 +7,7 @@ let loaded = false;
 let angle = 0;
 let gunSound;
 let gui = new GUI(players);
+let fxManger = new EffectsManager();
 
 socket.on("heartbeat", (game) => {
   if(players instanceof Map &&
@@ -56,6 +57,7 @@ function draw() {
     line(0,0,100,0);
     angle += 0.1;
   }
+  fxManger.draw();
   gui.draw();
 }
 
@@ -63,13 +65,14 @@ function update() {
   enemies.forEach(enemy => {
     enemy.update();
   });
+  fxManger.update();
 }
 
 function updateEnemies(serverEnemies) {
   for (let i = 0; i < serverEnemies.length; i++) {
     let enemyFromServer = serverEnemies[i];
     if (!enemyExists(enemyFromServer)) {
-      let newEnemy = new Enemy(enemyFromServer);
+      let newEnemy = new Enemy(enemyFromServer, fxManger);
       enemies.set(newEnemy.id, newEnemy);
     } else {
       let modEnemy = enemies.get(enemyFromServer.id);

@@ -32,6 +32,8 @@ app.get('/killEnemy/:id', (req, res) => {
 
 app.get('/registerKey/:key/:id', (req, res) => {
   const playerIndex = game.players.findIndex(player => player.id === req.params.id);
+  if (playerIndex === -1)
+    return "err";
   const result = game.players[playerIndex].setKey(req.params.key);
   if(result===consts.TM_TYPING_FULLMATCH){
     game.players[playerIndex].registerKill(1);

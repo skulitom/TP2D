@@ -39,7 +39,7 @@ class GUI
             textSize(32);
             fill(color.r, color.g, color.b);
             const strScore = "Player " + (index + 1) + ": " + score;
-            console.log(strScore);
+//            console.log(strScore);
             text(strScore, - startPosX, startPosY + 30 * index);
 
             index = index + 1;
