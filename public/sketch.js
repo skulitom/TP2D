@@ -8,6 +8,7 @@ let angle = 0;
 let gunSound;
 let gui = new GUI(players);
 let fxManger = new EffectsManager();
+let bg;
 
 socket.on("heartbeat", (game) => {
   if(players instanceof Map &&
@@ -36,13 +37,14 @@ function gunSoundfun(sound) {
 
 function setup() {
   createCanvas(1366, 768);
+  bg = loadImage('assets/textures/background/Ground.jpg');
   gunSound = loadSound('assets/sfx/gun-shot.mp3', gunSoundfun);
   loadSound('assets/music/DST-BetaTron.mp3', songLoaded);
   loaded = true;
 }
 
 function draw() {
-  background(220);
+  background(bg);
   if(loaded) {
     update();
     enemies.forEach(enemy => enemy.drawBody());
