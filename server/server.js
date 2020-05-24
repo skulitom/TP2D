@@ -35,7 +35,6 @@ app.get('/registerKey/:key/:id', (req, res) => {
   if (playerIndex === -1)
     return "err";
   const result = game.players[playerIndex].setKey(req.params.key);
-  console.log(result);
   switch(result) {
     case consts.TM_TYPING_FULLMATCH:
       game.players[playerIndex].registerKill(2);
@@ -58,7 +57,6 @@ app.get('/registerKey/:key/:id', (req, res) => {
 });
 
 io.sockets.on("connection", socket => {
-  console.log(`New connection ${socket.id}`);
   game.players.forEach(player => player.moveAway());
   let newPlayer = new Player(socket.id, game.players.length, tManager);
   tManager.registerPlayer(newPlayer);

@@ -35,12 +35,8 @@ class TypeManager {
 
     setTyping(rgb, text, playerId) {
 
-        //console.log("typing text");
-        //console.log(text);
         let inText = text.join('').trim();
         let player = this.playersList.get(playerId);
-        //console.log(inText);
-        //console.log(this.currentEnemyId);
         if(this.playerTypeblesList.has(playerId)) {
             const enemy = this.typebleList.get(this.playerTypeblesList.get(playerId));
             if (enemy == undefined)
@@ -52,18 +48,15 @@ class TypeManager {
             const enWords = enemy.getWords();
             const key = enemy.getId();
             if ((enWords === inText) && ((this.playerTypeblesList.get(playerId) === key))) {
-                console.log("Enemy matched:");
                 this.numOfTypos = 0;
 
                 enemy.setTypedText(inText);
                 enemy.kill(player.getColor());
                 this.playerTypeblesList.delete(playerId);
                 this.typebleList.delete(key);
-                //console.log(text);
                 return consts.TM_TYPING_FULLMATCH;
             } else if (enWords.startsWith(inText) && ((this.playerTypeblesList.get(playerId) === key))) {
 
-                console.log("Partial Enemy matched:");
                 this.numOfTypos = 0;
 
                 enemy.setFillRgb(rgb);
@@ -86,19 +79,15 @@ class TypeManager {
         } else {
             for (let [key, enemy] of this.typebleList.entries()) {
                 if(enemy.getWords() === inText) {
-                    console.log("Enemy matched:");
                     this.numOfTypos = 0;
 
                     enemy.setTypedText(inText);
                     enemy.kill(player.getColor());
                     this.playerTypeblesList.delete(playerId);
                     this.typebleList.delete(key);
-                    //console.log(text);
                     return consts.TM_TYPING_FULLMATCH;
                 }
                 else if (enemy.getWords().startsWith(inText)) {
-
-                    console.log("Partial Enemy matched:");
                     this.numOfTypos = 0;
 
                     enemy.setFillRgb(rgb);
@@ -109,7 +98,6 @@ class TypeManager {
                 }
             }
         }
-        console.log("No match");
         return consts.TM_TYPING_TYPO_NO_MATCH;
 
     }

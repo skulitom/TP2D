@@ -1,3 +1,3 @@
 module.exports = Object.freeze({
-    CHARACTERS: ',.?#%$!<>'
+    CHARACTERS: '1234567890'
 });

@@ -96,7 +96,6 @@ function updatePlayers(serverPlayers) {
     let playerFromServer = serverPlayers[i];
     if (!playerExists(playerFromServer)) {
       let newPlayer = new Player(playerFromServer);
-      console.log("player push");
       players.set(newPlayer.id, newPlayer);
     } else {
       let modPlayer = players.get(playerFromServer.id);
