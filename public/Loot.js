@@ -29,11 +29,15 @@ class Loot {
         this.typedWords = text;
     }
 
-    draw() {
+    drawBody() {
         if(!this.isOpen) {
             fill(this.rgb.r, this.rgb.g, this.rgb.b);
             rect(this.x, this.y, this.size, this.size);
+        }
+    }
 
+    drawUI() {
+        if(!this.isOpen) {
             textSize(16);
             textAlign(LEFT, TOP);
             strokeWeight(2);

@@ -28,7 +28,7 @@ class Enemy {
         if (enemy.bDead && !this.bDead)
         {
             this.bDead = enemy.bDead;
-            this.fxManager.createExplosion(this.x, this.y, this.killerColor);
+            this.fxManager.createExplosion(this.x, this.y, this.killerColor, this.size);
         }
     }
 
@@ -56,7 +56,7 @@ class Enemy {
         }
     }
   
-    draw() {
+    drawBody() {
         if (this.bDead){
             fill(this.rgb.r * 0.5, this.rgb.g * 0.5, this.rgb.b * 0.5);
         } else {
@@ -64,7 +64,11 @@ class Enemy {
         }
         
         circle(this.x, this.y, this.size);
-        
+    
+    }
+    
+    drawUI() {
+
         if (this.bDead)
             return;
 

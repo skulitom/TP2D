@@ -1,9 +1,10 @@
 class Explosion {
-    constructor(x, y, color) {
+    constructor(x, y, color, startSize) {
         this.x = x;
         this.y = y;
         this.color = color;
         this.time = 0;
+        this.startSize = startSize + startSize * startSize * 0.08;
     }
 
     update() {
@@ -21,8 +22,7 @@ class Explosion {
 
     draw() {
 
-        const START_SIZE = 16;
-        const size = sqrt(START_SIZE * this.time * 100); 
+        const size = sqrt(this.startSize * this.time * 100); 
 
         fill(this.color.r, this.color.g, this.color.b);
         circle(this.x, this.y, size);

@@ -45,8 +45,10 @@ function draw() {
   background(220);
   if(loaded) {
     update();
-    enemies.forEach(enemy => enemy.draw());
-    lootList.forEach(loot => loot.draw());
+    enemies.forEach(enemy => enemy.drawBody());
+    lootList.forEach(loot => loot.drawBody());
+    enemies.forEach(enemy => enemy.drawUI());
+    lootList.forEach(loot => loot.drawUI());
 //    console.log(players);
     players.forEach(player => player.draw());
   } else {

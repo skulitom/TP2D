@@ -3,11 +3,11 @@ class EffectsManager {
         this.explosionEffectsPool = [];
     }
 
-    createExplosion(x, y, color) {
+    createExplosion(x, y, color, startSize) {
         
-        let newExplosion = new Explosion(x, y, color);
+        let newExplosion = new Explosion(x, y, color, startSize);
         this.explosionEffectsPool.push(newExplosion);
-        console.log("exp created");
+        //console.log(startSize);
 
     }
 
@@ -18,10 +18,8 @@ class EffectsManager {
             const needDestroy = this.explosionEffectsPool[explId].update();
             if (needDestroy)
             {
-                this.explosionEffectsPool.splice(explId);
-                console.log("exp destroyed");    
-            }
-            console.log("exp run");    
+                this.explosionEffectsPool.splice(explId);  
+            } 
         }
 
     }
