@@ -1,7 +1,9 @@
 const consts = require('./constants/EnemyConstants');
+let Typeble = require('./Typeble');
 
-class Enemy {
+class Enemy extends Typeble {
     constructor(id, player) {
+        super(id);
         let random = Math.random();
         if(random <= 0.25){
             this.x = 0;
@@ -16,7 +18,6 @@ class Enemy {
             this.y = 769;
             this.x = Math.random()*1366 +1;
         }
-        this.id = id;
         this.words = consts.CHARACTERS.charAt(Math.floor(Math.random() * consts.CHARACTERS.length));
         this.speed = 1;
         this.typedWords = "";
@@ -40,24 +41,12 @@ class Enemy {
         };
     }
 
-    getId() {
-        return this.id;
-    }
-
     getPlayerId() {
         return this.playerId;
     }
 
-    getWords() {
-        return this.words;
-    }
-
     getSpeed() {
         return this.speed;
-    }
-
-    setFillRgb(rgb) {
-        this.fillRGB = rgb;
     }
 
     getIsInHitArea() {
@@ -66,10 +55,6 @@ class Enemy {
 
     getHitPower() {
         return this.hitPower;
-    }
-
-    setTypedText(text) {
-        this.typedWords = text;
     }
 
     getIsDead() {
@@ -89,11 +74,11 @@ class Enemy {
     }
 
     kill(killerColor) {
+        super.kill(killerColor);
         this.bDead = true;
         this.speed = 0;
         this.hitPower = 0;
         this.inHitArea = false;
-        this.killerColor = killerColor;
     }
 }
 

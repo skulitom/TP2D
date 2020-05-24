@@ -14,7 +14,7 @@ class Loot {
     modify(loot) {
         this.typedWords = loot.typedWords;
         this.fillRGB = loot.fillRGB;
-        this.isOpen = loot.bDead;
+        this.isOpen = loot.isOpen;
     }
 
     getId() {

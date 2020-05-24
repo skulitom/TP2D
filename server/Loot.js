@@ -1,12 +1,12 @@
 const consts = require('./constants/LootConstants');
+let Typeble = require('./Typeble');
 
-class Loot {
+class Loot extends Typeble {
     constructor(id) {
+        super(id);
         this.y = Math.random()*768;
         this.x = Math.random()*1366;
-        this.id = id;
         this.words = consts.CHARACTERS.charAt(Math.floor(Math.random() * consts.CHARACTERS.length));
-        this.typedWords = "";
         this.isOpen = false;
         this.size = 10;
         this.fillRGB = {
@@ -22,23 +22,8 @@ class Loot {
         };
     }
 
-    getId() {
-        return this.id;
-    }
-
-    getWords() {
-        return this.words;
-    }
-
-    setFillRgb(rgb) {
-        this.fillRGB = rgb;
-    }
-
-    setTypedText(text) {
-        this.typedWords = text;
-    }
-
-    kill() {
+    kill(killerColor) {
+        super.kill(killerColor);
         this.isOpen = true;
     }
 }
