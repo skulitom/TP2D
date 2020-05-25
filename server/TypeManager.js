@@ -38,20 +38,19 @@ class TypeManager {
         let inText = text.join('').trim();
         let player = this.playersList.get(playerId);
         if(this.playerTypeblesList.has(playerId)) {
-            const enemy = this.typebleList.get(this.playerTypeblesList.get(playerId));
-            if (enemy == undefined)
-            {
+            const typeble = this.typebleList.get(this.playerTypeblesList.get(playerId));
+            if (!typeble) {
                 this.numOfTypos = 0;
                 this.playerTypeblesList.delete(playerId);
                 return consts.TM_TYPING_TYPO_NO_MATCH;
             }
-            const enWords = enemy.getWords();
-            const key = enemy.getId();
+            const enWords = typeble.getWords();
+            const key = typeble.getId();
             if ((enWords === inText) && ((this.playerTypeblesList.get(playerId) === key))) {
                 this.numOfTypos = 0;
 
-                enemy.setTypedText(inText);
-                enemy.kill(player.getColor());
+                typeble.setTypedText(inText);
+                typeble.kill(player.getColor());
                 this.playerTypeblesList.delete(playerId);
                 this.typebleList.delete(key);
                 return consts.TM_TYPING_FULLMATCH;
@@ -59,8 +58,8 @@ class TypeManager {
 
                 this.numOfTypos = 0;
 
-                enemy.setFillRgb(rgb);
-                enemy.setTypedText(inText);
+                typeble.setFillRgb(rgb);
+                typeble.setTypedText(inText);
                 return consts.TM_TYPING_PARTMATCH;
 
             } else if (this.playerTypeblesList.get(playerId) === key) {
@@ -77,22 +76,22 @@ class TypeManager {
             }
 
         } else {
-            for (let [key, enemy] of this.typebleList.entries()) {
-                if(enemy.getWords() === inText) {
+            for (let [key, typeble] of this.typebleList.entries()) {
+                if(typeble.getWords() === inText) {
                     this.numOfTypos = 0;
 
-                    enemy.setTypedText(inText);
-                    enemy.kill(player.getColor());
+                    typeble.setTypedText(inText);
+                    typeble.kill(player.getColor());
                     this.playerTypeblesList.delete(playerId);
                     this.typebleList.delete(key);
                     return consts.TM_TYPING_FULLMATCH;
                 }
-                else if (enemy.getWords().startsWith(inText)) {
+                else if (typeble.getWords().startsWith(inText)) {
                     this.numOfTypos = 0;
 
-                    enemy.setFillRgb(rgb);
-                    enemy.setTypedText(inText);
-                    this.playerTypeblesList.set(playerId, enemy.getId());
+                    typeble.setFillRgb(rgb);
+                    typeble.setTypedText(inText);
+                    this.playerTypeblesList.set(playerId, typeble.getId());
                     return consts.TM_TYPING_PARTMATCH;
 
                 }
