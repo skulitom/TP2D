@@ -1,4 +1,4 @@
-class Typable {
+class Typeble {
     constructor(id) {
         this.id = id;
         this.words = 'o';
@@ -37,4 +37,4 @@ class Typable {
     }
 }
 
-module.exports = Typable;
+module.exports = Typeble;
