@@ -27,11 +27,12 @@ io.sockets.on('connection', socket => {
 
     socket.on('disconnect', () => {
       io.sockets.in(room).emit("disconnect", socket.id);
+      gameManager.removePlayer(room, socket.id);
       if(!(io.sockets.adapter.rooms[room])) {
+        gameManager.closeGame(room);
         clearInterval(timerList.get(room));
         timerList.delete(room);
       }
-      gameManager.removePlayer(room, socket.id);
     });
   });
 });
