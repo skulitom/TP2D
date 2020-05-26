@@ -149,10 +149,5 @@ function removeEnemy(enemyId) {
 
 function keyTyped() {
   gunSound.play();
-  fetch('/registerKey/'+key+'/'+socket.id)
-      .then( res => {
-
-      }).catch(err => {
-    console.log('Fetch Error :-S', err);
-  });
+  socket.emit('set key', {'key':key, 'id':socket.id});
 }
