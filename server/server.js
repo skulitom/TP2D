@@ -17,6 +17,7 @@ app.use(express.static("public"));
 
 let io = socket(server);
 let tManager = new TypeManager();
+let games = new Map();
 
 let game = {
   'players': [],
@@ -26,45 +27,45 @@ let game = {
 
 setInterval(updateGame, 16);
 
-app.get('/killEnemy/:id', (req, res) => {
-  game.enemies = game.enemies.filter(enemy => enemy.id !== req.params.id);
-  res.sendStatus(200);
-});
-
 io.sockets.on('connection', socket => {
-  game.players.forEach(player => player.moveAway());
-  let newPlayer = new Player(socket.id, game.players.length, tManager);
-  tManager.registerPlayer(newPlayer);
-  game.players.push(newPlayer);
+  socket.on('room', (room) => {
+    games.set(room, game);
+    socket.join(room);
 
-  socket.on('disconnect', () => {
-    io.sockets.emit("disconnect", socket.id);
-    game.players.forEach(player => player.moveBack());
-    game.players = game.players.filter(player => player.id !== socket.id);
-  });
+    game.players.forEach(player => player.moveAway());
+    let newPlayer = new Player(socket.id, game.players.length, tManager);
+    tManager.registerPlayer(newPlayer);
+    game.players.push(newPlayer);
 
-  socket.on('set key', (msg) => {
-    const playerIndex = game.players.findIndex(player => player.id === msg.id);
-    if (playerIndex === -1)
-      return "err";
-    const result = game.players[playerIndex].setKey(msg.key);
-    switch(result) {
-      case consts.TM_TYPING_FULLMATCH:
-        game.players[playerIndex].registerKill(2);
-        break;
-      case consts.TM_TYPING_PARTMATCH:
-        game.players[playerIndex].registerKill(1);
-        break;
-      case consts.TM_TYPING_TYPO:
-        game.players[playerIndex].registerKill(-1);
-        break;
-      case consts.TM_TYPING_TYPO_RESET:
-        game.players[playerIndex].registerKill(-2);
-        break;
-      case consts.TM_TYPING_TYPO_NO_MATCH:
-        game.players[playerIndex].registerKill(-0.5);
-        break;
-    }
+    socket.on('set key', (msg) => {
+      const playerIndex = game.players.findIndex(player => player.id === msg.id);
+      if (playerIndex === -1)
+        return "err";
+      const result = game.players[playerIndex].setKey(msg.key);
+      switch(result) {
+        case consts.TM_TYPING_FULLMATCH:+
+            game.players[playerIndex].registerKill(2);
+          break;
+        case consts.TM_TYPING_PARTMATCH:
+          game.players[playerIndex].registerKill(1);
+          break;
+        case consts.TM_TYPING_TYPO:
+          game.players[playerIndex].registerKill(-1);
+          break;
+        case consts.TM_TYPING_TYPO_RESET:
+          game.players[playerIndex].registerKill(-2);
+          break;
+        case consts.TM_TYPING_TYPO_NO_MATCH:
+          game.players[playerIndex].registerKill(-0.5);
+          break;
+      }
+    });
+
+    socket.on('disconnect', () => {
+      io.sockets.in(room).emit("disconnect", socket.id);
+      game.players.forEach(player => player.moveBack());
+      game.players = game.players.filter(player => player.id !== socket.id);
+    });
   });
 });
 

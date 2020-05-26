@@ -1,4 +1,5 @@
 const socket = io.connect('localhost');
+const room = 'abc123';
 
 let players = new Map();
 let enemies = new Map();
@@ -9,6 +10,10 @@ let gunSound;
 let gui = new GUI(players);
 let fxManger = new EffectsManager();
 let bg;
+
+socket.on('connect', () => {
+  socket.emit('room', room);
+});
 
 socket.on("heartbeat", (game) => {
   if(players instanceof Map &&
