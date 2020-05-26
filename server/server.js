@@ -1,131 +1,44 @@
 const express = require('express');
 const socket = require('socket.io');
-const consts = require('./constants/TypingConstants');
 const app = express();
-const shortid = require('shortid');
 const PORT = process.env.PORT || 80;
-let Player = require('./Player');
-let Enemy = require('./Enemy');
-let Loot = require('./Loot');
-let BossEnemy = require('./BossEnemy');
-let TypeManager = require('./TypeManager');
-let timer = 0;
-let freqCoef = 200;
+let GameManager = require('./GameManager');
 
 let server = app.listen(PORT);
 app.use(express.static("public"));
 
 let io = socket(server);
-let tManager = new TypeManager();
-let games = new Map();
-
-let game = {
-  'players': [],
-  'enemies': [],
-  'loot': []
-};
-
-setInterval(updateGame, 16);
+let gameManager = new GameManager();
+let timerList = new Map();
 
 io.sockets.on('connection', socket => {
   socket.on('room', (room) => {
-    games.set(room, game);
+    if(!(io.sockets.adapter.rooms[room])) {
+      gameManager.createGame(room);
+      let interval = setInterval(() => updateGame(room), 16);
+      timerList.set(room, interval);
+    }
     socket.join(room);
-
-    game.players.forEach(player => player.moveAway());
-    let newPlayer = new Player(socket.id, game.players.length, tManager);
-    tManager.registerPlayer(newPlayer);
-    game.players.push(newPlayer);
+    gameManager.addPlayer(room, socket.id);
 
     socket.on('set key', (msg) => {
-      const playerIndex = game.players.findIndex(player => player.id === msg.id);
-      if (playerIndex === -1)
-        return "err";
-      const result = game.players[playerIndex].setKey(msg.key);
-      switch(result) {
-        case consts.TM_TYPING_FULLMATCH:+
-            game.players[playerIndex].registerKill(2);
-          break;
-        case consts.TM_TYPING_PARTMATCH:
-          game.players[playerIndex].registerKill(1);
-          break;
-        case consts.TM_TYPING_TYPO:
-          game.players[playerIndex].registerKill(-1);
-          break;
-        case consts.TM_TYPING_TYPO_RESET:
-          game.players[playerIndex].registerKill(-2);
-          break;
-        case consts.TM_TYPING_TYPO_NO_MATCH:
-          game.players[playerIndex].registerKill(-0.5);
-          break;
-      }
+      gameManager.onKey(room, msg.id, msg.key);
     });
 
     socket.on('disconnect', () => {
       io.sockets.in(room).emit("disconnect", socket.id);
-      game.players.forEach(player => player.moveBack());
-      game.players = game.players.filter(player => player.id !== socket.id);
+      if(!(io.sockets.adapter.rooms[room])) {
+        clearInterval(timerList.get(room));
+        timerList.delete(room);
+      }
+      gameManager.removePlayer(room, socket.id);
     });
   });
 });
 
-function distributeDamage(timer, enemy) {
-  if(Math.floor(timer%10)===0) {
-    if(enemy.getIsInHitArea()){
-      game.players.forEach(player => {
-        if(player.id === enemy.getPlayerId()){
-          player.hit(enemy.getHitPower());
-        }
-      });
-    }
-  }
-}
-
-function updateFrequencyCoef(){
-  if(freqCoef<=10){
-    freqCoef=10;
-  } else {
-    freqCoef-=10;
-    if(freqCoef <= 10) {
-      freqCoef = 10;
-    }
-  }
-}
-
-function getRandomItem(arrayOfItems) {
-  return arrayOfItems[Math.floor(Math.random() * arrayOfItems.length)];
-}
-
-function updateGame() {
-  timer++;
-  if (game.players[0]) {
-    if (Math.floor(timer % (freqCoef * 5)) === 0) {
-      let enemy = new BossEnemy(shortid.generate(), getRandomItem(game.players));
-      game.enemies.push(enemy);
-      tManager.registerTypeble(enemy);
-      updateFrequencyCoef()
-
-    }else if(Math.floor(timer % (freqCoef * 6)) === 0) {
-      let loot = new Loot(shortid.generate());
-      //tManager.registerTypeble(loot);
-      game.loot.push(loot);
-      tManager.registerTypeble(loot);
-    }
-    game.enemies.forEach((enemy) => {
-      enemy.update();
-      distributeDamage(timer, enemy);
-    });
-
-    if (Math.floor(timer % freqCoef) === 0) {
-      let enemy = new Enemy(shortid.generate(), getRandomItem(game.players));
-      game.enemies.push(enemy);
-      tManager.registerTypeble(enemy);
-    }
-  }
-  if (timer > 100000) {
-    timer -= 100000;
-  }
-  io.sockets.emit("heartbeat", game);
+function updateGame(room) {
+  gameManager.updateGame(room);
+  io.sockets.in(room).emit("heartbeat", gameManager.getEmitable(room));
 }
 
 
