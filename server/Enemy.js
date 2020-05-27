@@ -19,7 +19,7 @@ class Enemy extends Typeble {
             this.x = Math.random()*1366 +1;
         }
         this.words = consts.CHARACTERS.charAt(Math.floor(Math.random() * consts.CHARACTERS.length));
-        this.speed = 1;
+        this.speed = 2;
         this.typedWords = "";
         this.bDead = false;
         this.inHitArea = false;

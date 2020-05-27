@@ -5,11 +5,12 @@ class Player {
     this.x = Math.floor(1366/2);
     this.y = Math.floor(768/2);
     this.id = id;
-    this.weapon = 'pistol';
     this.health = 100;
     this.typeInput = new TypeInput(side, tManager, id);
     this.bDead = false;
     this.score = 0;
+    this.size = 20;
+    this.direction = 3;
 
     this.rgb = {
       r: Math.random() * 255,

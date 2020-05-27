@@ -4,19 +4,20 @@ class Player {
     this.y = player.y;
     this.id = player.id;
     this.rgb = player.rgb;
-    this.weapon = player.weapon;
     this.health = player.health;
     this.bDead = player.bDead;
-    this.score = 0;
+    this.size = player.size;
+    this.score = player.score;
+    this.direction = player.direction;
   }
 
   modify(player) {
-    this.weapon = player.weapon;
     this.health = player.health;
     this.bDead = player.bDead;
     this.x = player.x;
     this.y = player.y;
     this.score = player.score;
+    this.direction = player.direction;
   }
 
   getX() {
@@ -37,10 +38,14 @@ class Player {
 
   draw() {
     if(!this.bDead) {
+      translate(this.x, this.y);
+      rotate(this.direction);
       fill(this.rgb.r, this.rgb.g, this.rgb.b);
-      circle(this.x, this.y, 20);
+      circle(0, 0, this.size);
       fill(0, 0, 0);
-      rect(this.x - 10, this.y - 10, 5, 5);
+      rect( -this.size, -this.size/2, 20, 5);
+      rotate(-this.direction);
+      translate(-(this.x), -(this.y));
       rect(this.x - 25, this.y + 30, 50, 5);
       fill(255, 0, 0);
       rect(this.x - 25, this.y + 30, this.health / 2, 5);
@@ -48,7 +53,7 @@ class Player {
 //      console.log(this.y);
     } else {
       fill(0, 0, 255);
-      circle(this.x, this.y, 20);
+      circle(this.x, this.y, this.size);
     }
   }
 
