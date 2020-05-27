@@ -1,11 +1,10 @@
 const express = require('express');
 const socket = require('socket.io');
 const app = express();
-const PORT = process.env.PORT || 80;
+const PORT = process.env.PORT || 8080;
 let GameManager = require('./GameManager');
 
 let server = app.listen(PORT);
-app.use(express.static("public"));
 
 let io = socket(server);
 let gameManager = new GameManager();

@@ -1,4 +1,4 @@
-const socket = io.connect('localhost');
+const socket = io.connect('http://localhost:8080');
 const room = 'abc123';
 
 let players = new Map();
