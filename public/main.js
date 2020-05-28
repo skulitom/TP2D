@@ -4,17 +4,22 @@ const path = require('path');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let mainWindow
+let mainWindow;
 
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 1400,
-    height: 850,
+    width: 1380,
+    height: 820,
+    title: "Typer Space",
+    //frame: false,
+    transparent: true,
+    resizable: false,
+    icon: path.join(__dirname, 'assets/brand/TyperSpaceLogo.jpg'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
-  })
+  });
 
   // and load the index.html of the app.
   mainWindow.loadFile('index.html');
