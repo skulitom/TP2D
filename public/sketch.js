@@ -5,11 +5,13 @@ let players = new Map();
 let enemies = new Map();
 let lootList = new Map();
 let loaded = false;
+let menu = false;
 let angle = 0;
 let gunSound;
 let gui = new GUI(players);
 let fxManger = new EffectsManager();
 let bg;
+let resolution = [1366, 768];
 
 socket.on('connect', () => {
   socket.emit('room', room);
@@ -41,33 +43,51 @@ function gunSoundfun(sound) {
 }
 
 function setup() {
-  createCanvas(1366, 768);
+  createCanvas(...resolution);
   bg = loadImage('assets/textures/background/Ground.jpg');
   gunSound = loadSound('assets/sfx/gun-shot.mp3', gunSoundfun);
   loadSound('assets/music/DST-BetaTron.mp3', songLoaded);
   loaded = true;
 }
 
-function draw() {
+function drawMainGame() {
   background(bg);
+  update();
+  enemies.forEach(enemy => enemy.drawBody());
+  lootList.forEach(loot => loot.drawBody());
+  enemies.forEach(enemy => enemy.drawUI());
+  lootList.forEach(loot => loot.drawUI());
+  players.forEach(player => player.draw());
+}
+
+function drawLoadingAnimation() {
+  translate(...resolution.map(x => x/2));
+  rotate(angle);
+  strokeWeight(4);
+  stroke(255,0,255);
+  line(0,0,100,0);
+  angle += 0.1;
+}
+
+function drawMenu() {
+  let menuColor = color(100,100,110);
+  menuColor.setAlpha(120);
+  fill(menuColor);
+  rect(...resolution.map(x => x/12),...resolution.map(x => x/1.2));
+}
+
+function draw() {
   if(loaded) {
-    update();
-    enemies.forEach(enemy => enemy.drawBody());
-    lootList.forEach(loot => loot.drawBody());
-    enemies.forEach(enemy => enemy.drawUI());
-    lootList.forEach(loot => loot.drawUI());
-//    console.log(players);
-    players.forEach(player => player.draw());
+    drawMainGame();
   } else {
-    translate(1366/2, 768/2);
-    rotate(angle);
-    strokeWeight(4);
-    stroke(255,0,255);
-    line(0,0,100,0);
-    angle += 0.1;
+    background(100);
+    drawLoadingAnimation();
   }
   fxManger.draw();
   gui.draw();
+  if(menu) {
+    drawMenu();
+  }
 }
 
 function update() {
@@ -153,6 +173,10 @@ function removeEnemy(enemyId) {
 }
 
 function keyTyped() {
-  gunSound.play();
-  socket.emit('set key', {'key':key, 'id':socket.id});
+  if(keyCode === ENTER) {
+    menu = !menu;
+  } else {
+    gunSound.play();
+    socket.emit('set key', {'key': key, 'id': socket.id});
+  }
 }
