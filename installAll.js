@@ -7,10 +7,7 @@ exec('npm install', (err, stdout, stderr) => {
         // node couldn't execute the command
         return;
     }
-
-    // the *entire* stdout and stderr (buffered)
-    console.log(`stdout: ${stdout}`);
-    console.log(`stderr: ${stderr}`);
+    
 });
 process.chdir('../public');
 exec('npm install', (err, stdout, stderr) => {
@@ -18,8 +15,4 @@ exec('npm install', (err, stdout, stderr) => {
         // node couldn't execute the command
         return;
     }
-
-    // the *entire* stdout and stderr (buffered)
-    console.log(`stdout: ${stdout}`);
-    console.log(`stderr: ${stderr}`);
 });

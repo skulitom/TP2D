@@ -15,7 +15,7 @@ class Enemy {
         this.killerColor = enemy.killerColor;
     }
 
-    modify(enemy) {
+    modify = (enemy) => {
         if(this.typedWords.length < enemy.typedWords.length){
             this.shot = true;
         }
@@ -30,17 +30,17 @@ class Enemy {
             this.bDead = enemy.bDead;
             this.fxManager.createExplosion(this.x, this.y, this.killerColor, this.size);
         }
-    }
+    };
 
-    getId() {
+    getId = () =>  {
         return this.id;
-    }
+    };
 
-    getWords() {
+    getWords = () =>  {
         return this.words;
-    }
+    };
 
-    kill(){
+    kill = () => {
         fetch('/killEnemy/'+this.id)
             .then( res => {
                 console.log(res);
@@ -48,15 +48,15 @@ class Enemy {
                 console.log('Fetch Error :-S', err);
             });
         this.bDead = true;
-    }
+    };
 
-    update() {
+    update = () =>  {
         if (this.shot) {
             this.shot = false;
         }
-    }
+    };
   
-    drawBody() {
+    drawBody = () => {
         if (this.bDead){
             fill(this.rgb.r * 0.5, this.rgb.g * 0.5, this.rgb.b * 0.5);
         } else {
@@ -64,10 +64,11 @@ class Enemy {
         }
         
         circle(this.x, this.y, this.size);
+        this.drawUI();
     
-    }
+    };
     
-    drawUI() {
+    drawUI = () => {
 
         if (this.bDead)
             return;
@@ -84,6 +85,6 @@ class Enemy {
         text(this.words, this.x - 5, this.y +10+ this.size);
         fill(this.fillRGB.r, this.fillRGB.g, this.fillRGB.b);
         text(this.typedWords, this.x - 5, this.y +10+ this.size);
-    }
+    };
   
 }

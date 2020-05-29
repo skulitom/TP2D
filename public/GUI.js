@@ -1,17 +1,10 @@
-class GUI
-{
+class GUI {
 
-    constructor(players)
-    {
-
+    constructor(players) {
         this.players = players;
-
     }
   
-    draw()
-    {
-  
-
+    draw = () =>  {
         const startPosX = -20;
         const startPosY = 20;
 
@@ -19,8 +12,7 @@ class GUI
         const winHeigh = 768;
 
         let index = 0;
-        for (let [id, pl] of this.players)
-        {
+        for (let [id, pl] of this.players) {
         
             const color = pl.getColor();
             const score = pl.getScore();
@@ -45,7 +37,6 @@ class GUI
             text(strScore, - startPosX, startPosY + 30 * index);
 
             index = index + 1;
-
         }
 
     }

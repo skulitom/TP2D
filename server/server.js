@@ -11,34 +11,34 @@ let gameManager = new GameManager();
 let timerList = new Map();
 
 io.sockets.on('connection', socket => {
-  socket.on('room', (room) => {
-    if(!(io.sockets.adapter.rooms[room])) {
-      gameManager.createGame(room);
-      let interval = setInterval(() => updateGame(room), 16);
-      timerList.set(room, interval);
-    }
-    socket.join(room);
-    gameManager.addPlayer(room, socket.id);
+    socket.on('room', (room) => {
+        if(!(io.sockets.adapter.rooms[room])) {
+            gameManager.createGame(room);
+            let interval = setInterval(() => updateGame(room), 16);
+            timerList.set(room, interval);
+        }
+        socket.join(room);
+        gameManager.addPlayer(room, socket.id);
 
-    socket.on('set key', (msg) => {
-      gameManager.onKey(room, msg.id, msg.key);
-    });
+        socket.on('set key', (msg) => {
+            gameManager.onKey(room, msg.id, msg.key);
+        });
 
-    socket.on('disconnect', () => {
-      io.sockets.in(room).emit("disconnect", socket.id);
-      gameManager.removePlayer(room, socket.id);
-      if(!(io.sockets.adapter.rooms[room])) {
-        gameManager.closeGame(room);
-        clearInterval(timerList.get(room));
-        timerList.delete(room);
-      }
+        socket.on('disconnect', () => {
+            io.sockets.in(room).emit("disconnect", socket.id);
+            gameManager.removePlayer(room, socket.id);
+            if(!(io.sockets.adapter.rooms[room])) {
+                gameManager.closeGame(room);
+                clearInterval(timerList.get(room));
+                timerList.delete(room);
+            }
+        });
     });
-  });
 });
 
 function updateGame(room) {
-  gameManager.updateGame(room);
-  io.sockets.in(room).emit("heartbeat", gameManager.getEmitable(room));
+    gameManager.updateGame(room);
+    io.sockets.in(room).emit("heartbeat", gameManager.getEmitable(room));
 }
 
 
