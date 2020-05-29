@@ -41,27 +41,27 @@ class Enemy extends Typeble {
         };
     }
 
-    getPlayerId() {
+    getPlayerId = () =>  {
         return this.playerId;
-    }
+    };
 
-    getSpeed() {
+    getSpeed = () =>  {
         return this.speed;
-    }
+    };
 
-    getIsInHitArea() {
+    getIsInHitArea = () =>  {
         return this.inHitArea;
-    }
+    };
 
-    getHitPower() {
+    getHitPower = () =>  {
         return this.hitPower;
-    }
+    };
 
-    getIsDead() {
+    getIsDead = () => {
         return this.bDead;
-    }
+    };
 
-    update(){
+    update = () => {
         if(this.bDead) {
             return;
         }
@@ -71,15 +71,15 @@ class Enemy extends Typeble {
         if(Math.abs(this.playerY-this.y) < 5 && Math.abs(this.playerX-this.x) < 5) {
             this.inHitArea = true;
         }
-    }
+    };
 
-    kill(killerColor) {
+    kill = (killerColor) => {
         super.kill(killerColor);
         this.bDead = true;
         this.speed = 0;
         this.hitPower = 0;
         this.inHitArea = false;
-    }
+    };
 }
 
 module.exports = Enemy;

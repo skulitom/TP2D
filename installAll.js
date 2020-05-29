@@ -7,7 +7,7 @@ exec('npm install', (err, stdout, stderr) => {
         // node couldn't execute the command
         return;
     }
-    
+
 });
 process.chdir('../public');
 exec('npm install', (err, stdout, stderr) => {

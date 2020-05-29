@@ -22,10 +22,10 @@ class Loot extends Typeble {
         };
     }
 
-    kill(killerColor) {
+    kill = (killerColor) => {
         super.kill(killerColor);
         this.isOpen = true;
-    }
+    };
 }
 
 module.exports = Loot;

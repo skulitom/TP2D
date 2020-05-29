@@ -9,32 +9,24 @@ class TypeManager {
         this.numOfTypos = 0;
     }
 
-    registerTypeble(value) {
-
+    registerTypeble = (value) => {
         this.typebleList.set(value.getId(), value);
+    };
 
-    }
-
-    registerPlayer(value) {
-
+    registerPlayer = (value) => {
         this.playersList.set(value.getId(), value);
+    };
 
-    }
-
-    resetTyping(playerId) {
-
+    resetTyping = (playerId) => {
         if (this.playerTypeblesList.has(playerId)) {
-
             const en = this.typebleList.get(this.playerTypeblesList.get(playerId));
             en.setTypedText("");
             this.playerTypeblesList.delete(playerId);
-
         }
+    };
 
-    }
-
-    setTyping(rgb, text, playerId) {
-
+    //TODO: Break down into smaller functions
+    setTyping = (rgb, text, playerId) => {
         let inText = text.join('').trim();
         let player = this.playersList.get(playerId);
         if(this.playerTypeblesList.has(playerId)) {
@@ -99,11 +91,9 @@ class TypeManager {
         }
         return consts.TM_TYPING_TYPO_NO_MATCH;
 
-    }
+    };
 
-    logout(enemy)
-    {
-
+    logout = (enemy) => {
         //for (let k)
 
     }

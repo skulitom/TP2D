@@ -9,34 +9,28 @@ class TypeInput {
 
     tManager;
 
-    constructor(side, tManager, playerId)
-    {
+    constructor(side, tManager, playerId) {
 
         this.tManager = tManager;
         this.side = side;
         this.playerId = playerId;
 
-        if (side === 0)
-        {
-
+        if (side === 0) {
             this.textColor.r = 255;
 
         }
-        else if (side === 1)
-        {
+        else if (side === 1) {
 
             this.textColor.b = 255;
 
         }
-        else if (side === 2)
-        {
+        else if (side === 2) {
             this.textColor.g = 255;
         }
 
     }
 
-    updateInKey(keyB)
-    {
+    updateInKey = (keyB) => {
         const key = keyB.toUpperCase();
         this.currInput.push(key);
         //console.log("new input");
@@ -44,28 +38,26 @@ class TypeInput {
 
         const result = this.tManager.setTyping(this.textColor, this.currInput, this.playerId);
         //console.log(result);
-        if ((result == consts.TM_TYPING_FULLMATCH) || (result == consts.TM_TYPING_TYPO_RESET) ||
-            (result == consts.TM_TYPING_TYPO_NO_MATCH))
-        {
+        if ((result == consts.TM_TYPING_FULLMATCH) ||
+            (result == consts.TM_TYPING_TYPO_RESET) ||
+            (result == consts.TM_TYPING_TYPO_NO_MATCH)) {
             this.currInput = [];
         }
-        else if ((result == consts.TM_TYPING_TYPO))
-        {
+        else if ((result == consts.TM_TYPING_TYPO)) {
             this.currInput.pop();
         }
         return result;
 
     }
 
-    resetInput()
-    {
+    resetInput = () =>  {
 
         this.currInput = [];
         this.tManager.resetTyping(this.playerId);
         //console.log("pop input");
         //console.log(this.currInput);
 
-    }
+    };
 
 }
 

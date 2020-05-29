@@ -19,46 +19,46 @@ class Player {
         }
     }
 
-    getId() {
+    getId = () =>  {
         return this.id;
-    }
+    };
 
-    getColor() {
+    getColor = () =>  {
         return this.rgb;
-    }
+    };
 
-    registerKill(level) {
+    registerKill = (level) => {
         if(this.score+level<=0){
             this.score = 0;
             return;
         }
         this.score += level;
-    }
+    };
 
-    hit(damage) {
+    hit = (damage) => {
         if(this.health<=damage){
             this.health=0;
             this.bDead = true;
         } else {
             this.health-=damage;
         }
-    }
+    };
 
-    moveAway() {
+    moveAway = () =>  {
         this.x -= 100;
-    }
+    };
 
-    moveBack() {
+    moveBack = () =>  {
         this.x += 100;
-    }
+    };
 
-    setKey(key) {
+    setKey = (key) => {
         if(!this.bDead) {
             return this.typeInput.updateInKey(key);
         } else {
             return 'player dead';
         }
-    }
+    };
 
 }
 

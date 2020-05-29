@@ -36,10 +36,10 @@ io.sockets.on('connection', socket => {
     });
 });
 
-function updateGame(room) {
+updateGame = (room) => {
     gameManager.updateGame(room);
     io.sockets.in(room).emit("heartbeat", gameManager.getEmitable(room));
-}
+};
 
 
 
