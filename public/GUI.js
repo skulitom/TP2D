@@ -24,6 +24,7 @@ class GUI
         
             const color = pl.getColor();
             const score = pl.getScore();
+            const strScore = "Player " + (index + 1) + ": " + score;
 
             //stroke(200);
             textAlign(LEFT, TOP);
@@ -35,11 +36,12 @@ class GUI
 //            {
 //                textAlign(RIGHT, TOP);
 //            }
-            
             textSize(32);
+            fill(0);
+            strokeWeight(3);
+            text(strScore, - startPosX, startPosY + 30 * index);
             fill(color.r, color.g, color.b);
-            const strScore = "Player " + (index + 1) + ": " + score;
-//            console.log(strScore);
+            strokeWeight(1);
             text(strScore, - startPosX, startPosY + 30 * index);
 
             index = index + 1;
