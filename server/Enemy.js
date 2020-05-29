@@ -4,18 +4,19 @@ let Typeble = require('./Typeble');
 class Enemy extends Typeble {
     constructor(id, player) {
         super(id);
+        this.size = 20;
         let random = Math.random();
         if(random <= 0.25){
-            this.x = 0;
+            this.x = 0 - this.size;
             this.y = Math.random()*768 + 1;
         } else if(random <= 0.5) {
-            this.x = 1367;
+            this.x = 1367 + this.size;
             this.y = Math.random()* 768 + 1;
         } else if(random <= 0.75) {
-            this.y = 0;
+            this.y = 0 - this.size;
             this.x = Math.random()*1366 +1;
         } else {
-            this.y = 769;
+            this.y = 769 + this.size;
             this.x = Math.random()*1366 +1;
         }
         this.words = consts.CHARACTERS.charAt(Math.floor(Math.random() * consts.CHARACTERS.length));
@@ -24,7 +25,6 @@ class Enemy extends Typeble {
         this.bDead = false;
         this.inHitArea = false;
         this.hitPower = 1;
-        this.size = 20;
         this.playerX = player.x;
         this.playerY = player.y;
         this.playerId = player.id;

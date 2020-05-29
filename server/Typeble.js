@@ -11,25 +11,25 @@ class Typeble {
         };
     }
 
-    getId() {
+    getId = () => {
         return this.id;
-    }
+    };
 
-    getWords() {
+    getWords = () => {
         return this.words;
-    }
+    };
 
-    setFillRgb(rgb) {
+    setFillRgb = (rgb) => {
         this.fillRGB = rgb;
-    }
+    };
 
-    setTypedText(text) {
+    setTypedText = (text) => {
         this.typedWords = text;
-    }
+    };
 
-    getTextEnd() {
+    getTextEnd = () => {
         return this.textEnd;
-    }
+    };
 
     kill(killerColor) {
         this.textEnd = true;
