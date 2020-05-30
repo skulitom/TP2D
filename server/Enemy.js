@@ -28,6 +28,7 @@ class Enemy extends Typeble {
         this.playerX = player.x;
         this.playerY = player.y;
         this.playerId = player.id;
+        this.rotate();
         this.texture = 'frodo';
         this.fillRGB = {
             r: 255,
@@ -41,6 +42,11 @@ class Enemy extends Typeble {
             b: 0,
         };
     }
+
+    rotate = () => {
+        this.direction = Math.atan2(this.playerY - this.y, this.playerX - this.x);
+        this.direction += Math.PI/2;
+    };
 
     getPlayerId = () =>  {
         return this.playerId;

@@ -14,10 +14,11 @@ class Enemy {
         this.fxManager = fxManager;
         this.killerColor = enemy.killerColor;
         this.texture = enemy.texture;
+        this.direction = enemy.direction;
     }
 
     modify = (enemy) => {
-        if(this.typedWords.length < enemy.typedWords.length){
+        if(this.typedWords.length < enemy.typedWords.length) {
             this.shot = true;
         }
         this.typedWords = enemy.typedWords;
@@ -26,8 +27,8 @@ class Enemy {
         this.x = enemy.x;
         this.y = enemy.y;
         this.killerColor = enemy.killerColor;
-        if (enemy.bDead && !this.bDead)
-        {
+        this.direction = enemy.direction;
+        if (enemy.bDead && !this.bDead) {
             this.bDead = enemy.bDead;
             this.fxManager.createExplosion(this.x, this.y, this.killerColor, this.size);
         }
@@ -63,8 +64,13 @@ class Enemy {
 //        } else {
 //            fill(this.rgb.r, this.rgb.g, this.rgb.b);
 //        }
-
-        image(texture, this.x, this.y, this.size * 2, this.size * 2);
+        imageMode(CENTER);
+        translate(this.x , this.y);
+        rotate(this.direction);
+        image(texture, 0, 0, this.size * 2, this.size * 2);
+        rotate(-this.direction);
+        translate(-(this.x), -(this.y));
+        imageMode(CORNER);
 
 //        circle(this.x, this.y, this.size);
         this.drawUI();
