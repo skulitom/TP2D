@@ -67,7 +67,7 @@ class Enemy {
         imageMode(CENTER);
         translate(this.x , this.y);
         rotate(this.direction);
-        image(texture, 0, 0, this.size * 2, this.size * 2);
+        image(texture, 0, 0, this.size * 4, this.size * 4);
         rotate(-this.direction);
         translate(-(this.x), -(this.y));
         imageMode(CORNER);

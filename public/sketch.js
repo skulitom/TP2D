@@ -48,7 +48,7 @@ setup = () => {
     bg = loadImage('assets/textures/background/Ground.jpg');
     gunSound = loadSound('assets/sfx/gun-shot.mp3', gunSoundfun);
     loadSound('assets/music/DST-BetaTron.mp3', songLoaded);
-    frodo = loadImage('assets/textures/npcs/frodo/frodo.jpg');
+    frodo = loadImage('assets/textures/npcs/frodo/frodo.png');
     loaded = true;
 };
 
