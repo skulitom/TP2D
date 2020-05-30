@@ -12,6 +12,7 @@ let gui = new GUI(players);
 let fxManger = new EffectsManager();
 let bg;
 let resolution = [1366, 768];
+let frodo;
 
 socket.on('connect', () => {
     socket.emit('room', room);
@@ -47,13 +48,14 @@ setup = () => {
     bg = loadImage('assets/textures/background/Ground.jpg');
     gunSound = loadSound('assets/sfx/gun-shot.mp3', gunSoundfun);
     loadSound('assets/music/DST-BetaTron.mp3', songLoaded);
+    frodo = loadImage('assets/textures/npcs/frodo/frodo.jpg');
     loaded = true;
 };
 
 drawMainGame = () => {
     background(bg);
     update();
-    enemies.forEach(enemy => {enemy.drawBody()});
+    enemies.forEach(enemy => {enemy.drawBody(frodo)});
     lootList.forEach(loot => {loot.drawBody()});
     players.forEach(player => player.draw());
 };

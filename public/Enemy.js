@@ -57,14 +57,16 @@ class Enemy {
         }
     };
   
-    drawBody = () => {
-        if (this.bDead){
-            fill(this.rgb.r * 0.5, this.rgb.g * 0.5, this.rgb.b * 0.5);
-        } else {
-            fill(this.rgb.r, this.rgb.g, this.rgb.b);
-        }
-        
-        circle(this.x, this.y, this.size);
+    drawBody = (texture) => {
+//        if (this.bDead){
+//            fill(this.rgb.r * 0.5, this.rgb.g * 0.5, this.rgb.b * 0.5);
+//        } else {
+//            fill(this.rgb.r, this.rgb.g, this.rgb.b);
+//        }
+
+        image(texture, this.x, this.y, this.size * 2, this.size * 2);
+
+//        circle(this.x, this.y, this.size);
         this.drawUI();
     
     };
