@@ -42,13 +42,15 @@ class TypeManager {
                 this.numOfTypos = 0;
 
                 typeble.setTypedText(inText);
-                typeble.kill(player.getColor());
+                player.rotate(typeble.x, typeble.y);
+                typeble.kill(player);
                 this.playerTypeblesList.delete(playerId);
                 this.typebleList.delete(key);
                 return consts.TM_TYPING_FULLMATCH;
             } else if (enWords.startsWith(inText) && ((this.playerTypeblesList.get(playerId) === key))) {
 
                 this.numOfTypos = 0;
+                player.rotate(typeble.x, typeble.y);
 
                 typeble.setFillRgb(rgb);
                 typeble.setTypedText(inText);
@@ -73,7 +75,8 @@ class TypeManager {
                     this.numOfTypos = 0;
 
                     typeble.setTypedText(inText);
-                    typeble.kill(player.getColor());
+                    player.rotate(typeble.x, typeble.y);
+                    typeble.kill(player);
                     this.playerTypeblesList.delete(playerId);
                     this.typebleList.delete(key);
                     return consts.TM_TYPING_FULLMATCH;
@@ -83,6 +86,7 @@ class TypeManager {
 
                     typeble.setFillRgb(rgb);
                     typeble.setTypedText(inText);
+                    player.rotate(typeble.x, typeble.y);
                     this.playerTypeblesList.set(playerId, typeble.getId());
                     return consts.TM_TYPING_PARTMATCH;
 

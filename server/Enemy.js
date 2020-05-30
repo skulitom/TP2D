@@ -28,6 +28,7 @@ class Enemy extends Typeble {
         this.playerX = player.x;
         this.playerY = player.y;
         this.playerId = player.id;
+        this.texture = 'frodo';
         this.fillRGB = {
             r: 255,
             g: 0,
@@ -73,8 +74,8 @@ class Enemy extends Typeble {
         }
     };
 
-    kill = (killerColor) => {
-        super.kill(killerColor);
+    kill = (killer) => {
+        super.kill(killer);
         this.bDead = true;
         this.speed = 0;
         this.hitPower = 0;

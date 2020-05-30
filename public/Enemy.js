@@ -13,6 +13,7 @@ class Enemy {
         this.shot = false;
         this.fxManager = fxManager;
         this.killerColor = enemy.killerColor;
+        this.texture = enemy.texture;
     }
 
     modify = (enemy) => {

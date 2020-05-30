@@ -22,8 +22,8 @@ class Loot extends Typeble {
         };
     }
 
-    kill = (killerColor) => {
-        super.kill(killerColor);
+    kill = (killer) => {
+        super.kill(killer);
         this.isOpen = true;
     };
 }

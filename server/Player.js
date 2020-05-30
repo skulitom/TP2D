@@ -27,6 +27,11 @@ class Player {
         return this.rgb;
     };
 
+    rotate = (enemyX, enemyY) => {
+        console.log(this.direction);
+        this.direction = Math.atan2(enemyY - this.y, enemyX - this.x);
+    };
+
     registerKill = (level) => {
         if(this.score+level<=0){
             this.score = 0;
