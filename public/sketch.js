@@ -10,6 +10,7 @@ let angle = 0;
 let gunSound;
 let gui = new GUI(players);
 let fxManger = new EffectsManager();
+let menuGUI = new Menu();
 let bg;
 let resolution = [1366, 768];
 let frodo;
@@ -71,13 +72,6 @@ drawLoadingAnimation = () =>  {
     angle += 0.1;
 };
 
-drawMenu = () =>  {
-    let menuColor = color(100,100,110);
-    menuColor.setAlpha(120);
-    fill(menuColor);
-    rect(...resolution.map(x => x/12),...resolution.map(x => x/1.2));
-};
-
 draw = () =>  {
     if(loaded) {
         drawMainGame();
@@ -87,9 +81,8 @@ draw = () =>  {
     }
     fxManger.draw();
     gui.draw();
-    if(menu) {
-        drawMenu();
-    }
+    menuGUI.draw(menu);
+
 };
 
 update = () => {
