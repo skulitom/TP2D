@@ -50,7 +50,7 @@ setup = () => {
     gunSound = loadSound('assets/sfx/gun-shot.mp3', gunSoundfun);
     loadSound('assets/music/DST-BetaTron.mp3', songLoaded);
     frodo = loadImage('assets/textures/npcs/frodo/frodo.png');
-    tracer = loadImage('assets/textures/npcs/player/trace.png');
+    tracer = loadImage('assets/textures/player/trace.png');
     loaded = true;
 };
 

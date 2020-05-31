@@ -10,7 +10,7 @@ class Loot extends Typeble {
         this.isOpen = false;
         this.toExplode = false;
         this.size = 10;
-        this.radius = 100;
+        this.radius = 150;
         this.fillRGB = {
             r: 255,
             g: 255,
