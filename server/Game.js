@@ -103,6 +103,11 @@ class Game {
     };
 
     updateEnemies = () => {
+        this.loot.forEach((lootLoc) => {
+            if(lootLoc.getToExplode()){
+                lootLoc.explode(this.enemies);
+            }
+        });
         this.enemies.forEach((enemy) => {
             enemy.update();
             this.distributeDamage(enemy);

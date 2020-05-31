@@ -43,6 +43,14 @@ class Enemy extends Typeble {
         };
     }
 
+    getX = () => {
+        return this.x;
+    };
+
+    getY = () => {
+      return this.y;
+    };
+
     rotate = () => {
         this.direction = Math.atan2(this.playerY - this.y, this.playerX - this.x);
         this.direction += Math.PI/2;
@@ -79,6 +87,14 @@ class Enemy extends Typeble {
             this.inHitArea = true;
         }
     };
+
+    destroy() {
+        super.destroy();
+        this.bDead = true;
+        this.speed = 0;
+        this.hitPower = 0;
+        this.inHitArea = false;
+    }
 
     kill = (killer) => {
         super.kill(killer);

@@ -19,7 +19,11 @@ class Explosion {
 
     draw = () => {
         const size = sqrt(this.startSize * this.time * 100);
-        fill(this.color.r, this.color.g, this.color.b);
+        if(this.color) {
+            fill(this.color.r, this.color.g, this.color.b);
+        } else {
+            fill(255,0,0);
+        }
         circle(this.x, this.y, size);
     };
   

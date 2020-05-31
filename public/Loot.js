@@ -9,12 +9,16 @@ class Loot {
         this.typedWords = loot.typedWords;
         this.isOpen = loot.isOpen;
         this.size = loot.size;
+        this.killerColor = loot.killerColor;
+        this.radius = loot.radius;
+        this.timer = 0;
     }
 
     modify = (loot) => {
         this.typedWords = loot.typedWords;
         this.fillRGB = loot.fillRGB;
         this.isOpen = loot.isOpen;
+        this.killerColor = loot.killerColor;
     };
 
     getId = () =>  {
@@ -34,6 +38,10 @@ class Loot {
             fill(this.rgb.r, this.rgb.g, this.rgb.b);
             rect(this.x, this.y, this.size, this.size);
             this.drawUI();
+        } else if(this.timer < 10) {
+            fill(this.killerColor.r, this.killerColor.g, this.killerColor.b);
+            circle(this.x, this.y, this.radius * (this.timer/10));
+            this.timer+=1;
         }
     };
 

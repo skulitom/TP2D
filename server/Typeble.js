@@ -31,6 +31,10 @@ class Typeble {
         return this.textEnd;
     };
 
+    destroy() {
+        this.textEnd = true;
+    }
+
     kill(killer) {
         this.textEnd = true;
         this.killerColor = killer.getColor();
