@@ -9,6 +9,7 @@ class Player {
         this.size = player.size;
         this.score = player.score;
         this.direction = player.direction;
+        this.timer = 0;
     }
 
     modify = (player) => {
@@ -36,6 +37,10 @@ class Player {
         return this.rgb;
     };
 
+    shoot(tracer) {
+        this.tracer = tracer;
+    }
+
     draw = () =>  {
         if(!this.bDead) {
             translate(this.x, this.y);
@@ -44,6 +49,24 @@ class Player {
             circle(0, 0, this.size);
             fill(0, 0, 0);
             rect( -this.size, -this.size/2, 20, 5);
+
+            if(this.tracer && this.timer<10) {
+                console.log(this.tracer);
+                rotate(-Math.PI/2);
+                imageMode(CENTER);
+                translate(0, this.size*5);
+                rotate(-Math.PI);
+                image(this.tracer, 0, 0, this.size*2, this.size*10);
+                rotate(Math.PI);
+                translate(0, -this.size*5);
+                imageMode(CORNER);
+                rotate(Math.PI/2);
+                this.timer++;
+            } else {
+                this.timer = 0;
+                this.tracer = undefined;
+            }
+
             rotate(-this.direction);
             translate(-(this.x), -(this.y));
             rect(this.x - 25, this.y + 30, 50, 5);

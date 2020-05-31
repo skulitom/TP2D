@@ -13,6 +13,7 @@ let fxManger = new EffectsManager();
 let bg;
 let resolution = [1366, 768];
 let frodo;
+let tracer;
 
 socket.on('connect', () => {
     socket.emit('room', room);
@@ -49,6 +50,7 @@ setup = () => {
     gunSound = loadSound('assets/sfx/gun-shot.mp3', gunSoundfun);
     loadSound('assets/music/DST-BetaTron.mp3', songLoaded);
     frodo = loadImage('assets/textures/npcs/frodo/frodo.png');
+    tracer = loadImage('assets/textures/npcs/player/trace.png');
     loaded = true;
 };
 
@@ -177,6 +179,7 @@ keyTyped = ()  => {
         menu = !menu;
     } else {
         gunSound.play();
+        players.get(socket.id).shoot(tracer);
         socket.emit('set key', {'key': key, 'id': socket.id});
     }
 };
