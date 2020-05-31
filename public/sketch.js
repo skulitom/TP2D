@@ -14,6 +14,7 @@ let menuGUI = new Menu();
 let bg;
 let resolution = [1366, 768];
 let frodo;
+let playerSkin;
 let tracer;
 
 socket.on('connect', () => {
@@ -51,6 +52,7 @@ setup = () => {
     gunSound = loadSound('assets/sfx/gun-shot.mp3', gunSoundfun);
     loadSound('assets/music/DST-BetaTron.mp3', songLoaded);
     frodo = loadImage('assets/textures/npcs/frodo/frodo.png');
+    playerSkin = loadImage('assets/textures/player/player.png');
     tracer = loadImage('assets/textures/player/trace.png');
     loaded = true;
 };
@@ -60,7 +62,7 @@ drawMainGame = () => {
     update();
     enemies.forEach(enemy => {enemy.drawBody(frodo)});
     lootList.forEach(loot => {loot.drawBody()});
-    players.forEach(player => player.draw());
+    players.forEach(player => player.draw(playerSkin));
 };
 
 drawLoadingAnimation = () =>  {

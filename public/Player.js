@@ -41,18 +41,19 @@ class Player {
         this.tracer = tracer;
     }
 
-    draw = () =>  {
+    draw = (skin) =>  {
         if(!this.bDead) {
             translate(this.x, this.y);
-            rotate(this.direction);
-            fill(this.rgb.r, this.rgb.g, this.rgb.b);
-            circle(0, 0, this.size);
-            fill(0, 0, 0);
-            rect( -this.size, -this.size/2, 20, 5);
+            rotate(this.direction + Math.PI / 2);
+
+            imageMode(CENTER);
+            image(skin, 0, 0, this.size * 6, this.size * 6);
+            imageMode(CORNER);
+
 
             if(this.tracer && this.timer<10) {
                 console.log(this.tracer);
-                rotate(-Math.PI/2);
+                rotate(-Math.PI);
                 imageMode(CENTER);
                 translate(0, this.size*5);
                 rotate(-Math.PI);
@@ -60,14 +61,14 @@ class Player {
                 rotate(Math.PI);
                 translate(0, -this.size*5);
                 imageMode(CORNER);
-                rotate(Math.PI/2);
+                rotate(Math.PI);
                 this.timer++;
             } else {
                 this.timer = 0;
                 this.tracer = undefined;
             }
 
-            rotate(-this.direction);
+            rotate(-this.direction - Math.PI / 2);
             translate(-(this.x), -(this.y));
             rect(this.x - 25, this.y + 30, 50, 5);
             fill(255, 0, 0);
