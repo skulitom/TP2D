@@ -44,7 +44,6 @@ class Loot extends Typeble {
     };
 
     kill = (killer) => {
-        super.kill(killer);
         this.isOpen = true;
         this.toExplode = true;
     };
