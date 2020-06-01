@@ -5,7 +5,6 @@ let players = new Map();
 let enemies = new Map();
 let lootList = new Map();
 let loaded = false;
-let menu = false;
 let angle = 0;
 let gunSound;
 let gui = new GUI(players);
@@ -83,7 +82,7 @@ draw = () =>  {
     }
     fxManger.draw();
     gui.draw();
-    menuGUI.draw(menu);
+    menuGUI.draw();
 
 };
 
@@ -171,7 +170,7 @@ removeEnemy = (enemyId) => {
 
 keyTyped = ()  => {
     if(keyCode === ENTER) {
-        menu = !menu;
+        menuGUI.toggleMenu();
     } else {
         gunSound.play();
         players.get(socket.id).shoot(tracer);
