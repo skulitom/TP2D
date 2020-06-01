@@ -52,7 +52,6 @@ class Player {
 
 
             if(this.tracer && this.timer<10) {
-                console.log(this.tracer);
                 rotate(-Math.PI);
                 imageMode(CENTER);
                 translate(0, this.size*5);
