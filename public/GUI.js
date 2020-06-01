@@ -8,9 +8,6 @@ class GUI {
         const startPosX = -20;
         const startPosY = 20;
 
-        const winWidth = 1366;
-        const winHeigh = 768;
-
         let index = 0;
         for (let [id, pl] of this.players) {
         

@@ -1,0 +1,1 @@
+let resolution = [1366, 768];

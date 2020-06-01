@@ -21,6 +21,7 @@ class Game {
         if (playerIndex === -1) {
             return "err";
         }
+        this.players[playerIndex].shoot();
         const result = this.players[playerIndex].setKey(key);
         switch(result) {
             case consts.TM_TYPING_FULLMATCH:

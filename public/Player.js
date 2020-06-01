@@ -9,6 +9,8 @@ class Player {
         this.size = player.size;
         this.score = player.score;
         this.direction = player.direction;
+        this.shotsMade = player.shotsMade;
+        this.shotsFired = 0;
         this.timer = 0;
     }
 
@@ -19,6 +21,7 @@ class Player {
         this.y = player.y;
         this.score = player.score;
         this.direction = player.direction;
+        this.shotsMade = player.shotsMade;
     };
 
     getX = () =>  {
@@ -37,11 +40,7 @@ class Player {
         return this.rgb;
     };
 
-    shoot(tracer) {
-        this.tracer = tracer;
-    }
-
-    draw = (skin) =>  {
+    draw = (skin, tracer) =>  {
         if(!this.bDead) {
             translate(this.x, this.y);
             rotate(this.direction + Math.PI / 2);
@@ -49,31 +48,27 @@ class Player {
             imageMode(CENTER);
             image(skin, 0, 0, this.size * 6, this.size * 6);
             imageMode(CORNER);
-
-
-            if(this.tracer && this.timer<10) {
+            
+            if(this.shotsMade > this.shotsFired && this.timer<10) {
                 rotate(-Math.PI);
                 imageMode(CENTER);
                 translate(0, this.size*5);
                 rotate(-Math.PI);
-                image(this.tracer, 0, 0, this.size*2, this.size*10);
+                image(tracer, 0, 0, this.size*2, this.size*10);
                 rotate(Math.PI);
                 translate(0, -this.size*5);
                 imageMode(CORNER);
                 rotate(Math.PI);
                 this.timer++;
-            } else {
+            } else if(this.shotsMade > this.shotsFired) {
                 this.timer = 0;
-                this.tracer = undefined;
+                this.shotsFired += 1;
             }
-
             rotate(-this.direction - Math.PI / 2);
             translate(-(this.x), -(this.y));
             rect(this.x - 25, this.y + 30, 50, 5);
             fill(255, 0, 0);
             rect(this.x - 25, this.y + 30, this.health / 2, 5);
-//      console.log(this.x);
-//      console.log(this.y);
         } else {
             fill(0, 0, 255);
             circle(this.x, this.y, this.size);

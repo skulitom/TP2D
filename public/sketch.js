@@ -11,7 +11,6 @@ let gui = new GUI(players);
 let fxManger = new EffectsManager();
 let menuGUI = new Menu();
 let bg;
-let resolution = [1366, 768];
 let frodo;
 let playerSkin;
 let tracer;
@@ -61,7 +60,7 @@ drawMainGame = () => {
     update();
     enemies.forEach(enemy => {enemy.drawBody(frodo)});
     lootList.forEach(loot => {loot.drawBody()});
-    players.forEach(player => player.draw(playerSkin));
+    players.forEach(player => player.draw(playerSkin, tracer));
 };
 
 drawLoadingAnimation = () =>  {
@@ -173,7 +172,6 @@ keyTyped = ()  => {
         menuGUI.toggleMenu();
     } else {
         gunSound.play();
-        players.get(socket.id).shoot(tracer);
         socket.emit('set key', {'key': key, 'id': socket.id});
     }
 };

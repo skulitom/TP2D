@@ -11,6 +11,7 @@ class Player {
         this.score = 0;
         this.size = 20;
         this.direction = 3;
+        this.shotsMade = 0;
 
         this.rgb = {
             r: Math.random() * 255,
@@ -18,6 +19,10 @@ class Player {
             b: Math.random() * 255,
         }
     }
+
+    shoot = () => {
+        this.shotsMade+=1;
+    };
 
     getId = () =>  {
         return this.id;

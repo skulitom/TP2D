@@ -3,8 +3,8 @@ class Menu {
         this.buttonExit = undefined;
         this.buttonSettings = undefined;
         this.buttonResume = undefined;
-        this.menuDimentions = [1366, 768].map(x => x / 1.2);
-        this.menuLoc = [1366, 768].map(x => x / 12);
+        this.menuDimentions = resolution.map(x => x / 1.2);
+        this.menuLoc = resolution.map(x => x / 12);
         this.buttonWidth = this.menuDimentions[0]/2;
         this.buttonHeight = 70;
         this.buttonFontSize = 24;
@@ -36,7 +36,7 @@ class Menu {
             btn = createButton(name);
             btn.mouseClicked(clickFunction);
             btn.size(this.buttonWidth, this.buttonHeight);
-            btn.position(1366/2-this.buttonWidth/2, this.menuLoc[1] + 100*position);
+            btn.position(resolution[0]/2-this.buttonWidth/2, this.menuLoc[1] + 100*position);
             btn.style("font-family", "Bodoni");
             btn.style("font-size", this.buttonFontSize+"px");
         }
@@ -60,7 +60,7 @@ class Menu {
     };
 
     settingsButtonClicked = () => {
-
+        resolution = [1980,1080];
     };
 
 }
