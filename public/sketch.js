@@ -4,7 +4,6 @@ const room = 'abc123';
 let players = new Map();
 let enemies = new Map();
 let lootList = new Map();
-let loaded = false;
 let angle = 0;
 let gunSound;
 let gui = new GUI(players);
@@ -23,7 +22,7 @@ socket.on("heartbeat", (game) => {
     if(players instanceof Map &&
         enemies instanceof Map &&
         lootList instanceof Map &&
-        loaded
+        currentLoadedAssets===NUMBER_OF_ASSETS
     ) {
         updatePlayers(game.players);
         updateEnemies(game.enemies);
@@ -34,25 +33,30 @@ socket.on("heartbeat", (game) => {
 socket.on("disconnect", playerId => removePlayer(playerId));
 
 songLoaded = (loadedSong) => {
-    loaded = true;
     loadedSong.setVolume(0.2);
     loadedSong.play();
+    currentLoadedAssets+=1;
 };
 
 gunSoundfun = (sound) => {
     sound.setVolume(0.1);
     sound.loop = false;
+    currentLoadedAssets+=1;
+};
+
+somethingLoaded = () => {
+    currentLoadedAssets+=1;
 };
 
 setup = () => {
     createCanvas(...resolution);
-    bg = loadImage('assets/textures/background/Ground.jpg');
+    bg = loadImage('assets/textures/background/Ground.jpg', somethingLoaded);
     gunSound = loadSound('assets/sfx/gun-shot.mp3', gunSoundfun);
     loadSound('assets/music/DST-BetaTron.mp3', songLoaded);
-    frodo = loadImage('assets/textures/npcs/frodo/frodo.png');
-    playerSkin = loadImage('assets/textures/player/player.png');
-    tracer = loadImage('assets/textures/player/trace.png');
-    loaded = true;
+    frodo = loadImage('assets/textures/npcs/frodo/frodo.png', somethingLoaded);
+    playerSkin = loadImage('assets/textures/player/player.png', somethingLoaded);
+    tracer = loadImage('assets/textures/player/trace.png', somethingLoaded);
+
 };
 
 drawMainGame = () => {
@@ -73,7 +77,7 @@ drawLoadingAnimation = () =>  {
 };
 
 draw = () =>  {
-    if(loaded) {
+    if(currentLoadedAssets===NUMBER_OF_ASSETS) {
         drawMainGame();
     } else {
         background(100);
