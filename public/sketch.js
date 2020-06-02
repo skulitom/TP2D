@@ -68,12 +68,10 @@ drawMainGame = () => {
 };
 
 drawLoadingAnimation = () =>  {
-    translate(...resolution.map(x => x/2));
-    rotate(angle);
-    strokeWeight(4);
-    stroke(255,0,255);
-    line(0,0,100,0);
-    angle += 0.1;
+    fill(0,0,0);
+    rect(resolution[0]/4, resolution[1]/2, resolution[0]/2, 50);
+    fill(255,0,0);
+    rect(resolution[0]/4, resolution[1]/2, (resolution[0]/2)*(currentLoadedAssets/NUMBER_OF_ASSETS), 50);
 };
 
 draw = () =>  {
