@@ -4,15 +4,9 @@ const room = 'abc123';
 let players = new Map();
 let enemies = new Map();
 let lootList = new Map();
-let angle = 0;
-let gunSound;
 let gui = new GUI(players);
 let fxManger = new EffectsManager();
-let menuGUI = new Menu();
-let bg;
-let frodo;
-let playerSkin;
-let tracer;
+let menuGUI = new GameMenu();
 let gameOver = false;
 
 socket.on('connect', () => {
@@ -64,9 +58,9 @@ setup = () => {
 drawMainGame = () => {
     background(bg);
     update();
-    enemies.forEach(enemy => {enemy.drawBody(frodo)});
+    enemies.forEach(enemy => {enemy.drawBody()});
     lootList.forEach(loot => {loot.drawBody()});
-    players.forEach(player => player.draw(playerSkin, tracer, gunSound));
+    players.forEach(player => player.draw());
 };
 
 drawLoadingAnimation = () =>  {

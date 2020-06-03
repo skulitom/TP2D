@@ -1,4 +1,4 @@
-class Menu {
+class GameMenu {
     constructor() {
         this.buttonExit = undefined;
         this.buttonSettings = undefined;
