@@ -40,7 +40,7 @@ class Player {
         return this.rgb;
     };
 
-    draw = (skin, tracer) =>  {
+    draw = (skin, tracer, gunSound) =>  {
         if(!this.bDead) {
             translate(this.x, this.y);
             rotate(this.direction + Math.PI / 2);
@@ -48,7 +48,10 @@ class Player {
             imageMode(CENTER);
             image(skin, 0, 0, this.size * 6, this.size * 6);
             imageMode(CORNER);
-            
+
+            if(this.shotsMade > this.shotsFired && this.timer<1) {
+                gunSound.play();
+            }
             if(this.shotsMade > this.shotsFired && this.timer<10) {
                 rotate(-Math.PI);
                 imageMode(CENTER);

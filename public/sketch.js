@@ -64,7 +64,7 @@ drawMainGame = () => {
     update();
     enemies.forEach(enemy => {enemy.drawBody(frodo)});
     lootList.forEach(loot => {loot.drawBody()});
-    players.forEach(player => player.draw(playerSkin, tracer));
+    players.forEach(player => player.draw(playerSkin, tracer, gunSound));
 };
 
 drawLoadingAnimation = () =>  {
@@ -173,7 +173,6 @@ keyTyped = ()  => {
     if(keyCode === ENTER) {
         menuGUI.toggleMenu();
     } else {
-        gunSound.play();
         socket.emit('set key', {'key': key, 'id': socket.id});
     }
 };
