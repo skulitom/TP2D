@@ -69,6 +69,7 @@ class Player {
             }
             rotate(-this.direction - Math.PI / 2);
             translate(-(this.x), -(this.y));
+            fill(0,0,0);
             rect(this.x - 25, this.y + 30, 50, 5);
             fill(255, 0, 0);
             rect(this.x - 25, this.y + 30, this.health / 2, 5);

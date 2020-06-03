@@ -78,6 +78,8 @@ drawLoadingAnimation = () =>  {
 
 draw = () =>  {
     if(currentLoadedAssets===NUMBER_OF_ASSETS) {
+        strokeWeight(2);
+        stroke(51);
         drawMainGame();
     } else {
         background(100);
