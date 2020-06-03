@@ -43,6 +43,13 @@ class Enemy extends Typeble {
         };
     }
 
+    updatePlayer = (player) => {
+        this.playerX = player.x;
+        this.playerY = player.y;
+        this.playerId = player.id;
+        this.rotate()
+    };
+
     getX = () => {
         return this.x;
     };

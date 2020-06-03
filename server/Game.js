@@ -112,6 +112,17 @@ class Game {
             }
         });
         this.enemies.forEach((enemy) => {
+            let enemyHasPlayer = false;
+            this.players.forEach(player => {
+               if(player.getId() === enemy.getPlayerId()){
+                   if(!player.getIsDead()) {
+                       enemyHasPlayer = true;
+                   }
+               }
+            });
+            if(!enemyHasPlayer){
+                enemy.updatePlayer(this.getRandomItem(this.players));
+            }
             enemy.update();
             this.distributeDamage(enemy);
         });
