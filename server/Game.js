@@ -14,6 +14,7 @@ class Game {
         this.tManager = new TypeManager();
         this.timer = 0;
         this.freqCoef = 200;
+        this.gameOver = false;
     }
 
     onKey = (id, key) => {
@@ -99,7 +100,8 @@ class Game {
         return {
             'players': this.players,
             'enemies': this.enemies,
-            'loot': this.loot
+            'loot': this.loot,
+            'gamestatus': this.gameOver
         }
     };
 
@@ -118,6 +120,16 @@ class Game {
     update = () => {
         this.timer++;
         if (this.players[0]) {
+            let allDead = true;
+            this.players.forEach(player => {
+                if(!player.getIsDead()){
+                    allDead = false;
+                }
+            });
+            if(allDead){
+                this.gameOver = true;
+            }
+
             if (Math.floor(this.timer % (this.freqCoef * 5)) === 0) {
                 this.addBossEnemy();
                 this.updateFrequencyCoef();

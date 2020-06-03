@@ -20,6 +20,10 @@ class Player {
         }
     }
 
+    getIsDead = () => {
+        return this.bDead;
+    };
+
     shoot = () => {
         this.shotsMade+=1;
     };

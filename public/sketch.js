@@ -13,6 +13,7 @@ let bg;
 let frodo;
 let playerSkin;
 let tracer;
+let gameOver = false;
 
 socket.on('connect', () => {
     socket.emit('room', room);
@@ -26,7 +27,8 @@ socket.on("heartbeat", (game) => {
     ) {
         updatePlayers(game.players);
         updateEnemies(game.enemies);
-        updateLoot(game.loot)
+        updateLoot(game.loot);
+        gameOver = game.gamestatus;
     }
 });
 
@@ -83,6 +85,12 @@ draw = () =>  {
     }
     fxManger.draw();
     gui.draw();
+    if(gameOver) {
+        fill(255,0,0);
+        textSize(100);
+        textAlign(CENTER, BOTTOM);
+        text('Game Over!', ...resolution.map(x => x/2));
+    }
     menuGUI.draw();
 
 };
