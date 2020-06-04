@@ -6,3 +6,8 @@ let gunSound;
 let playerSkin;
 let tracer;
 let bg;
+let menuDimentions = resolution.map(x => x / 1.2);
+let menuLoc = resolution.map(x => x / 12);
+let buttonWidth = menuDimentions[0]/2;
+let buttonHeight = 70;
+let buttonFontSize = 24;
