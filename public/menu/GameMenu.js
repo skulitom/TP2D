@@ -9,10 +9,13 @@ class GameMenu {
         this.buttonHeight = 70;
         this.buttonFontSize = 24;
         this.menuShow = false;
+        this.settings = new Settings();
+        this.currentMenuItem = 0;
     }
 
     toggleMenu = () => {
       this.menuShow = !this.menuShow;
+        this.currentMenuItem = 0;
     };
 
     draw = () => {
@@ -21,13 +24,27 @@ class GameMenu {
             menuColor.setAlpha(120);
             fill(menuColor);
             rect(...this.menuLoc, ...this.menuDimentions);
-            this.buttonResume = this.createButton(this.buttonResume, 'Resume', this.resumeButtonClicked, 1);
-            this.buttonSettings = this.createButton(this.buttonSettings, 'Settings', this.settingsButtonClicked, 2);
-            this.buttonExit = this.createButton(this.buttonExit, 'Exit', this.exitButtonClicked, 3);
+            this.displayCurrentMenuItems();
         } else {
             this.buttonResume = this.removeButton(this.buttonResume);
             this.buttonExit = this.removeButton(this.buttonExit);
             this.buttonSettings = this.removeButton(this.buttonSettings);
+        }
+    };
+
+    displayCurrentMenuItems = () => {
+        switch (this.currentMenuItem) {
+            case 0:
+                this.buttonResume = this.createButton(this.buttonResume, 'Resume', this.resumeButtonClicked, 1);
+                this.buttonSettings = this.createButton(this.buttonSettings, 'Settings', this.settingsButtonClicked, 2);
+                this.buttonExit = this.createButton(this.buttonExit, 'Exit', this.exitButtonClicked, 3);
+                break;
+            case 1:
+                this.settings.draw();
+                break;
+            default:
+                break;
+
         }
     };
 
@@ -52,6 +69,7 @@ class GameMenu {
     };
 
     resumeButtonClicked = () => {
+        this.currentMenuItem = 0;
         this.menuShow = false;
     };
 
@@ -60,7 +78,10 @@ class GameMenu {
     };
 
     settingsButtonClicked = () => {
-        resolution = [1980,1080];
+        this.currentMenuItem = 1;
+        this.buttonResume = this.removeButton(this.buttonResume);
+        this.buttonExit = this.removeButton(this.buttonExit);
+        this.buttonSettings = this.removeButton(this.buttonSettings);
     };
 
 }
