@@ -36,11 +36,18 @@ class GameMenu {
                 this.buttonExit = this.menuUtils.createButton(this.buttonExit, 'Exit', this.exitButtonClicked, 3);
                 break;
             case 1:
-                this.settings.draw();
+                this.settings.createBackButton(this.backButtonClicked);
                 break;
             default:
                 break;
 
+        }
+    };
+
+    backButtonClicked = () => {
+        this.settings.removeSettings();
+        if(this.currentMenuItem>0) {
+            this.currentMenuItem -= 1;
         }
     };
 
