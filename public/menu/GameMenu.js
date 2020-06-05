@@ -4,14 +4,15 @@ class GameMenu {
         this.buttonSettings = undefined;
         this.buttonResume = undefined;
         this.menuShow = false;
-        this.settings = new Settings();
+        this.settings = new Settings(this.backButtonClicked);
         this.currentMenuItem = 0;
         this.menuUtils = new MenuUtils();
     }
 
     toggleMenu = () => {
-      this.menuShow = !this.menuShow;
+        this.menuShow = !this.menuShow;
         this.currentMenuItem = 0;
+        this.settings.removeSettings();
     };
 
     draw = () => {
@@ -22,9 +23,9 @@ class GameMenu {
             rect(...menuLoc, ...menuDimentions);
             this.displayCurrentMenuItems();
         } else {
-            this.buttonResume = this.menuUtils.removeButton(this.buttonResume);
-            this.buttonExit = this.menuUtils.removeButton(this.buttonExit);
-            this.buttonSettings = this.menuUtils.removeButton(this.buttonSettings);
+            this.buttonResume = this.menuUtils.removeItem(this.buttonResume);
+            this.buttonExit = this.menuUtils.removeItem(this.buttonExit);
+            this.buttonSettings = this.menuUtils.removeItem(this.buttonSettings);
         }
     };
 
@@ -36,7 +37,7 @@ class GameMenu {
                 this.buttonExit = this.menuUtils.createButton(this.buttonExit, 'Exit', this.exitButtonClicked, 3);
                 break;
             case 1:
-                this.settings.createBackButton(this.backButtonClicked);
+                this.settings.draw();
                 break;
             default:
                 break;
@@ -62,9 +63,9 @@ class GameMenu {
 
     settingsButtonClicked = () => {
         this.currentMenuItem = 1;
-        this.buttonResume = this.menuUtils.removeButton(this.buttonResume);
-        this.buttonExit = this.menuUtils.removeButton(this.buttonExit);
-        this.buttonSettings = this.menuUtils.removeButton(this.buttonSettings);
+        this.buttonResume = this.menuUtils.removeItem(this.buttonResume);
+        this.buttonExit = this.menuUtils.removeItem(this.buttonExit);
+        this.buttonSettings = this.menuUtils.removeItem(this.buttonSettings);
     };
 
 }
