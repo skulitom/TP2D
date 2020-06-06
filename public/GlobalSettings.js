@@ -11,6 +11,7 @@ let menuLoc = resolution.map(x => x / 12);
 let buttonWidth = menuDimentions[0]/2;
 let buttonHeight = 70;
 let buttonFontSize = 24;
+const FONT_FAMILY_TP2D = 'Bodoni';
 
 changeGlobalRes = (newRes) => {
     resolution = newRes;

@@ -8,5 +8,9 @@
 const { ipcRenderer } = require('electron');
 
 changeWindowResolution = (newResolution) => {
-    ipcRenderer.send('CHANGE_RESOLUTION', newResolution)
+    ipcRenderer.send('CHANGE_RESOLUTION', newResolution);
+};
+
+changeFullScreen = (status) => {
+    ipcRenderer.send('CHANGE_FULLSCREEN', status);
 };

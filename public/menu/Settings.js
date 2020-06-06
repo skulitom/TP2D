@@ -3,12 +3,14 @@ class Settings {
         this.menuUtils = new MenuUtils();
         this.backBtn = undefined;
         this.resolutionDropdown = undefined;
+        this.checkBoxFullscreen = undefined;
         this.backFnc = backFnc;
     }
 
     removeSettings = () => {
         this.backBtn = this.menuUtils.removeItem(this.backBtn);
         this.resolutionDropdown = this.menuUtils.removeItem(this.resolutionDropdown);
+        this.checkBoxFullscreen = this.menuUtils.removeItem(this.checkBoxFullscreen);
     };
 
     draw = () => {
@@ -20,18 +22,34 @@ class Settings {
             1
         );
 
-        this.backBtn = this.menuUtils.createButton(this.backBtn, 'Back', this.backFnc, 2);
+        this.checkBoxFullscreen = this.menuUtils.createCheckbox(
+            this.checkBoxFullscreen,
+            'Fullscreen',
+            this.checkFullscreenClicked,
+            false,
+            2
+        );
+
+        this.backBtn = this.menuUtils.createButton(this.backBtn, 'Back', this.backFnc, 3);
+    };
+
+    checkFullscreenClicked = () => {
+        changeFullScreen(this.checkBoxFullscreen.checked());
+    };
+
+    changeResolution = (newRes) => {
+        changeGlobalRes(newRes);
+        resizeCanvas(...newRes);
+        changeWindowResolution(newRes);
     };
 
     selectResolution = () => {
         switch (this.resolutionDropdown.value()) {
             case '1920 x 1080':
-                changeGlobalRes([1920,1080]);
-                changeWindowResolution([1920,1080]);
+                this.changeResolution([1920,1080]);
                 break;
             case '1366 x 768':
-                changeGlobalRes([1366, 768]);
-                changeWindowResolution([1366, 768]);
+                this.changeResolution([1366,768]);
                 break;
             default:
                 break;

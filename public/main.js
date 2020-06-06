@@ -10,6 +10,10 @@ ipcMain.on('CHANGE_RESOLUTION', (event, args) => {
     mainWindow.setSize(...args);
 });
 
+ipcMain.on('CHANGE_FULLSCREEN', (event, args) => {
+    mainWindow.setFullScreen(args);
+});
+
 function createWindow () {
     // Create the browser window.
     mainWindow = new BrowserWindow({
