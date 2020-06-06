@@ -1,10 +1,14 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron');
+const {app, BrowserWindow, ipcMain} = require('electron');
 const path = require('path');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
+
+ipcMain.on('CHANGE_RESOLUTION', (event, args) => {
+    mainWindow.setSize(...args);
+});
 
 function createWindow () {
     // Create the browser window.
@@ -17,7 +21,8 @@ function createWindow () {
         resizable: false,
         icon: path.join(__dirname, 'assets/brand/TyperSpaceLogo.jpg'),
         webPreferences: {
-            preload: path.join(__dirname, 'preload.js')
+            preload: path.join(__dirname, 'preload.js'),
+            nodeIntegration: true
         }
     });
 

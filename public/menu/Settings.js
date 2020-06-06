@@ -24,7 +24,18 @@ class Settings {
     };
 
     selectResolution = () => {
-
+        switch (this.resolutionDropdown.value()) {
+            case '1920 x 1080':
+                changeGlobalRes([1920,1080]);
+                changeWindowResolution([1920,1080]);
+                break;
+            case '1366 x 768':
+                changeGlobalRes([1366, 768]);
+                changeWindowResolution([1366, 768]);
+                break;
+            default:
+                break;
+        }
     };
 
 }
