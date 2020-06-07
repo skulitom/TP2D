@@ -74,8 +74,9 @@ class Player {
             fill(255, 0, 0);
             rect(this.x - 25, this.y + 30, this.health / 2, 5);
         } else {
-            fill(0, 0, 255);
-            circle(this.x, this.y, this.size);
+            imageMode(CENTER);
+            image(deadPlayerSkin, this.x, this.y, this.size * 6, this.size * 6);
+            imageMode(CORNER);
         }
     };
 }

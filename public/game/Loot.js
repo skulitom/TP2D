@@ -35,8 +35,14 @@ class Loot {
 
     drawBody = () =>  {
         if(!this.isOpen) {
-            fill(this.rgb.r, this.rgb.g, this.rgb.b);
-            rect(this.x, this.y, this.size, this.size);
+            imageMode(CENTER);
+//            translate(this.x , this.y);
+//            rotate(this.direction);
+            image(rocketSkin, this.x, this.y, this.size * 10, this.size * 10);
+            console.log(rocketSkin);
+//            rotate(-this.direction);
+//            translate(-(this.x), -(this.y));
+            imageMode(CORNER);
             this.drawUI();
         } else if(this.timer < 10) {
             fill(this.killerColor.r, this.killerColor.g, this.killerColor.b);

@@ -51,6 +51,8 @@ setup = () => {
     loadSound('assets/music/DST-BetaTron.mp3', songLoaded);
     frodo = loadImage('assets/textures/npcs/frodo/frodo.png', somethingLoaded);
     playerSkin = loadImage('assets/textures/player/player.png', somethingLoaded);
+    deadPlayerSkin = loadImage('assets/textures/player/PlayerDead.png', somethingLoaded);
+    rocketSkin = loadImage('assets/textures/rocket/Rocket.png', somethingLoaded);
     tracer = loadImage('assets/textures/player/trace.png', somethingLoaded);
 
 };
@@ -58,9 +60,9 @@ setup = () => {
 drawMainGame = () => {
     background(bg);
     update();
+    players.forEach(player => player.draw());
     enemies.forEach(enemy => {enemy.drawBody()});
     lootList.forEach(loot => {loot.drawBody()});
-    players.forEach(player => player.draw());
 };
 
 drawLoadingAnimation = () =>  {

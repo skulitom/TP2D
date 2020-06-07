@@ -1,9 +1,11 @@
 let resolution = [1366, 768];
 let currentLoadedAssets = 0;
-const NUMBER_OF_ASSETS = 6;
+const NUMBER_OF_ASSETS = 8;
 let frodo;
 let gunSound;
 let playerSkin;
+let deadPlayerSkin;
+let rocketSkin;
 let tracer;
 let bg;
 let menuDimentions = resolution.map(x => x / 1.2);
