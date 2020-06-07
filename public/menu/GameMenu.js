@@ -58,7 +58,7 @@ class GameMenu {
     };
 
     exitButtonClicked = () => {
-
+        quitApplication();
     };
 
     settingsButtonClicked = () => {

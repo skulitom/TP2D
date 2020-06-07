@@ -14,3 +14,7 @@ changeWindowResolution = (newResolution) => {
 changeFullScreen = (status) => {
     ipcRenderer.send('CHANGE_FULLSCREEN', status);
 };
+
+quitApplication = () => {
+    ipcRenderer.send('QUIT_APPLICATION', 'quiting')
+};

@@ -14,6 +14,10 @@ ipcMain.on('CHANGE_FULLSCREEN', (event, args) => {
     mainWindow.setFullScreen(args);
 });
 
+ipcMain.on('QUIT_APPLICATION', (event, args) => {
+    app.quit();
+});
+
 function createWindow () {
     // Create the browser window.
     mainWindow = new BrowserWindow({
