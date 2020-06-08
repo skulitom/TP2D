@@ -19,6 +19,15 @@ class MenuUtils {
         return sel;
     };
 
+    createSlider = (slid, minVal, maxVal, curVal, position) => {
+        if(!slid) {
+            slid = createSlider(minVal, maxVal, curVal);
+            slid.position(...this.calculatePosition(position));
+            slid.size(buttonWidth, buttonHeight);
+        }
+        return slid;
+    };
+
     createCheckbox = (chk, name, chkFunction, status, position) => {
         if(!chk) {
             chk = createCheckbox(name, status);

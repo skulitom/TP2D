@@ -4,13 +4,18 @@ class Settings {
         this.backBtn = undefined;
         this.resolutionDropdown = undefined;
         this.checkBoxFullscreen = undefined;
+        this.volumeSlider = undefined;
         this.backFnc = backFnc;
     }
 
     removeSettings = () => {
+        soundLevel = this.volumeSlider.value();
+        themeSound.setVolume(0.2*(soundLevel/100));
+        gunSound.setVolume(0.1*(soundLevel/100));
         this.backBtn = this.menuUtils.removeItem(this.backBtn);
         this.resolutionDropdown = this.menuUtils.removeItem(this.resolutionDropdown);
         this.checkBoxFullscreen = this.menuUtils.removeItem(this.checkBoxFullscreen);
+        this.volumeSlider = this.menuUtils.removeItem(this.volumeSlider);
     };
 
     draw = () => {
@@ -29,8 +34,19 @@ class Settings {
             false,
             2
         );
+        textSize(32);
+        fill(0,0,0);
+        text('Volume Level', ...this.menuUtils.calculatePosition(2.8));
 
-        this.backBtn = this.menuUtils.createButton(this.backBtn, 'Back', this.backFnc, 3);
+        this.volumeSlider = this.menuUtils.createSlider(
+            this.volumeSlider,
+            0,
+            100,
+            soundLevel,
+            3
+        );
+
+        this.backBtn = this.menuUtils.createButton(this.backBtn, 'Back', this.backFnc, 4);
     };
 
     checkFullscreenClicked = () => {

@@ -48,7 +48,7 @@ setup = () => {
     createCanvas(...resolution);
     bg = loadImage('assets/textures/background/Ground.jpg', somethingLoaded);
     gunSound = loadSound('assets/sfx/gun-shot.mp3', gunSoundfun);
-    loadSound('assets/music/DST-BetaTron.mp3', songLoaded);
+    themeSound = loadSound('assets/music/DST-BetaTron.mp3', songLoaded);
     frodo = loadImage('assets/textures/npcs/frodo/frodo.png', somethingLoaded);
     playerSkin = loadImage('assets/textures/player/player.png', somethingLoaded);
     deadPlayerSkin = loadImage('assets/textures/player/PlayerDead.png', somethingLoaded);
