@@ -1,11 +1,12 @@
 let TypeInput = require('./TypeInput');
+const gameConsts = require('./constants/GameConstants');
 
 class Player {
     constructor(id, side, tManager) {
-        this.x = Math.floor(1366/2);
-        this.y = Math.floor(768/2);
+        this.x = Math.floor(gameConsts.GAME_WIDTH/2);
+        this.y = Math.floor(gameConsts.GAME_HEIGHT/2);
         this.id = id;
-        this.health = 100;
+        this.health = gameConsts.MAX_HEALTH;
         this.typeInput = new TypeInput(side, tManager, id);
         this.bDead = false;
         this.score = 0;
@@ -58,11 +59,13 @@ class Player {
     };
 
     moveAway = () =>  {
-        this.x -= 100;
+        this.x -= gameConsts.POSITION_SHIFT[0];
+        this.y -= gameConsts.POSITION_SHIFT[1];
     };
 
     moveBack = () =>  {
-        this.x += 100;
+        this.x += gameConsts.POSITION_SHIFT[0];
+        this.y += gameConsts.POSITION_SHIFT[1];
     };
 
     setKey = (key) => {

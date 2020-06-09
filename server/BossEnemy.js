@@ -1,5 +1,6 @@
 const randomWords = require('random-words');
 let Enemy = require('./Enemy');
+const gameConsts = require('./constants/GameConstants');
 
 class BossEnemy extends Enemy {
     constructor(id, player) {
@@ -7,11 +8,7 @@ class BossEnemy extends Enemy {
         this.words = randomWords().toUpperCase();
         this.size = 30;
         this.speed = 1;
-        this.rgb = {
-            r: 0,
-            g: 255,
-            b: 0,
-        }
+        this.rgb = gameConsts.GREEN;
     }
 }
 

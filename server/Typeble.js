@@ -1,14 +1,12 @@
+const gameConsts = require('./constants/GameConstants');
+
 class Typeble {
     constructor(id) {
         this.id = id;
         this.words = 'o';
         this.typedWords = "";
         this.textEnd = false;
-        this.fillRGB = {
-            r: 255,
-            g: 0,
-            b: 0,
-        };
+        this.fillRGB = gameConsts.RED;
     }
 
     getId = () => {

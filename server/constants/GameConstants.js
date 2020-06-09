@@ -2,6 +2,7 @@ module.exports = Object.freeze({
     LOWEST_FREQUENCY: 50,
     FREQUENCY_STEP: 10,
     MAX_TIME: 100000,
+    MAX_HEALTH: 100,
     LOOT_COEF: 6,
     BOSS_ENEMY_COEF: 5,
     ENEMY_COEF: 1,
@@ -11,5 +12,30 @@ module.exports = Object.freeze({
     POINTS_ENEMY_MISSED: -1,
     POINTS_ENEMY_MISSED_RESET: -2,
     POINTS_NOBODY_HIT: -0.5,
-    DAMAGE_COEF: 10
+    DAMAGE_COEF: 10,
+    PLAYER_HIT_RADIUS: 5,
+    RED: {
+        r: 255,
+        g: 0,
+        b: 0,
+    },
+    GREEN: {
+        r: 0,
+        g: 255,
+        b: 0,
+    },
+    BLUE: {
+        r: 0,
+        g: 0,
+        b: 255,
+    },
+    YELLOW: {
+        r: 255,
+        g: 255,
+        b: 0,
+    },
+    EXPLOSION_RADIUS: 100,
+    GAME_WIDTH: 1366,
+    GAME_HEIGHT: 768,
+    POSITION_SHIFT: [100,0]
 });

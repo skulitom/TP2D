@@ -1,5 +1,6 @@
 const consts = require('./constants/EnemyConstants');
 let Typeble = require('./Typeble');
+const gameConsts = require('./constants/GameConstants');
 
 class Enemy extends Typeble {
     constructor(id, player) {
@@ -8,16 +9,16 @@ class Enemy extends Typeble {
         let random = Math.random();
         if(random <= 0.25){
             this.x = 0 - this.size;
-            this.y = Math.random()*768 + 1;
+            this.y = Math.random()*gameConsts.GAME_HEIGHT + 1;
         } else if(random <= 0.5) {
-            this.x = 1367 + this.size;
-            this.y = Math.random()* 768 + 1;
+            this.x = gameConsts.GAME_WIDTH + 1 + this.size;
+            this.y = Math.random()* gameConsts.GAME_HEIGHT + 1;
         } else if(random <= 0.75) {
             this.y = 0 - this.size;
-            this.x = Math.random()*1366 +1;
+            this.x = Math.random()*gameConsts.GAME_WIDTH +1;
         } else {
-            this.y = 769 + this.size;
-            this.x = Math.random()*1366 +1;
+            this.y = gameConsts.GAME_HEIGHT + 1 + this.size;
+            this.x = Math.random()*gameConsts.GAME_WIDTH +1;
         }
         this.words = consts.CHARACTERS.charAt(Math.floor(Math.random() * consts.CHARACTERS.length));
         this.speed = 2;
@@ -30,17 +31,8 @@ class Enemy extends Typeble {
         this.playerId = player.id;
         this.rotate();
         this.texture = 'frodo';
-        this.fillRGB = {
-            r: 255,
-            g: 0,
-            b: 0,
-        };
-
-        this.rgb = {
-            r: 255,
-            g: 0,
-            b: 0,
-        };
+        this.fillRGB = gameConsts.RED;
+        this.rgb = gameConsts.RED;
     }
 
     updatePlayer = (player) => {
@@ -90,7 +82,7 @@ class Enemy extends Typeble {
         const rotation = Math.atan2(this.playerY - this.y, this.playerX - this.x);
         this.x += Math.cos(rotation) * this.speed;
         this.y += Math.sin(rotation) * this.speed;
-        if(Math.abs(this.playerY-this.y) < 5 && Math.abs(this.playerX-this.x) < 5) {
+        if(Math.abs(this.playerY-this.y) < gameConsts.PLAYER_HIT_RADIUS && Math.abs(this.playerX-this.x) < gameConsts.PLAYER_HIT_RADIUS) {
             this.inHitArea = true;
         }
     };
