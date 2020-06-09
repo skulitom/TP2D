@@ -5,6 +5,7 @@ let BossEnemy = require('./BossEnemy');
 let TypeManager = require('./TypeManager');
 const shortid = require('shortid');
 const consts = require('./constants/TypingConstants');
+const gameConsts = require('./constants/GameConstants');
 
 class Game {
     constructor() {
@@ -74,12 +75,12 @@ class Game {
     };
 
     updateFrequencyCoef = () => {
-        if(this.freqCoef<=10){
-            this.freqCoef=10;
+        if(this.freqCoef<=gameConsts.LOWEST_FREQUENCY){
+            this.freqCoef=gameConsts.LOWEST_FREQUENCY;
         } else {
-            this.freqCoef-=10;
-            if(this.freqCoef <= 10) {
-                this.freqCoef = 10;
+            this.freqCoef-=gameConsts.FREQUENCY_STEP;
+            if(this.freqCoef <= gameConsts.LOWEST_FREQUENCY) {
+                this.freqCoef = gameConsts.LOWEST_FREQUENCY;
             }
         }
     };
@@ -120,12 +121,16 @@ class Game {
                    }
                }
             });
-            if(!enemyHasPlayer){
+            if(!enemyHasPlayer && !this.gameOver){
                 enemy.updatePlayer(this.getRandomItem(this.players));
             }
             enemy.update();
             this.distributeDamage(enemy);
         });
+    };
+
+    isCreationTime = (coef) => {
+        return Math.floor(this.timer % (this.freqCoef * coef)) === 0;
     };
 
     update = () => {
@@ -141,20 +146,20 @@ class Game {
                 this.gameOver = true;
             }
 
-            if (Math.floor(this.timer % (this.freqCoef * 5)) === 0) {
+            if (this.isCreationTime(gameConsts.BOSS_ENEMY_COEF)) {
                 this.addBossEnemy();
                 this.updateFrequencyCoef();
-            }else if(Math.floor(this.timer % (this.freqCoef * 6)) === 0) {
+            }else if(this.isCreationTime(gameConsts.LOOT_COEF)) {
                 this.addLoot();
             }
             this.updateEnemies();
 
-            if (Math.floor(this.timer % this.freqCoef) === 0) {
+            if (this.isCreationTime(gameConsts.ENEMY_COEF)) {
                 this.addEnemy();
             }
         }
-        if (this.timer > 100000) {
-            this.timer -= 100000;
+        if (this.timer > gameConsts.MAX_TIME) {
+            this.timer -= gameConsts.MAX_TIME;
         }
     };
 
