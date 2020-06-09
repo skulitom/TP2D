@@ -4,7 +4,7 @@ let Loot = require('./Loot');
 let BossEnemy = require('./BossEnemy');
 let TypeManager = require('./TypeManager');
 const shortid = require('shortid');
-const consts = require('./constants/TypingConstants');
+const typingConsts = require('./constants/TypingConstants');
 const gameConsts = require('./constants/GameConstants');
 
 class Game {
@@ -14,7 +14,7 @@ class Game {
         this.loot = [];
         this.tManager = new TypeManager();
         this.timer = 0;
-        this.freqCoef = 200;
+        this.freqCoef = gameConsts.INITIAL_FREQUENCY;
         this.gameOver = false;
     }
 
@@ -26,20 +26,20 @@ class Game {
         this.players[playerIndex].shoot();
         const result = this.players[playerIndex].setKey(key);
         switch(result) {
-            case consts.TM_TYPING_FULLMATCH:
-                this.players[playerIndex].registerKill(2);
+            case typingConsts.TM_TYPING_FULLMATCH:
+                this.players[playerIndex].registerKill(gameConsts.POINTS_ENEMY_KILLED);
                 break;
-            case consts.TM_TYPING_PARTMATCH:
-                this.players[playerIndex].registerKill(1);
+            case typingConsts.TM_TYPING_PARTMATCH:
+                this.players[playerIndex].registerKill(gameConsts.POINTS_NOBODY_HIT);
                 break;
-            case consts.TM_TYPING_TYPO:
-                this.players[playerIndex].registerKill(-1);
+            case typingConsts.TM_TYPING_TYPO:
+                this.players[playerIndex].registerKill(gameConsts.POINTS_ENEMY_MISSED);
                 break;
-            case consts.TM_TYPING_TYPO_RESET:
-                this.players[playerIndex].registerKill(-2);
+            case typingConsts.TM_TYPING_TYPO_RESET:
+                this.players[playerIndex].registerKill(gameConsts.POINTS_ENEMY_MISSED_RESET);
                 break;
-            case consts.TM_TYPING_TYPO_NO_MATCH:
-                this.players[playerIndex].registerKill(-0.5);
+            case typingConsts.TM_TYPING_TYPO_NO_MATCH:
+                this.players[playerIndex].registerKill(gameConsts.POINTS_NOBODY_HIT);
                 break;
         }
     };
@@ -86,7 +86,7 @@ class Game {
     };
 
     distributeDamage = (enemy) => {
-        if(Math.floor(this.timer%10)===0) {
+        if(this.isTimeTo(gameConsts.DAMAGE_COEF)) {
             if(enemy.getIsInHitArea()){
                 this.players.forEach(player => {
                     if(player.id === enemy.getPlayerId()){
@@ -130,7 +130,11 @@ class Game {
     };
 
     isCreationTime = (coef) => {
-        return Math.floor(this.timer % (this.freqCoef * coef)) === 0;
+        return this.isTimeTo(this.freqCoef * coef);
+    };
+
+    isTimeTo = (coef) => {
+        return Math.floor(this.timer % coef) === 0;
     };
 
     update = () => {
