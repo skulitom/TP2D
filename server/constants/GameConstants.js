@@ -35,7 +35,7 @@ module.exports = Object.freeze({
         b: 0,
     },
     EXPLOSION_RADIUS: 100,
-    GAME_WIDTH: 1366,
-    GAME_HEIGHT: 768,
+    GAME_WIDTH: 1920,
+    GAME_HEIGHT: 1080,
     POSITION_SHIFT: [100,0]
 });

@@ -1,7 +1,7 @@
 class Enemy {
     constructor(enemy, fxManager) {
-        this.x = enemy.x;
-        this.y = enemy.y;
+        this.x = enemy.x*resolutionMultipleX;
+        this.y = enemy.y*resolutionMultipleY;
         this.id = enemy.id;
         this.rgb = enemy.rgb;
         this.fillRGB = enemy.fillRGB;
@@ -24,8 +24,8 @@ class Enemy {
         this.typedWords = enemy.typedWords;
         this.fillRGB = enemy.fillRGB;
         this.speed = enemy.speed;
-        this.x = enemy.x;
-        this.y = enemy.y;
+        this.x = enemy.x*resolutionMultipleX;
+        this.y = enemy.y*resolutionMultipleY;
         this.killerColor = enemy.killerColor;
         this.direction = enemy.direction;
         if (enemy.bDead && !this.bDead) {

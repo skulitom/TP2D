@@ -1,7 +1,7 @@
 class Player {
     constructor(player) {
-        this.x = player.x;
-        this.y = player.y;
+        this.x = player.x*resolutionMultipleX;
+        this.y = player.y*resolutionMultipleY;
         this.id = player.id;
         this.rgb = player.rgb;
         this.health = player.health;
@@ -17,8 +17,8 @@ class Player {
     modify = (player) => {
         this.health = player.health;
         this.bDead = player.bDead;
-        this.x = player.x;
-        this.y = player.y;
+        this.x = player.x*resolutionMultipleX;
+        this.y = player.y*resolutionMultipleY;
         this.score = player.score;
         this.direction = player.direction;
         this.shotsMade = player.shotsMade;

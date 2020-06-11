@@ -1,7 +1,7 @@
 class Loot {
     constructor(loot) {
-        this.x = loot.x;
-        this.y = loot.y;
+        this.x = loot.x*resolutionMultipleX;
+        this.y = loot.y*resolutionMultipleY;
         this.id = loot.id;
         this.rgb = loot.rgb;
         this.fillRGB = loot.fillRGB;
@@ -15,6 +15,8 @@ class Loot {
     }
 
     modify = (loot) => {
+        this.x = loot.x*resolutionMultipleX;
+        this.y = loot.y*resolutionMultipleY;
         this.typedWords = loot.typedWords;
         this.fillRGB = loot.fillRGB;
         this.isOpen = loot.isOpen;
