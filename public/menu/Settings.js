@@ -9,7 +9,9 @@ class Settings {
     }
 
     removeSettings = () => {
-        soundLevel = this.volumeSlider.value();
+        if(this.volumeSlider) {
+            soundLevel = this.volumeSlider.value();
+        }
         themeSound.setVolume(0.2*(soundLevel/100));
         gunSound.setVolume(0.1*(soundLevel/100));
         this.backBtn = this.menuUtils.removeItem(this.backBtn);

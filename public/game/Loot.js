@@ -36,12 +36,7 @@ class Loot {
     drawBody = () =>  {
         if(!this.isOpen) {
             imageMode(CENTER);
-//            translate(this.x , this.y);
-//            rotate(this.direction);
             image(rocketSkin, this.x, this.y, this.size * 10, this.size * 10);
-            console.log(rocketSkin);
-//            rotate(-this.direction);
-//            translate(-(this.x), -(this.y));
             imageMode(CORNER);
             this.drawUI();
         } else if(this.timer < 10) {

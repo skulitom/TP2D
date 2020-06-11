@@ -54,6 +54,11 @@ setup = () => {
     deadPlayerSkin = loadImage('assets/textures/player/PlayerDead.png', somethingLoaded);
     rocketSkin = loadImage('assets/textures/rocket/Rocket.png', somethingLoaded);
     tracer = loadImage('assets/textures/player/trace.png', somethingLoaded);
+    document.addEventListener('keydown', (event) => {
+        if(event.keyCode === ESCAPE){
+            menuGUI.toggleMenu();
+        }
+    } );
 
 };
 
@@ -177,7 +182,7 @@ removeEnemy = (enemyId) => {
 
 keyTyped = ()  => {
     if(keyCode === ENTER) {
-        menuGUI.toggleMenu();
+
     } else {
         socket.emit('set key', {'key': key, 'id': socket.id});
     }
