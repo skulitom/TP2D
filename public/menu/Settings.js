@@ -24,7 +24,7 @@ class Settings {
         this.resolutionDropdown = this.menuUtils.createDropdown(
             this.resolutionDropdown,
             ['1920 x 1080', '1366 x 768'],
-            1,
+            resolution.join(' x '),
             this.selectResolution,
             1
         );
@@ -55,6 +55,8 @@ class Settings {
         changeFullScreen(this.checkBoxFullscreen.checked());
         if(this.checkBoxFullscreen.checked()) {
             this.changeResolution(getScreenSize());
+        } else {
+            this.selectResolution();
         }
     };
 
@@ -75,6 +77,7 @@ class Settings {
             default:
                 break;
         }
+        this.removeSettings();
     };
 
 }

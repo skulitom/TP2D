@@ -7,6 +7,7 @@ const path = require('path');
 let mainWindow;
 
 ipcMain.on('CHANGE_RESOLUTION', (event, args) => {
+    mainWindow.setMinimumSize(...args);
     mainWindow.setSize(...args);
 });
 

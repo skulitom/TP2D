@@ -3,7 +3,7 @@ class MenuUtils {
         return [resolution[0]/2-buttonWidth/2, menuLoc[1] + 100*position];
     };
 
-    createDropdown = (sel, items, selectedPos, selectEvent, position) => {
+    createDropdown = (sel, items, selectedItem, selectEvent, position) => {
         if(!sel) {
             sel = createSelect();
             sel.position(...this.calculatePosition(position));
@@ -13,7 +13,7 @@ class MenuUtils {
             sel.size(buttonWidth, buttonHeight);
             sel.style("font-family", FONT_FAMILY_TP2D);
             sel.style("font-size", buttonFontSize+"px");
-            sel.selected(items[selectedPos]);
+            sel.selected(selectedItem);
             sel.changed(selectEvent);
         }
         return sel;
