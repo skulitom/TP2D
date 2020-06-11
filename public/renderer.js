@@ -18,3 +18,7 @@ changeFullScreen = (status) => {
 quitApplication = () => {
     ipcRenderer.send('QUIT_APPLICATION', 'quiting')
 };
+
+getScreenSize = () => {
+    return [screen.availWidth, screen.availHeight]
+};

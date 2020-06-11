@@ -53,6 +53,9 @@ class Settings {
 
     checkFullscreenClicked = () => {
         changeFullScreen(this.checkBoxFullscreen.checked());
+        if(this.checkBoxFullscreen.checked()) {
+            this.changeResolution(getScreenSize());
+        }
     };
 
     changeResolution = (newRes) => {
