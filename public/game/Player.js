@@ -6,7 +6,7 @@ class Player {
         this.rgb = player.rgb;
         this.health = player.health;
         this.bDead = player.bDead;
-        this.size = player.size;
+        this.size = player.size*resolutionMultipleX*resolutionMultipleY;
         this.score = player.score;
         this.direction = player.direction;
         this.shotsMade = player.shotsMade;
@@ -20,6 +20,7 @@ class Player {
         this.x = player.x*resolutionMultipleX;
         this.y = player.y*resolutionMultipleY;
         this.score = player.score;
+        this.size = player.size*resolutionMultipleX*resolutionMultipleY;
         this.direction = player.direction;
         this.shotsMade = player.shotsMade;
     };

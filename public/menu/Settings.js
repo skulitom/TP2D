@@ -23,7 +23,7 @@ class Settings {
     draw = () => {
         this.resolutionDropdown = this.menuUtils.createDropdown(
             this.resolutionDropdown,
-            ['1920 x 1080', '1366 x 768'],
+            ['1920 x 1080','1600 x 900', '1366 x 768', '1280 x 720'],
             resolution.join(' x '),
             this.selectResolution,
             1
@@ -71,8 +71,14 @@ class Settings {
             case '1920 x 1080':
                 this.changeResolution([1920,1080]);
                 break;
+            case '1600 x 900':
+                this.changeResolution([1600, 900]);
+                break;
             case '1366 x 768':
                 this.changeResolution([1366,768]);
+                break;
+            case '1280 x 720':
+                this.changeResolution([1280, 720]);
                 break;
             default:
                 break;

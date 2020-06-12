@@ -9,7 +9,7 @@ class Enemy {
         this.typedWords = enemy.typedWords;
         this.speed = enemy.speed;
         this.bDead = enemy.bDead;
-        this.size = enemy.size;
+        this.size = enemy.size*resolutionMultipleX*resolutionMultipleY;
         this.shot = false;
         this.fxManager = fxManager;
         this.killerColor = enemy.killerColor;
@@ -21,6 +21,7 @@ class Enemy {
         if(this.typedWords.length < enemy.typedWords.length) {
             this.shot = true;
         }
+        this.size = enemy.size*resolutionMultipleX*resolutionMultipleY;
         this.typedWords = enemy.typedWords;
         this.fillRGB = enemy.fillRGB;
         this.speed = enemy.speed;

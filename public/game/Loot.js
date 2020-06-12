@@ -8,7 +8,7 @@ class Loot {
         this.words = loot.words;
         this.typedWords = loot.typedWords;
         this.isOpen = loot.isOpen;
-        this.size = loot.size;
+        this.size = loot.size*resolutionMultipleX*resolutionMultipleY;
         this.killerColor = loot.killerColor;
         this.radius = loot.radius;
         this.timer = 0;
@@ -17,6 +17,7 @@ class Loot {
     modify = (loot) => {
         this.x = loot.x*resolutionMultipleX;
         this.y = loot.y*resolutionMultipleY;
+        this.size = loot.size*resolutionMultipleX*resolutionMultipleY;
         this.typedWords = loot.typedWords;
         this.fillRGB = loot.fillRGB;
         this.isOpen = loot.isOpen;
