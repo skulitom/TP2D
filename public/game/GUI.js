@@ -15,16 +15,7 @@ class GUI {
             const score = pl.getScore();
             const strScore = "Player " + (index + 1) + ": " + score;
 
-            //stroke(200);
             textAlign(LEFT, TOP);
-//            if (index == 0)
-//            {
-//                textAlign(LEFT, TOP);
-//            }
-//            else if (index == 1)
-//            {
-//                textAlign(RIGHT, TOP);
-//            }
             textSize(32);
             fill(0);
             strokeWeight(3);

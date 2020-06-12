@@ -25,6 +25,8 @@ function createWindow () {
         width: 1380,
         height: 820,
         title: "Typer Space",
+        alwaysOnTop: true,
+        //autoHideMenuBar: true,
         //frame: false,
         transparent: true,
         resizable: false,

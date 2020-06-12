@@ -93,6 +93,7 @@ draw = () =>  {
         textSize(100);
         textAlign(CENTER, BOTTOM);
         text('Game Over!', ...resolution.map(x => x/2));
+        textAlign(LEFT, TOP);
     }
     menuGUI.draw();
 

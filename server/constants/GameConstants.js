@@ -13,7 +13,7 @@ module.exports = Object.freeze({
     POINTS_ENEMY_MISSED_RESET: -2,
     POINTS_NOBODY_HIT: -0.5,
     DAMAGE_COEF: 10,
-    PLAYER_HIT_RADIUS: 5,
+    PLAYER_HIT_RADIUS: 75,
     RED: {
         r: 255,
         g: 0,

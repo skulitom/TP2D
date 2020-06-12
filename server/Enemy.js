@@ -79,11 +79,13 @@ class Enemy extends Typeble {
         if(this.bDead) {
             return;
         }
-        const rotation = Math.atan2(this.playerY - this.y, this.playerX - this.x);
-        this.x += Math.cos(rotation) * this.speed;
-        this.y += Math.sin(rotation) * this.speed;
+
         if(Math.abs(this.playerY-this.y) < gameConsts.PLAYER_HIT_RADIUS && Math.abs(this.playerX-this.x) < gameConsts.PLAYER_HIT_RADIUS) {
             this.inHitArea = true;
+        } else {
+            const rotation = Math.atan2(this.playerY - this.y, this.playerX - this.x);
+            this.x += Math.cos(rotation) * this.speed;
+            this.y += Math.sin(rotation) * this.speed;
         }
     };
 
