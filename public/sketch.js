@@ -8,6 +8,7 @@ let gui = new GUI(players);
 let fxManger = new EffectsManager();
 let menuGUI = new GameMenu();
 let gameOver = false;
+let fileManager = new FileManager();
 
 socket.on('connect', () => {
     socket.emit('room', room);
@@ -28,32 +29,9 @@ socket.on("heartbeat", (game) => {
 
 socket.on("disconnect", playerId => removePlayer(playerId));
 
-songLoaded = (loadedSong) => {
-    loadedSong.setVolume(0.2);
-    loadedSong.play();
-    currentLoadedAssets+=1;
-};
-
-gunSoundfun = (sound) => {
-    sound.setVolume(0.1);
-    sound.loop = false;
-    currentLoadedAssets+=1;
-};
-
-somethingLoaded = () => {
-    currentLoadedAssets+=1;
-};
-
 setup = () => {
     createCanvas(...resolution);
-    bg = loadImage('assets/textures/background/Ground.jpg', somethingLoaded);
-    gunSound = loadSound('assets/sfx/gun-shot.mp3', gunSoundfun);
-    themeSound = loadSound('assets/music/DST-BetaTron.mp3', songLoaded);
-    frodo = loadImage('assets/textures/npcs/frodo/frodo.png', somethingLoaded);
-    playerSkin = loadImage('assets/textures/player/player.png', somethingLoaded);
-    deadPlayerSkin = loadImage('assets/textures/player/PlayerDead.png', somethingLoaded);
-    rocketSkin = loadImage('assets/textures/rocket/Rocket.png', somethingLoaded);
-    tracer = loadImage('assets/textures/player/trace.png', somethingLoaded);
+    fileManager.loadAllAssets();
     document.addEventListener('keydown', (event) => {
         if(event.keyCode === ESCAPE){
             menuGUI.toggleMenu();
