@@ -1,6 +1,4 @@
 let resolution = [1366, 768];
-let currentLoadedAssets = 0;
-const NUMBER_OF_ASSETS = 8;
 let resolutionMultipleX = resolution[0]/1920;
 let resolutionMultipleY = resolution[1]/1080;
 let soundLevel = 100;

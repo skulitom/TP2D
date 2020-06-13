@@ -7,6 +7,8 @@ let bg;
 let frodo;
 let gunSound;
 let testAnimation;
+let currentLoadedAssets = 0;
+const NUMBER_OF_ASSETS = 8;
 
 class FileManager {
 

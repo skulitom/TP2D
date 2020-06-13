@@ -45,7 +45,7 @@ class AnimationPack
             this.currFrameId = this.currFrameId + 1;
             if (this.currFrameId == this.numOfFrames)
             {
-                this.currFrameId = 0
+                this.currFrameId = 0;
                 if (!this.bLoop)
                 {
                     this.bActive = false;
