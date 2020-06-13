@@ -6,6 +6,7 @@ let tracer;
 let bg;
 let frodo;
 let gunSound;
+let testAnimation;
 
 class FileManager {
 
@@ -34,13 +35,14 @@ class FileManager {
         deadPlayerSkin = loadImage('assets/textures/player/PlayerDead.png', this.somethingLoaded);
         rocketSkin = loadImage('assets/textures/rocket/Rocket.png', this.somethingLoaded);
         tracer = loadImage('assets/textures/player/trace.png', this.somethingLoaded);
+        testAnimation = this.loadAnimation('assets/textures/testAnim/anim001.png', 'assets/textures/testAnim/anim010.png');
     };
 
     loadAnimation = (path1, path2) => {
         let animationArr = [];
         let startPos = +(path1.slice(-3));
         const endPos = +(path2.slice(-3));
-        const basePath = path1.substring(0,path1.length-3);
+        const basePath = path1.substring(0,path1.length-7);
         if(startPos <= endPos) {
             while(startPos < endPos) {
                 animationArr.push(loadImage(basePath+this.getNumString(startPos)));

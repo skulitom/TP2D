@@ -5,7 +5,7 @@ class AnimationPack
     {
 
         this.dataArray = dataArray;
-        this.numOfFrames = dataArray.length();
+        this.numOfFrames = dataArray.length;
         this.currFrameId = 0;
         this.frameDelay = frameDelay;
         this.frameTimeLeft = frameDelay;
@@ -13,6 +13,7 @@ class AnimationPack
 
         this.bActive = false;
 
+        console.log(this.dataArray);
         this.currImg = this.dataArray[0];
 
     }
@@ -57,6 +58,9 @@ class AnimationPack
             
         }
 
+        console.log(this.currImg);
+        console.log(position);
+        console.log(size);
         image(this.currImg, position.x, position.y, size.x, size.y);
 
     }

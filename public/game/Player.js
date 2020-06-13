@@ -12,6 +12,8 @@ class Player {
         this.shotsMade = player.shotsMade;
         this.shotsFired = 0;
         this.timer = 0;
+        this.tAnim = new AnimationPack(testAnimation, 1, true);
+        this.tAnim.startAnim();
 
     }
 
@@ -49,6 +51,7 @@ class Player {
 
             imageMode(CENTER);
 //            image(playerSkin, 0, 0, this.size * 6, this.size * 6);
+            this.tAnim.render({ x: this.x, y: this.y }, { x: this.size, y: this.size });
             imageMode(CORNER);
 
             if(this.shotsMade > this.shotsFired && this.timer<1) {
