@@ -57,11 +57,7 @@ class AnimationPack
             this.frameTimeLeft = this.frameDelay;
             
         }
-
-        console.log(this.currImg);
-        console.log(position);
-        console.log(size);
-        image(this.currImg, position.x, position.y, size.x, size.y);
+        image(this.currImg, position.x, position.y, size.x*4, size.y*4);
 
     }
 

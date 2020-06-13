@@ -51,7 +51,7 @@ class Player {
 
             imageMode(CENTER);
 //            image(playerSkin, 0, 0, this.size * 6, this.size * 6);
-            this.tAnim.render({ x: this.x, y: this.y }, { x: this.size, y: this.size });
+            this.tAnim.render({ x: 0, y: 0 }, { x: this.size, y: this.size });
             imageMode(CORNER);
 
             if(this.shotsMade > this.shotsFired && this.timer<1) {

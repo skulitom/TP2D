@@ -40,12 +40,15 @@ class FileManager {
 
     loadAnimation = (path1, path2) => {
         let animationArr = [];
-        let startPos = +(path1.slice(-3));
-        const endPos = +(path2.slice(-3));
+        const pathType = path1.slice(-4);
+        const pathNoType1 = path1.substring(0,path1.length-4);
+        const pathNoType2 = path2.substring(0,path1.length-4);
+        let startPos = +(pathNoType1.slice(-3));
+        const endPos = +(pathNoType2.slice(-3));
         const basePath = path1.substring(0,path1.length-7);
         if(startPos <= endPos) {
-            while(startPos < endPos) {
-                animationArr.push(loadImage(basePath+this.getNumString(startPos)));
+            while(startPos <= endPos) {
+                animationArr.push(loadImage(basePath+this.getNumString(startPos)+pathType));
                 startPos+=1;
             }
         }
