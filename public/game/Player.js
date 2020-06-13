@@ -12,6 +12,7 @@ class Player {
         this.shotsMade = player.shotsMade;
         this.shotsFired = 0;
         this.timer = 0;
+
     }
 
     modify = (player) => {
@@ -47,7 +48,7 @@ class Player {
             rotate(this.direction + Math.PI / 2);
 
             imageMode(CENTER);
-            image(playerSkin, 0, 0, this.size * 6, this.size * 6);
+//            image(playerSkin, 0, 0, this.size * 6, this.size * 6);
             imageMode(CORNER);
 
             if(this.shotsMade > this.shotsFired && this.timer<1) {
