@@ -13,7 +13,7 @@ class Player {
         this.shotsFired = 0;
         this.timer = 0;
         this.drawManager = new DrawManager();
-        this.drawManager.uploadAnimation("playerSkin", testAnimation, 1, true);
+        this.drawManager.uploadAnimation("playerFire", playerFireAnim, 0.01, false);
 
     }
 
@@ -49,21 +49,23 @@ class Player {
             translate(this.x, this.y);
             rotate(this.direction + Math.PI / 2);
 
-            this.drawManager.putAnimation("playerSkin", [0,0], this.size);
+            this.drawManager.putImage(playerSkin, [0, 0], this.size*16);
 
             if(this.shotsMade > this.shotsFired && this.timer<1) {
                 gunSound.play();
             }
             if(this.shotsMade > this.shotsFired && this.timer<10) {
-                rotate(-Math.PI);
-                imageMode(CENTER);
-                translate(0, this.size*5);
-                rotate(-Math.PI);
-                image(tracer, 0, 0, this.size*2, this.size*10);
-                rotate(Math.PI);
-                translate(0, -this.size*5);
-                imageMode(CORNER);
-                rotate(Math.PI);
+                //rotate(-Math.PI);
+                //imageMode(CENTER);
+                //translate(0, this.size*5);
+                //rotate(-Math.PI);
+                //image(tracer, 0, 0, this.size*2, this.size*10);
+                //rotate(Math.PI);
+                //translate(0, -this.size*5);
+                //imageMode(CORNER);
+                //rotate(Math.PI);
+                this.drawManager.putAnimation("playerFire", [0, 0], this.size * 16);
+                this.drawManager.startAnimation("playerFire");
                 this.timer++;
             } else if(this.shotsMade > this.shotsFired) {
                 this.timer = 0;

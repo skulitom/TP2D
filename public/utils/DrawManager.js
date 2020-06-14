@@ -4,10 +4,20 @@ class DrawManager {
         this.animations = new Map();
     }
 
-    uploadAnimation = (key, animationFrames, frameDelay, bloop) => {
+    uploadAnimation = (key, animationFrames, frameDelay, bloop = false, bStart = false) => {
         let newAnimation = new AnimationPack(animationFrames, frameDelay, bloop);
         this.animations.set(key, newAnimation);
-        newAnimation.startAnim();
+        if (bStart) {
+            newAnimation.startAnim();
+        }
+    };
+
+    startAnimation = (key) => {
+        this.animations.get(key).startAnim();
+    };
+
+    stopAnimation = (key) => {
+        this.animations.get(key).stopAnim();
     };
 
     putImage = (img, position, size) => {

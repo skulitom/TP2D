@@ -7,8 +7,8 @@ class AnimationPack
         this.dataArray = dataArray;
         this.numOfFrames = dataArray.length;
         this.currFrameId = 0;
-        this.frameDelay = frameDelay;
-        this.frameTimeLeft = frameDelay;
+        this.frameDelay = frameDelay * 1000;
+        this.frameTimeLeft = this.frameDelay;
         this.bLoop = bLoop; 
 
         this.bActive = false;
@@ -57,7 +57,7 @@ class AnimationPack
             this.frameTimeLeft = this.frameDelay;
             
         }
-        image(this.currImg, position.x, position.y, size.x*4, size.y*4);
+        image(this.currImg, position.x, position.y, size.x, size.y);
 
     };
 
