@@ -62,4 +62,19 @@ class DrawManager {
         }
     }
 
+    putAnimationWithDirection = (key, position, direction, size) => {
+        const animationToDisplay = this.animations.get(key);
+        if(animationToDisplay) {
+            imageMode(CENTER);
+            translate(...position);
+            rotate(direction);
+            animationToDisplay.render({ x: 0, y: 0 }, { x: size, y: size });
+            rotate(-direction);
+            translate(...position.map(x => -x));
+            imageMode(CORNER);
+        } else {
+            console.log("Wrong Animation Key!!");
+        }
+    };
+
 }

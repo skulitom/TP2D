@@ -16,6 +16,7 @@ class Enemy {
         this.texture = enemy.texture;
         this.direction = enemy.direction;
         this.drawManager = new DrawManager();
+        this.drawManager.uploadAnimation('move', frodoMove, 0.01, true, true);
     }
 
     modify = (enemy) => {
@@ -61,7 +62,8 @@ class Enemy {
     };
   
     drawBody = () => {
-        this.drawManager.putImageWithDirection(frodo, [this.x, this.y], this.direction, this.size*4);
+//        this.drawManager.putImageWithDirection(frodo, [this.x, this.y], this.direction, this.size*4);
+        this.drawManager.putAnimationWithDirection('move', [this.x, this.y], this.direction, this.size * 8);
         this.drawUI();
     
     };

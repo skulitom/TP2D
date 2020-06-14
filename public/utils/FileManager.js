@@ -5,6 +5,7 @@ let themeSound;
 let tracer;
 let bg;
 let frodo;
+let frodoMove;
 let gunSound;
 let testAnimation;
 let playerFireAnim;
@@ -34,6 +35,7 @@ class FileManager {
         gunSound = loadSound('assets/sfx/gun-shot.mp3', this.gunSoundfun);
         themeSound = loadSound('assets/music/DST-BetaTron.mp3', this.songLoaded);
         frodo = loadImage('assets/textures/npcs/frodo/frodo.png', this.somethingLoaded);
+        frodoMove = this.loadAnimation('assets/textures/npcs/frodo/moveAnim/move0001.png', 'assets/textures/npcs/frodo/moveAnim/move0016.png');
         playerSkin = loadImage('assets/textures/player/player.png', this.somethingLoaded);
         deadPlayerSkin = loadImage('assets/textures/player/PlayerDead.png', this.somethingLoaded);
         rocketSkin = loadImage('assets/textures/rocket/Rocket.png', this.somethingLoaded);
