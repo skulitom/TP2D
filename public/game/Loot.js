@@ -12,6 +12,7 @@ class Loot {
         this.killerColor = loot.killerColor;
         this.radius = loot.radius;
         this.timer = 0;
+        this.drawManager = new DrawManager();
     }
 
     modify = (loot) => {
@@ -38,9 +39,7 @@ class Loot {
 
     drawBody = () =>  {
         if(!this.isOpen) {
-            imageMode(CENTER);
-            image(rocketSkin, this.x, this.y, this.size * 10, this.size * 10);
-            imageMode(CORNER);
+            this.drawManager.putImage(rocketSkin, [this.x, this.y], this.size * 5)
             this.drawUI();
         } else if(this.timer < 10) {
             fill(this.killerColor.r, this.killerColor.g, this.killerColor.b);
@@ -50,18 +49,7 @@ class Loot {
     };
 
     drawUI = () =>  {
-        textSize(16);
-        textAlign(LEFT, TOP);
-        strokeWeight(2);
-        stroke(51);
-        fill(255, 255, 255);
-        rect(this.x - this.words.length * 2 - 8, this.y + 5 + this.size, this.words.length * 14 + 10, 20);
-        strokeWeight(1);
-
-        fill(0, 0, 0);
-        text(this.words, this.x - 5, this.y + 10 + this.size);
-        fill(this.fillRGB.r, this.fillRGB.g, this.fillRGB.b);
-        text(this.typedWords, this.x - 5, this.y + 10 + this.size);
+        this.drawManager.putInputText(this.words, this.typedWords,[this.x, this.y], this.size, this.fillRGB);
     };
 
 }

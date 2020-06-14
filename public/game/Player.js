@@ -14,6 +14,7 @@ class Player {
         this.timer = 0;
         this.tAnim = new AnimationPack(testAnimation, 1, true);
         this.tAnim.startAnim();
+        this.drawManager = new DrawManager();
 
     }
 
@@ -79,9 +80,7 @@ class Player {
             fill(255, 0, 0);
             rect(this.x - 25, this.y + 30, this.health / 2, 5);
         } else {
-            imageMode(CENTER);
-            image(deadPlayerSkin, this.x, this.y, this.size * 6, this.size * 6);
-            imageMode(CORNER);
+            this.drawManager.putImage(deadPlayerSkin, [this.x, this.y], this.size*6);
         }
     };
 }

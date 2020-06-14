@@ -15,6 +15,7 @@ class Enemy {
         this.killerColor = enemy.killerColor;
         this.texture = enemy.texture;
         this.direction = enemy.direction;
+        this.drawManager = new DrawManager();
     }
 
     modify = (enemy) => {
@@ -60,41 +61,18 @@ class Enemy {
     };
   
     drawBody = () => {
-//        if (this.bDead){
-//            fill(this.rgb.r * 0.5, this.rgb.g * 0.5, this.rgb.b * 0.5);
-//        } else {
-//            fill(this.rgb.r, this.rgb.g, this.rgb.b);
-//        }
-        imageMode(CENTER);
-        translate(this.x , this.y);
-        rotate(this.direction);
-        image(frodo, 0, 0, this.size * 4, this.size * 4);
-        rotate(-this.direction);
-        translate(-(this.x), -(this.y));
-        imageMode(CORNER);
-
-//        circle(this.x, this.y, this.size);
+        this.drawManager.putImageWithDirection(frodo, [this.x, this.y], this.direction, this.size*4);
         this.drawUI();
     
     };
     
     drawUI = () => {
 
-        if (this.bDead)
+        if (this.bDead) {
             return;
+        }
 
-        textSize(16);
-        textAlign(LEFT, TOP);
-        strokeWeight(2);
-        stroke(51);
-        fill(255, 255, 255);
-        rect(this.x - this.words.length*2 -8, this.y +5+ this.size, this.words.length*14 + 10, 20);
-        strokeWeight(1);
-
-        fill(0, 0, 0);
-        text(this.words, this.x - 5, this.y +10+ this.size);
-        fill(this.fillRGB.r, this.fillRGB.g, this.fillRGB.b);
-        text(this.typedWords, this.x - 5, this.y +10+ this.size);
+        this.drawManager.putInputText(this.words, this.typedWords, [this.x, this.y], this.size, this.fillRGB);
     };
   
 }
