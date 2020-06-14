@@ -1,5 +1,15 @@
 class DrawManager {
 
+    constructor() {
+        this.animations = new Map();
+    }
+
+    uploadAnimation = (key, animationFrames, frameDelay, bloop) => {
+        let newAnimation = new AnimationPack(animationFrames, frameDelay, bloop);
+        this.animations.set(key, newAnimation);
+        newAnimation.startAnim();
+    };
+
     putImage = (img, position, size) => {
         imageMode(CENTER);
         image(img, position[0], position[1], size, size);
@@ -30,5 +40,16 @@ class DrawManager {
         fill(fillRGB.r, fillRGB.g, fillRGB.b);
         text(typedWords, position[0] - 5, position[1] +10+ size);
     };
+
+    putAnimation = (key, position, size) => {
+        const animationToDisplay = this.animations.get(key);
+        if(animationToDisplay) {
+            imageMode(CENTER);
+            animationToDisplay.render({ x: position[0], y: position[1] }, { x: size, y: size });
+            imageMode(CORNER);
+        } else {
+            console.log("Wrong Animation Key!!");
+        }
+    }
 
 }

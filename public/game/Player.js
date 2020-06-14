@@ -12,9 +12,8 @@ class Player {
         this.shotsMade = player.shotsMade;
         this.shotsFired = 0;
         this.timer = 0;
-        this.tAnim = new AnimationPack(testAnimation, 1, true);
-        this.tAnim.startAnim();
         this.drawManager = new DrawManager();
+        this.drawManager.uploadAnimation("playerSkin", testAnimation, 1, true);
 
     }
 
@@ -50,10 +49,7 @@ class Player {
             translate(this.x, this.y);
             rotate(this.direction + Math.PI / 2);
 
-            imageMode(CENTER);
-//            image(playerSkin, 0, 0, this.size * 6, this.size * 6);
-            this.tAnim.render({ x: 0, y: 0 }, { x: this.size, y: this.size });
-            imageMode(CORNER);
+            this.drawManager.putAnimation("playerSkin", [0,0], this.size);
 
             if(this.shotsMade > this.shotsFired && this.timer<1) {
                 gunSound.play();

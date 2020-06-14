@@ -18,18 +18,18 @@ class AnimationPack
 
     }
 
-    startAnim()
+    startAnim = () =>
     {
         this.bActive = true;
         this.currImg = this.dataArray[0];
-    }
+    };
 
-    stopAnim()
+    stopAnim = () =>
     {
         this.bActive = false;
-    }
+    };
 
-    render(position, size)
+    render = (position, size) =>
     {
 
         if (!this.bActive)
@@ -43,7 +43,7 @@ class AnimationPack
         {
         
             this.currFrameId = this.currFrameId + 1;
-            if (this.currFrameId == this.numOfFrames)
+            if (this.currFrameId === this.numOfFrames)
             {
                 this.currFrameId = 0;
                 if (!this.bLoop)
@@ -59,6 +59,6 @@ class AnimationPack
         }
         image(this.currImg, position.x, position.y, size.x*4, size.y*4);
 
-    }
+    };
 
 }
