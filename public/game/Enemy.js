@@ -9,7 +9,7 @@ class Enemy {
         this.typedWords = enemy.typedWords;
         this.speed = enemy.speed;
         this.bDead = enemy.bDead;
-        this.size = enemy.size*resolutionMultipleX*resolutionMultipleY;
+        this.size = enemy.size*Math.sqrt(resolutionMultipleX**2 + resolutionMultipleY**2);
         this.shot = false;
         this.fxManager = fxManager;
         this.killerColor = enemy.killerColor;
@@ -23,7 +23,7 @@ class Enemy {
         if(this.typedWords.length < enemy.typedWords.length) {
             this.shot = true;
         }
-        this.size = enemy.size*resolutionMultipleX*resolutionMultipleY;
+        this.size = enemy.size*Math.sqrt(resolutionMultipleX**2 + resolutionMultipleY**2);
         this.typedWords = enemy.typedWords;
         this.fillRGB = enemy.fillRGB;
         this.speed = enemy.speed;
@@ -63,7 +63,7 @@ class Enemy {
   
     drawBody = () => {
 //        this.drawManager.putImageWithDirection(frodo, [this.x, this.y], this.direction, this.size*4);
-        this.drawManager.putAnimationWithDirection('move', [this.x, this.y], this.direction, this.size * 8);
+        this.drawManager.putAnimationWithDirection('move', [this.x, this.y], this.direction, this.size * 4);
         this.drawUI();
     
     };

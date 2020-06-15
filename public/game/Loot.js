@@ -8,7 +8,7 @@ class Loot {
         this.words = loot.words;
         this.typedWords = loot.typedWords;
         this.isOpen = loot.isOpen;
-        this.size = loot.size*resolutionMultipleX*resolutionMultipleY;
+        this.size = loot.size*Math.sqrt(resolutionMultipleX**2 + resolutionMultipleY**2);
         this.killerColor = loot.killerColor;
         this.radius = loot.radius;
         this.timer = 0;
@@ -18,7 +18,7 @@ class Loot {
     modify = (loot) => {
         this.x = loot.x*resolutionMultipleX;
         this.y = loot.y*resolutionMultipleY;
-        this.size = loot.size*resolutionMultipleX*resolutionMultipleY;
+        this.size = loot.size*Math.sqrt(resolutionMultipleX**2 + resolutionMultipleY**2);
         this.typedWords = loot.typedWords;
         this.fillRGB = loot.fillRGB;
         this.isOpen = loot.isOpen;
@@ -39,7 +39,7 @@ class Loot {
 
     drawBody = () =>  {
         if(!this.isOpen) {
-            this.drawManager.putImage(rocketSkin, [this.x, this.y], this.size * 5)
+            this.drawManager.putImage(rocketSkin, [this.x, this.y], this.size * 2);
             this.drawUI();
         } else if(this.timer < 10) {
             fill(this.killerColor.r, this.killerColor.g, this.killerColor.b);

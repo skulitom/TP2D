@@ -6,9 +6,9 @@ class Player {
         this.rgb = player.rgb;
         this.health = player.health;
         this.bDead = player.bDead;
-        this.size = player.size*resolutionMultipleX*resolutionMultipleY;
+        this.size = player.size**Math.sqrt(resolutionMultipleX**2 + resolutionMultipleY**2);
         this.score = player.score;
-        this.direction = player.direction;
+        this.direction = player.direction + Math.PI / 2;
         this.shotsMade = player.shotsMade;
         this.shotsFired = 0;
         this.timer = 0;
@@ -23,8 +23,8 @@ class Player {
         this.x = player.x*resolutionMultipleX;
         this.y = player.y*resolutionMultipleY;
         this.score = player.score;
-        this.size = player.size*resolutionMultipleX*resolutionMultipleY;
-        this.direction = player.direction;
+        this.size = player.size*Math.sqrt(resolutionMultipleX**2 + resolutionMultipleY**2);
+        this.direction = player.direction + Math.PI / 2;
         this.shotsMade = player.shotsMade;
     };
 
@@ -44,41 +44,31 @@ class Player {
         return this.rgb;
     };
 
+    drawHealthBar = () => {
+        fill(0,0,0);
+        rect(this.x - 25, this.y + 30, 50, 5);
+        fill(255, 0, 0);
+        rect(this.x - 25, this.y + 30, this.health / 2, 5);
+    };
+
     draw = () =>  {
         if(!this.bDead) {
-            translate(this.x, this.y);
-            rotate(this.direction + Math.PI / 2);
-
-            this.drawManager.putImage(playerSkin, [0, 0], this.size*16);
+            this.drawManager.putImageWithDirection(playerSkin, [this.x, this.y], this.direction,  this.size*8);
 
             if(this.shotsMade > this.shotsFired && this.timer<1) {
                 gunSound.play();
             }
             if(this.shotsMade > this.shotsFired && this.timer<10) {
-                //rotate(-Math.PI);
-                //imageMode(CENTER);
-                //translate(0, this.size*5);
-                //rotate(-Math.PI);
-                //image(tracer, 0, 0, this.size*2, this.size*10);
-                //rotate(Math.PI);
-                //translate(0, -this.size*5);
-                //imageMode(CORNER);
-                //rotate(Math.PI);
-                this.drawManager.putAnimation("playerFire", [0, 0], this.size * 16);
+                this.drawManager.putAnimationWithDirection("playerFire", [this.x, this.y], this.direction , this.size * 8);
                 this.drawManager.startAnimation("playerFire");
                 this.timer++;
             } else if(this.shotsMade > this.shotsFired) {
                 this.timer = 0;
                 this.shotsFired += 1;
             }
-            rotate(-this.direction - Math.PI / 2);
-            translate(-(this.x), -(this.y));
-            fill(0,0,0);
-            rect(this.x - 25, this.y + 30, 50, 5);
-            fill(255, 0, 0);
-            rect(this.x - 25, this.y + 30, this.health / 2, 5);
+            this.drawHealthBar();
         } else {
-            this.drawManager.putImage(deadPlayerSkin, [this.x, this.y], this.size*6);
+            this.drawManager.putImage(deadPlayerSkin, [this.x, this.y], this.size*8);
         }
     };
 }
