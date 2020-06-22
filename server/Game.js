@@ -12,6 +12,8 @@ class Game {
         this.players = [];
         this.enemies = [];
         this.loot = [];
+        this.availablePositions = [0,1,2,3];
+        this.takenPositions = new Map();
         this.tManager = new TypeManager();
         this.timer = 0;
         this.freqCoef = gameConsts.INITIAL_FREQUENCY;
@@ -45,13 +47,16 @@ class Game {
     };
 
     removePlayer = (id) => {
-        this.players.forEach(player => player.moveBack());
+        this.availablePositions.push(this.takenPositions.get(id));
+        this.takenPositions.delete(id);
         this.players = this.players.filter(player => player.id !== id);
     };
 
     addPlayer = (id) => {
-        this.players.forEach(player => player.moveAway());
-        let newPlayer = new Player(id, this.players.length, this.tManager);
+        const positionIndex = this.availablePositions.pop();
+        this.takenPositions.set(id, positionIndex);
+        console.log(gameConsts.PLAYER_POSITIONS[positionIndex]);
+        let newPlayer = new Player(id, gameConsts.PLAYER_POSITIONS[positionIndex], this.players.length, this.tManager);
         this.tManager.registerPlayer(newPlayer);
         this.players.push(newPlayer);
     };
