@@ -19,10 +19,10 @@ class GUI {
             textSize(32);
             fill(0);
             strokeWeight(3);
-            text(strScore, - startPosX, startPosY + 30 * index);
+            text(strScore, - startPosX, startPosY + 40 * index);
             fill(color.r, color.g, color.b);
             strokeWeight(1);
-            text(strScore, - startPosX, startPosY + 30 * index);
+            text(strScore, - startPosX, startPosY + 40 * index);
 
             index = index + 1;
         }

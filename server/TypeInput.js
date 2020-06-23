@@ -1,4 +1,5 @@
 const consts = require('./constants/TypingConstants');
+const gameConsts = require('./constants/GameConstants');
 
 class TypeInput {
 
@@ -15,18 +16,7 @@ class TypeInput {
         this.side = side;
         this.playerId = playerId;
 
-        if (side === 0) {
-            this.textColor.r = 255;
-
-        }
-        else if (side === 1) {
-
-            this.textColor.b = 255;
-
-        }
-        else if (side === 2) {
-            this.textColor.g = 255;
-        }
+        this.textColor = gameConsts.PLAYER_SIDE_COLOR[side];
 
     }
 

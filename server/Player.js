@@ -14,11 +14,7 @@ class Player {
         this.direction = 3;
         this.shotsMade = 0;
 
-        this.rgb = {
-            r: Math.random() * 255,
-            g: Math.random() * 255,
-            b: Math.random() * 255,
-        }
+        this.rgb = gameConsts.PLAYER_SIDE_COLOR[side];
     }
 
     getIsDead = () => {

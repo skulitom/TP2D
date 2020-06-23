@@ -44,4 +44,10 @@ module.exports = Object.freeze( new function() {
         [Math.floor(this.GAME_WIDTH/2 + this.POSITION_SHIFT), Math.floor(this.GAME_HEIGHT/2 - this.POSITION_SHIFT)],
         [Math.floor(this.GAME_WIDTH/2 + this.POSITION_SHIFT), Math.floor(this.GAME_HEIGHT/2 + this.POSITION_SHIFT)]
     ];
+    this.PLAYER_SIDE_COLOR = [
+        this.RED,
+        this.BLUE,
+        this.GREEN,
+        this.YELLOW
+    ];
 });
