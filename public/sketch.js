@@ -8,6 +8,7 @@ let gui = new GUI(players);
 let fxManger = new EffectsManager();
 let menuGUI = new GameMenu();
 let gameOver = false;
+let gameMap = 'Ice Peaks';
 let fileManager = new FileManager();
 
 socket.on('connect', () => {
@@ -24,6 +25,7 @@ socket.on("heartbeat", (game) => {
         updateEnemies(game.enemies);
         updateLoot(game.loot);
         gameOver = game.gamestatus;
+        gameMap = game.gamemap;
     }
 });
 

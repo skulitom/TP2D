@@ -18,6 +18,7 @@ class Game {
         this.timer = 0;
         this.freqCoef = gameConsts.INITIAL_FREQUENCY;
         this.gameOver = false;
+        this.gameMap = "Green Desert";
     }
 
     onKey = (id, key) => {
@@ -107,7 +108,8 @@ class Game {
             'players': this.players,
             'enemies': this.enemies,
             'loot': this.loot,
-            'gamestatus': this.gameOver
+            'gamestatus': this.gameOver,
+            'gamemap': this.gameMap
         }
     };
 
