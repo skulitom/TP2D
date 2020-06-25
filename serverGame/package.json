@@ -1,8 +1,8 @@
 {
-  "name": "boing",
+  "name": "servergame",
   "version": "1.0.0",
-  "description": "fun game this",
-  "main": "server/server.js",
+  "description": "Server for the game instances of TyperSpace",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",

@@ -1,6 +1,6 @@
 const { exec } = require('child_process');
 const process = require('process');
-process.chdir('server');
+process.chdir('serverGame');
 
 exec('npm install', (err, stdout, stderr) => {
     if (err) {
