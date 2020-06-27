@@ -36,6 +36,10 @@ class DrawManager {
         imageMode(CORNER);
     };
 
+    getIsAcriveAnimations = (key) => {
+        return this.animations.get(key).getBActive();
+    };
+
     putInputText = (words, typedWords, position, size, fillRGB) => {
         textSize(16);
         textAlign(LEFT, TOP);

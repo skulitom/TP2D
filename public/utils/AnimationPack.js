@@ -13,10 +13,14 @@ class AnimationPack
 
         this.bActive = false;
 
-        console.log(this.dataArray);
         this.currImg = this.dataArray[0];
 
     }
+
+    getBActive = () =>
+    {
+        return this.bActive;
+    };
 
     startAnim = () =>
     {

@@ -9,6 +9,7 @@ let frodoMove;
 let gunSound;
 let testAnimation;
 let playerFireAnim;
+let rocketAnimation;
 let currentLoadedAssets = 0;
 const NUMBER_OF_ASSETS = 8;
 
@@ -38,10 +39,11 @@ class FileManager {
         frodoMove = this.loadAnimation('assets/textures/npcs/frodo/moveAnim/move0001.png', 'assets/textures/npcs/frodo/moveAnim/move0016.png');
         playerSkin = loadImage('assets/textures/player/player.png', this.somethingLoaded);
         deadPlayerSkin = loadImage('assets/textures/player/PlayerDead.png', this.somethingLoaded);
-        rocketSkin = loadImage('assets/textures/rocket/Rocket.png', this.somethingLoaded);
+        rocketSkin = loadImage('assets/textures/rocket/LandAnim/land0022.png', this.somethingLoaded);
         tracer = loadImage('assets/textures/player/trace.png', this.somethingLoaded);
         testAnimation = this.loadAnimation('assets/textures/testAnim/anim001.png', 'assets/textures/testAnim/anim010.png');
         playerFireAnim = this.loadAnimation('assets/textures/player/FireAnim/fire0001.png', 'assets/textures/player/FireAnim/fire0013.png');
+        rocketAnimation = this.loadAnimation('assets/textures/rocket/LandAnim/land0001.png','assets/textures/rocket/LandAnim/land0022.png');
     };
 
     loadAnimation = (path1, path2) => {

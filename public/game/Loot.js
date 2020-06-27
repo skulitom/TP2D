@@ -13,6 +13,9 @@ class Loot {
         this.radius = loot.radius;
         this.timer = 0;
         this.drawManager = new DrawManager();
+        this.drawManager.uploadAnimation("rocketLand", rocketAnimation, 0.01, false);
+        this.drawManager.putAnimation("rocketLand", [this.x, this.y], this.size * 8);
+        this.drawManager.startAnimation("rocketLand");
     }
 
     modify = (loot) => {
@@ -39,8 +42,10 @@ class Loot {
 
     drawBody = () =>  {
         if(!this.isOpen) {
-            this.drawManager.putImage(rocketSkin, [this.x, this.y], this.size * 2);
-            this.drawUI();
+            if(!this.drawManager.getIsAcriveAnimations("rocketLand")) {
+                this.drawManager.putImage(rocketSkin, [this.x, this.y], this.size * 8);
+                this.drawUI();
+            }
         } else if(this.timer < 10) {
             fill(this.killerColor.r, this.killerColor.g, this.killerColor.b);
             circle(this.x, this.y, this.radius * (this.timer/10));
