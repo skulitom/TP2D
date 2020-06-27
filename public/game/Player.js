@@ -57,10 +57,10 @@ class Player {
 
             if(this.shotsMade > this.shotsFired && this.timer<1) {
                 gunSound.play();
-            }
-            if(this.shotsMade > this.shotsFired && this.timer<10) {
-                this.drawManager.putAnimationWithDirection("playerFire", [this.x, this.y], this.direction , this.size * 8);
                 this.drawManager.startAnimation("playerFire");
+            }
+            if(this.shotsMade > this.shotsFired && this.drawManager.getIsAcriveAnimations("playerFire")) {
+                this.drawManager.putAnimationWithDirection("playerFire", [this.x, this.y], this.direction , this.size * 8);
                 this.timer++;
             } else if(this.shotsMade > this.shotsFired) {
                 this.timer = 0;

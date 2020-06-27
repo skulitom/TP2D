@@ -13,8 +13,7 @@ class Loot {
         this.radius = loot.radius;
         this.timer = 0;
         this.drawManager = new DrawManager();
-        this.drawManager.uploadAnimation("rocketLand", rocketAnimation, 0.01, false);
-        this.drawManager.putAnimation("rocketLand", [this.x, this.y], this.size * 8);
+        this.drawManager.uploadAnimation("rocketLand", rocketAnimation, 0.025, false);
         this.drawManager.startAnimation("rocketLand");
     }
 
@@ -41,9 +40,11 @@ class Loot {
     };
 
     drawBody = () =>  {
-        if(!this.isOpen) {
-            if(!this.drawManager.getIsAcriveAnimations("rocketLand")) {
-                this.drawManager.putImage(rocketSkin, [this.x, this.y], this.size * 8);
+        if (!this.isOpen) {
+            if (this.drawManager.getIsAcriveAnimations("rocketLand")) {
+                this.drawManager.putAnimation("rocketLand", [this.x, this.y], this.size * 20);
+            } else {
+                this.drawManager.putImage(rocketSkin, [this.x, this.y], this.size * 20);
                 this.drawUI();
             }
         } else if(this.timer < 10) {

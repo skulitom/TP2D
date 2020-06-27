@@ -37,7 +37,7 @@ class DrawManager {
     };
 
     getIsAcriveAnimations = (key) => {
-        return this.animations.get(key).getBActive();
+        return this.animations.get(key).getActive();
     };
 
     putInputText = (words, typedWords, position, size, fillRGB) => {
