@@ -13,7 +13,7 @@ class Player {
         this.shotsFired = 0;
         this.timer = 0;
         this.drawManager = new DrawManager();
-        this.drawManager.uploadAnimation("playerFire", playerFireAnim, 0.01, false);
+        this.drawManager.uploadAnimation("playerFire", playerFireAnim, 0.005, false);
 
     }
 

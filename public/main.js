@@ -8,7 +8,7 @@ let mainWindow;
 
 ipcMain.on('CHANGE_RESOLUTION', (event, args) => {
     mainWindow.setMinimumSize(...args);
-    mainWindow.setSize(...args);
+    mainWindow.setContentSize(...args);
 });
 
 ipcMain.on('CHANGE_FULLSCREEN', (event, args) => {
@@ -22,10 +22,10 @@ ipcMain.on('QUIT_APPLICATION', (event, args) => {
 function createWindow () {
     // Create the browser window.
     mainWindow = new BrowserWindow({
-        width: 1380,
-        height: 820,
+        width: 1374,
+        height: 818,
         title: "Typer Space",
-        alwaysOnTop: true,
+        //alwaysOnTop: true,
         //autoHideMenuBar: true,
         //frame: false,
         transparent: true,
@@ -36,6 +36,9 @@ function createWindow () {
             nodeIntegration: true
         }
     });
+    mainWindow.setContentSize(1366, 768);
+    // uncomment line below in PROD
+    mainWindow.setMenuBarVisibility(false);
 
     // and load the index.html of the app.
     mainWindow.loadFile('index.html');
