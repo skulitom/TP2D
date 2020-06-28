@@ -46,8 +46,6 @@ class AnimationPack
         image(this.currImg, position.x, position.y, size.x, size.y);
         if (this.frameTimeLeft <= 0)
         {
-        
-            console.log(this.currFrameId);
 
             this.currFrameId = this.currFrameId + 1;
             if (this.currFrameId === this.numOfFrames)

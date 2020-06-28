@@ -10,6 +10,8 @@ start the client using npm start in the public directory.
 
 start the server using npm start in the server directory.
 
+Console: Ctrl + Shift + I
+
 TODO:
 - 4 Fixed Player positions
 - Deploy backend to amazon server
