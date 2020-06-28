@@ -6,6 +6,8 @@ let tracer;
 let bg;
 let frodo;
 let frodoMove;
+let frodoDead1;
+let frodoDeadImg;
 let gunSound;
 let testAnimation;
 let playerFireAnim;
@@ -44,6 +46,8 @@ class FileManager {
         testAnimation = this.loadAnimation('assets/textures/testAnim/anim001.png', 'assets/textures/testAnim/anim010.png');
         playerFireAnim = this.loadAnimation('assets/textures/player/FireAnim/fire0001.png', 'assets/textures/player/FireAnim/fire0013.png');
         rocketAnimation = this.loadAnimation('assets/textures/rocket/LandAnim/land0001.png','assets/textures/rocket/LandAnim/land0022.png');
+        frodoDead1 = this.loadAnimation('assets/textures/npcs/frodo/deadAnim/dead0001.png','assets/textures/npcs/frodo/deadAnim/dead0016.png');
+        frodoDeadImg = loadImage('assets/textures/npcs/frodo/deadAnim/dead0016.png');
     };
 
     loadAnimation = (path1, path2) => {

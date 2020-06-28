@@ -17,6 +17,7 @@ class Enemy {
         this.direction = enemy.direction;
         this.drawManager = new DrawManager();
         this.drawManager.uploadAnimation('move', frodoMove, 0.01, true, true);
+        this.drawManager.uploadAnimation('dead', frodoDead1, 0.1, false, false);
     }
 
     modify = (enemy) => {
@@ -53,6 +54,7 @@ class Enemy {
                 console.log('Fetch Error :-S', err);
             });
         this.bDead = true;
+        this.drawManager.startAnimation('dead');
     };
 
     update = () =>  {
@@ -63,8 +65,16 @@ class Enemy {
   
     drawBody = () => {
 //        this.drawManager.putImageWithDirection(frodo, [this.x, this.y], this.direction, this.size*4);
-        this.drawManager.putAnimationWithDirection('move', [this.x, this.y], this.direction, this.size * 4);
-        this.drawUI();
+        if(!this.bDead) {
+            this.drawManager.putAnimationWithDirection('move', [this.x, this.y], this.direction, this.size * 4);
+            this.drawUI();
+        } else {
+            if(this.drawManager.getIsAcriveAnimations('dead')) {
+                this.drawManager.putAnimationWithDirection('dead', [this.x, this.y], this.direction, this.size * 4);
+            } else {
+                this.drawManager.putImageWithDirection(frodoDeadImg,[this.x, this.y], this.direction, this.size * 4 );
+            }
+        }
     
     };
     
