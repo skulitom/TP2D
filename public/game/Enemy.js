@@ -17,7 +17,7 @@ class Enemy {
         this.direction = enemy.direction;
         this.drawManager = new DrawManager();
         this.drawManager.uploadAnimation('move', frodoMove, 0.01, true, true);
-        this.drawManager.uploadAnimation('dead', frodoDead1, 0.1, false, false);
+        this.drawManager.uploadAnimation('dead', frodoDead1, 0.01, false, false);
     }
 
     modify = (enemy) => {
@@ -34,7 +34,8 @@ class Enemy {
         this.direction = enemy.direction;
         if (enemy.bDead && !this.bDead) {
             this.bDead = enemy.bDead;
-            this.fxManager.createExplosion(this.x, this.y, this.killerColor, this.size);
+            this.drawManager.startAnimation('dead');
+            //this.fxManager.createExplosion(this.x, this.y, this.killerColor, this.size);
         }
     };
 
@@ -44,17 +45,6 @@ class Enemy {
 
     getWords = () =>  {
         return this.words;
-    };
-
-    kill = () => {
-        fetch('/killEnemy/'+this.id)
-            .then( res => {
-                console.log(res);
-            }).catch(err => {
-                console.log('Fetch Error :-S', err);
-            });
-        this.bDead = true;
-        this.drawManager.startAnimation('dead');
     };
 
     update = () =>  {
