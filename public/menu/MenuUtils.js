@@ -1,6 +1,6 @@
 class MenuUtils {
     calculatePosition = (position) => {
-        return [resolution[0]/2-buttonWidth/2, menuLoc[1] + 100*position];
+        return [resolution[0]/2-buttonWidth/2, menuLoc[1] + buttonDistance*position];
     };
 
     createDropdown = (sel, items, selectedItem, selectEvent, position) => {
