@@ -11,9 +11,9 @@ class Player {
         this.direction = player.direction + Math.PI / 2;
         this.shotsMade = player.shotsMade;
         this.shotsFired = 0;
-        this.timer = 0;
         this.drawManager = new DrawManager();
         this.drawManager.uploadAnimation("playerFire", playerFireAnim, 0.005, false);
+        this.shotFiredSounds = 0;
 
     }
 
@@ -55,15 +55,14 @@ class Player {
         if(!this.bDead) {
             this.drawManager.putImageWithDirection(playerSkin, [this.x, this.y], this.direction,  this.size*8);
 
-            if(this.shotsMade > this.shotsFired && this.timer<1) {
-                gunSound.play();
+            if(this.shotsMade > this.shotsFired && this.shotsMade > this.shotFiredSounds) {
                 this.drawManager.startAnimation("playerFire");
+                gunSound.play();
+                this.shotFiredSounds++;
             }
             if(this.shotsMade > this.shotsFired && this.drawManager.getIsAcriveAnimations("playerFire")) {
                 this.drawManager.putAnimationWithDirection("playerFire", [this.x, this.y], this.direction , this.size * 8);
-                this.timer++;
             } else if(this.shotsMade > this.shotsFired) {
-                this.timer = 0;
                 this.shotsFired += 1;
             }
             this.drawHealthBar();
