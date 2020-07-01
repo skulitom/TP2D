@@ -10,7 +10,7 @@ class Loot extends Typeble {
         this.words = consts.CHARACTERS.charAt(Math.floor(Math.random() * consts.CHARACTERS.length));
         this.isOpen = false;
         this.toExplode = false;
-        this.size = 10;
+        this.size = 20;
         this.radius = gameConsts.EXPLOSION_RADIUS;
         this.fillRGB = gameConsts.YELLOW;
         this.rgb = gameConsts.YELLOW;

@@ -6,12 +6,12 @@ class Player {
         this.rgb = player.rgb;
         this.health = player.health;
         this.bDead = player.bDead;
-        this.size = player.size**Math.sqrt(resolutionMultipleX**2 + resolutionMultipleY**2);
         this.score = player.score;
         this.direction = player.direction + Math.PI / 2;
         this.shotsMade = player.shotsMade;
         this.shotsFired = 0;
         this.drawManager = new DrawManager();
+        this.size = this.drawManager.getAdjustedSize(player.size);
         this.drawManager.uploadAnimation("playerFire", playerFireAnim, 0.005, false);
         this.shotFiredSounds = 0;
 
@@ -23,7 +23,7 @@ class Player {
         this.x = player.x*resolutionMultipleX;
         this.y = player.y*resolutionMultipleY;
         this.score = player.score;
-        this.size = player.size*Math.sqrt(resolutionMultipleX**2 + resolutionMultipleY**2);
+        this.size = this.drawManager.getAdjustedSize(player.size);
         this.direction = player.direction + Math.PI / 2;
         this.shotsMade = player.shotsMade;
     };
@@ -53,7 +53,7 @@ class Player {
 
     draw = () =>  {
         if(!this.bDead) {
-            this.drawManager.putImageWithDirection(playerSkin, [this.x, this.y], this.direction,  this.size*8);
+            this.drawManager.putImageWithDirection(playerSkin, [this.x, this.y], this.direction,  this.size);
 
             if(this.shotsMade > this.shotsFired && this.shotsMade > this.shotFiredSounds) {
                 this.drawManager.startAnimation("playerFire");
@@ -61,13 +61,13 @@ class Player {
                 this.shotFiredSounds++;
             }
             if(this.shotsMade > this.shotsFired && this.drawManager.getIsAcriveAnimations("playerFire")) {
-                this.drawManager.putAnimationWithDirection("playerFire", [this.x, this.y], this.direction , this.size * 8);
+                this.drawManager.putAnimationWithDirection("playerFire", [this.x, this.y], this.direction , this.size);
             } else if(this.shotsMade > this.shotsFired) {
                 this.shotsFired += 1;
             }
             this.drawHealthBar();
         } else {
-            this.drawManager.putImage(deadPlayerSkin, [this.x, this.y], this.size*8);
+            this.drawManager.putImage(deadPlayerSkin, [this.x, this.y], this.size);
         }
     };
 }

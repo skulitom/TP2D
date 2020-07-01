@@ -6,7 +6,7 @@ class BossEnemy extends Enemy {
     constructor(id, player) {
         super(id, player);
         this.words = randomWords().toUpperCase();
-        this.size = 30;
+        this.size = 25;
         this.speed = 1;
         this.rgb = gameConsts.GREEN;
     }

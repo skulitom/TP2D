@@ -8,11 +8,11 @@ class Loot {
         this.words = loot.words;
         this.typedWords = loot.typedWords;
         this.isOpen = loot.isOpen;
-        this.size = loot.size*Math.sqrt(resolutionMultipleX**2 + resolutionMultipleY**2);
         this.killerColor = loot.killerColor;
         this.radius = loot.radius;
         this.timer = 0;
         this.drawManager = new DrawManager();
+        this.size = this.drawManager.getAdjustedSize(loot.size);
         this.drawManager.uploadAnimation("rocketLand", rocketAnimation, 0.025, false);
         this.drawManager.startAnimation("rocketLand");
     }
@@ -20,7 +20,7 @@ class Loot {
     modify = (loot) => {
         this.x = loot.x*resolutionMultipleX;
         this.y = loot.y*resolutionMultipleY;
-        this.size = loot.size*Math.sqrt(resolutionMultipleX**2 + resolutionMultipleY**2);
+        this.size = this.drawManager.getAdjustedSize(loot.size);
         this.typedWords = loot.typedWords;
         this.fillRGB = loot.fillRGB;
         this.isOpen = loot.isOpen;
@@ -42,9 +42,9 @@ class Loot {
     drawBody = () =>  {
         if (!this.isOpen) {
             if (this.drawManager.getIsAcriveAnimations("rocketLand")) {
-                this.drawManager.putAnimation("rocketLand", [this.x, this.y], this.size * 20);
+                this.drawManager.putAnimation("rocketLand", [this.x, this.y], this.size);
             } else {
-                this.drawManager.putImage(rocketSkin, [this.x, this.y], this.size * 20);
+                this.drawManager.putImage(rocketSkin, [this.x, this.y], this.size);
                 this.drawUI();
             }
         } else if(this.timer < 10) {

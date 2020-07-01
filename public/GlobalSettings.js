@@ -8,6 +8,7 @@ let buttonWidth = menuDimentions[0]/2;
 let buttonHeight = resolution[1]/11;
 let buttonDistance = resolution[1]/6;
 let buttonFontSize = 24;
+const IMAGE_RATIO = 6;
 const FONT_FAMILY_TP2D = 'Bodoni';
 
 changeGlobalRes = (newRes) => {

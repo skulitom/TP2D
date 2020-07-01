@@ -9,13 +9,13 @@ class Enemy {
         this.typedWords = enemy.typedWords;
         this.speed = enemy.speed;
         this.bDead = enemy.bDead;
-        this.size = enemy.size*Math.sqrt(resolutionMultipleX**2 + resolutionMultipleY**2);
         this.shot = false;
         this.fxManager = fxManager;
         this.killerColor = enemy.killerColor;
         this.texture = enemy.texture;
         this.direction = enemy.direction;
         this.drawManager = new DrawManager();
+        this.size = this.drawManager.getAdjustedSize(enemy.size);
         this.drawManager.uploadAnimation('move', frodoMove, 0.01, true, true);
         this.drawManager.uploadAnimation('dead', frodoDead1, 0.01, false, false);
     }
@@ -24,7 +24,7 @@ class Enemy {
         if(this.typedWords.length < enemy.typedWords.length) {
             this.shot = true;
         }
-        this.size = enemy.size*Math.sqrt(resolutionMultipleX**2 + resolutionMultipleY**2);
+        this.size = this.drawManager.getAdjustedSize(enemy.size);
         this.typedWords = enemy.typedWords;
         this.fillRGB = enemy.fillRGB;
         this.speed = enemy.speed;
@@ -56,13 +56,13 @@ class Enemy {
     drawBody = () => {
 //        this.drawManager.putImageWithDirection(frodo, [this.x, this.y], this.direction, this.size*4);
         if(!this.bDead) {
-            this.drawManager.putAnimationWithDirection('move', [this.x, this.y], this.direction, this.size * 4);
+            this.drawManager.putAnimationWithDirection('move', [this.x, this.y], this.direction, this.size);
             this.drawUI();
         } else {
             if(this.drawManager.getIsAcriveAnimations('dead')) {
-                this.drawManager.putAnimationWithDirection('dead', [this.x, this.y], this.direction, this.size * 4);
+                this.drawManager.putAnimationWithDirection('dead', [this.x, this.y], this.direction, this.size);
             } else {
-                this.drawManager.putImageWithDirection(frodoDeadImg,[this.x, this.y], this.direction, this.size * 4 );
+                this.drawManager.putImageWithDirection(frodoDeadImg,[this.x, this.y], this.direction, this.size);
             }
         }
     

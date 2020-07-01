@@ -10,7 +10,7 @@ class Player {
         this.typeInput = new TypeInput(side, tManager, id);
         this.bDead = false;
         this.score = 0;
-        this.size = 20;
+        this.size = 25;
         this.direction = 3;
         this.shotsMade = 0;
 

@@ -5,7 +5,7 @@ const gameConsts = require('./constants/GameConstants');
 class Enemy extends Typeble {
     constructor(id, player) {
         super(id);
-        this.size = 20;
+        this.size = 15;
         let random = Math.random();
         if(random <= 0.25){
             this.x = 0 - this.size;

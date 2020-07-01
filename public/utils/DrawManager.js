@@ -22,7 +22,7 @@ class DrawManager {
 
     putImage = (img, position, size) => {
         imageMode(CENTER);
-        image(img, position[0], position[1], size, size);
+        image(img, position[0], position[1], size*IMAGE_RATIO, size*IMAGE_RATIO);
         imageMode(CORNER);
     };
 
@@ -30,7 +30,7 @@ class DrawManager {
         imageMode(CENTER);
         translate(...position);
         rotate(direction);
-        image(img, 0, 0, size, size);
+        image(img, 0, 0, size*IMAGE_RATIO, size*IMAGE_RATIO);
         rotate(-direction);
         translate(...position.map(x => -x));
         imageMode(CORNER);
@@ -38,6 +38,10 @@ class DrawManager {
 
     getIsAcriveAnimations = (key) => {
         return this.animations.get(key).getActive();
+    };
+
+    getAdjustedSize = (size) => {
+        return size*((resolutionMultipleX + resolutionMultipleY)/2);
     };
 
     putInputText = (words, typedWords, position, size, fillRGB) => {
@@ -59,12 +63,12 @@ class DrawManager {
         const animationToDisplay = this.animations.get(key);
         if(animationToDisplay) {
             imageMode(CENTER);
-            animationToDisplay.render({ x: position[0], y: position[1] }, { x: size, y: size });
+            animationToDisplay.render({ x: position[0], y: position[1] }, { x: size*IMAGE_RATIO, y: size*IMAGE_RATIO });
             imageMode(CORNER);
         } else {
             console.log("Wrong Animation Key!!");
         }
-    }
+    };
 
     putAnimationWithDirection = (key, position, direction, size) => {
         const animationToDisplay = this.animations.get(key);
@@ -72,7 +76,7 @@ class DrawManager {
             imageMode(CENTER);
             translate(...position);
             rotate(direction);
-            animationToDisplay.render({ x: 0, y: 0 }, { x: size, y: size });
+            animationToDisplay.render({ x: 0, y: 0 }, { x: size*IMAGE_RATIO, y: size*IMAGE_RATIO });
             rotate(-direction);
             translate(...position.map(x => -x));
             imageMode(CORNER);
