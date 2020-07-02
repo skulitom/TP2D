@@ -15,6 +15,7 @@ class GUI {
             const score = pl.getScore();
             const strScore = "Player " + (index + 1) + ": " + score;
 
+            textFont(fontNeucha);
             textAlign(LEFT, TOP);
             textSize(32);
             fill(0);

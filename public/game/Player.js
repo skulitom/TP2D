@@ -9,7 +9,7 @@ class Player {
         this.score = player.score;
         this.direction = player.direction + Math.PI / 2;
         this.shotsMade = player.shotsMade;
-        this.shotsFired = 0;
+        this.shotsFired = player.shotsMade;
         this.drawManager = new DrawManager();
         this.size = this.drawManager.getAdjustedSize(player.size);
         this.drawManager.uploadAnimation("playerFire", playerFireAnim, 0.005, false);
