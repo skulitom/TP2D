@@ -15,6 +15,7 @@ class MenuUtils {
             sel.style("font-size", buttonFontSize+"px");
             sel.selected(selectedItem);
             sel.changed(selectEvent);
+            sel.addClass('btn-gradient red');
         }
         return sel;
     };
@@ -48,6 +49,7 @@ class MenuUtils {
             btn.position(...this.calculatePosition(position));
             btn.style("font-family", FONT_FAMILY_TP2D);
             btn.style("font-size", buttonFontSize+"px");
+            btn.addClass('btn-gradient red');
         }
         return btn;
     };
