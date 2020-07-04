@@ -42,9 +42,9 @@ class Loot {
     drawBody = () => {
         if (!this.isOpen) {
             if (this.drawManager.getIsAcriveAnimations("rocketLand")) {
-                this.drawManager.putAnimation("rocketLand", [this.x, this.y], this.size*2);
+                this.drawManager.putAnimation("rocketLand", [this.x, this.y], this.size*3);
             } else {
-                this.drawManager.putImage(rocketSkin, [this.x, this.y], this.size*2);
+                this.drawManager.putImage(rocketSkin, [this.x, this.y], this.size*3);
                 this.drawUI();
             }
         } else if(this.timer < 10) {

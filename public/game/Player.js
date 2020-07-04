@@ -13,7 +13,7 @@ class Player {
         this.drawManager = new DrawManager();
         this.size = this.drawManager.getAdjustedSize(player.size);
         this.drawManager.uploadAnimation('playerFire', playerFireAnim, 0.005, false);
-        this.drawManager.uploadAnimation('playerDead', deadPlayerAnim, 0.01, false);
+        this.drawManager.uploadAnimation('playerDead', deadPlayerAnim, 0.02, false);
         this.shotFiredSounds = 0;
 
     }

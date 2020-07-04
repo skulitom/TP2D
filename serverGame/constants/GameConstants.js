@@ -13,7 +13,7 @@ module.exports = Object.freeze( new function() {
     this.POINTS_ENEMY_MISSED_RESET= -2;
     this.POINTS_NOBODY_HIT= -0.5;
     this.DAMAGE_COEF= 10;
-    this.PLAYER_HIT_RADIUS= 40;
+    this.PLAYER_HIT_RADIUS= 60;
     this.RED= {
         r: 255,
         g: 0,
