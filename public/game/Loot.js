@@ -39,7 +39,7 @@ class Loot {
         this.typedWords = text;
     };
 
-    drawBody = () =>  {
+    drawBody = () => {
         if (!this.isOpen) {
             if (this.drawManager.getIsAcriveAnimations("rocketLand")) {
                 this.drawManager.putAnimation("rocketLand", [this.x, this.y], this.size);
