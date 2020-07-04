@@ -12,13 +12,17 @@ class Player {
         this.shotsFired = player.shotsMade;
         this.drawManager = new DrawManager();
         this.size = this.drawManager.getAdjustedSize(player.size);
-        this.drawManager.uploadAnimation("playerFire", playerFireAnim, 0.005, false);
+        this.drawManager.uploadAnimation('playerFire', playerFireAnim, 0.005, false);
+        this.drawManager.uploadAnimation('playerDead', deadPlayerAnim, 0.01, false);
         this.shotFiredSounds = 0;
 
     }
 
     modify = (player) => {
         this.health = player.health;
+        if(player.bDead !== this.bDead) {
+            this.drawManager.startAnimation('playerDead');
+        }
         this.bDead = player.bDead;
         this.x = player.x*resolutionMultipleX;
         this.y = player.y*resolutionMultipleY;
@@ -67,7 +71,11 @@ class Player {
             }
             this.drawHealthBar();
         } else {
-            this.drawManager.putImage(deadPlayerSkin, [this.x, this.y], this.size);
+            if(this.drawManager.getIsAcriveAnimations('playerDead')) {
+                this.drawManager.putAnimationWithDirection('playerDead', [this.x, this.y], this.direction , this.size)
+            } else {
+                this.drawManager.putImageWithDirection(deadPlayerSkin, [this.x, this.y], this.direction, this.size);
+            }
         }
     };
 }

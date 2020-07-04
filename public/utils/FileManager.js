@@ -1,5 +1,6 @@
 let playerSkin;
 let deadPlayerSkin;
+let deadPlayerAnim;
 let rocketSkin;
 let themeSound;
 let tracer;
@@ -44,7 +45,8 @@ class FileManager {
         frodo = loadImage('assets/textures/npcs/frodo/frodo.png', this.somethingLoaded);
         frodoMove = this.loadAnimation('assets/textures/npcs/frodo/moveAnim/move0001.png', 'assets/textures/npcs/frodo/moveAnim/move0016.png');
         playerSkin = loadImage('assets/textures/player/player.png', this.somethingLoaded);
-        deadPlayerSkin = loadImage('assets/textures/player/PlayerDead.png', this.somethingLoaded);
+        deadPlayerSkin = loadImage('assets/textures/player/deathAnim/playerDead0096.png', this.somethingLoaded);
+        deadPlayerAnim = this.loadAnimation('assets/textures/player/deathAnim/playerDead0001.png','assets/textures/player/deathAnim/playerDead0096.png');
         rocketSkin = loadImage('assets/textures/rocket/LandAnim/land0022.png', this.somethingLoaded);
         tracer = loadImage('assets/textures/player/trace.png', this.somethingLoaded);
         testAnimation = this.loadAnimation('assets/textures/testAnim/anim001.png', 'assets/textures/testAnim/anim010.png');
