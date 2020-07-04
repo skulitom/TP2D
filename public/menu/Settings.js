@@ -37,7 +37,7 @@ class Settings {
             2
         );
         textSize(32);
-        fill(0,0,0);
+        fill(255,255,255);
         text('Volume Level', ...this.menuUtils.calculatePosition(2.8));
 
         this.volumeSlider = this.menuUtils.createSlider(

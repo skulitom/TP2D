@@ -11,6 +11,7 @@ let frodoDeadImg;
 let gunSound;
 let testAnimation;
 let fontNeucha;
+let fontOxygenMono;
 let playerFireAnim;
 let rocketAnimation;
 let currentLoadedAssets = 0;
@@ -35,6 +36,7 @@ class FileManager {
     };
 
     loadAllAssets = () => {
+        fontOxygenMono = loadFont('assets/fonts/OxygenMono-Regular.ttf');
         fontNeucha = loadFont('assets/fonts/Neucha-Regular.ttf');
         bg = loadImage('assets/textures/background/Ground.jpg', this.somethingLoaded);
         gunSound = loadSound('assets/sfx/gun-shot.mp3', this.gunSoundfun);

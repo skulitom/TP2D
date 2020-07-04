@@ -11,7 +11,6 @@ class MenuUtils {
                 sel.option(item);
             });
             sel.size(buttonWidth, buttonHeight);
-            sel.style("font-family", FONT_FAMILY_TP2D);
             sel.style("font-size", buttonFontSize+"px");
             sel.selected(selectedItem);
             sel.changed(selectEvent);
@@ -34,7 +33,6 @@ class MenuUtils {
             chk = createCheckbox(name, status);
             chk.changed(chkFunction);
             chk.position(...this.calculatePosition(position));
-            chk.style("font-family", FONT_FAMILY_TP2D);
             chk.style("font-size", buttonFontSize+"px");
             chk.size(buttonWidth, buttonHeight);
         }
@@ -47,7 +45,6 @@ class MenuUtils {
             btn.mouseClicked(clickFunction);
             btn.size(buttonWidth, buttonHeight);
             btn.position(...this.calculatePosition(position));
-            btn.style("font-family", FONT_FAMILY_TP2D);
             btn.style("font-size", buttonFontSize+"px");
             btn.addClass('btn-gradient red');
         }

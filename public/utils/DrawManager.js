@@ -54,9 +54,9 @@ class DrawManager {
         strokeWeight(1);
 
         fill(0, 0, 0);
-        text(words, position[0] - 5, position[1] +10+ size);
+        text(words, position[0] - 5, position[1] +5+ size);
         fill(fillRGB.r, fillRGB.g, fillRGB.b);
-        text(typedWords, position[0] - 5, position[1] +10+ size);
+        text(typedWords, position[0] - 5, position[1] +5+ size);
     };
 
     putAnimation = (key, position, size) => {

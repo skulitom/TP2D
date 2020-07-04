@@ -42,9 +42,9 @@ class Loot {
     drawBody = () =>  {
         if (!this.isOpen) {
             if (this.drawManager.getIsAcriveAnimations("rocketLand")) {
-                this.drawManager.putAnimation("rocketLand", [this.x, this.y], this.size);
+                this.drawManager.putAnimation("rocketLand", [this.x, this.y], this.size*2);
             } else {
-                this.drawManager.putImage(rocketSkin, [this.x, this.y], this.size);
+                this.drawManager.putImage(rocketSkin, [this.x, this.y], this.size*2);
                 this.drawUI();
             }
         } else if(this.timer < 10) {
@@ -55,6 +55,7 @@ class Loot {
     };
 
     drawUI = () =>  {
+        textFont(fontOxygenMono);
         this.drawManager.putInputText(this.words, this.typedWords,[this.x, this.y], this.size, this.fillRGB);
     };
 
