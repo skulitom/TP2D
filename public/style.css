@@ -6,6 +6,16 @@ canvas {
     display: block;
 }
 
+@font-face {
+    font-family: 'OxygenMono'; /*a name to be used later*/
+    src: url('assets/fonts/OxygenMono-Regular.ttf'); /*URL to font*/
+}
+
+@font-face {
+    font-family: 'Neucha'; /*a name to be used later*/
+    src: url('assets/fonts/Neucha-Regular.ttf'); /*URL to font*/
+}
+
 .color .red    {background: #fa5a5a;}
 .color .yellow {background: #f0d264;}
 .color .green  {background: #82c8a0;}
@@ -79,6 +89,7 @@ button[class*="btn"] {border: 0;}
 
 /* Gradient buttons */
 .btn-gradient {
+    font-family: 'Neucha'!important;
     text-decoration: none;
     color: white;
     border: 1px solid rgba(0,0,0,0.21);
@@ -99,7 +110,7 @@ button[class*="btn"] {border: 0;}
 }
 
 .btn-gradient.red{
-    background: rgba(250,90,90,1)!important;
+    background: rgba(180,50,50,1)!important;
     background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(250,90,90,1)), to(rgba(232,81,81,1)));
     background: -webkit-linear-gradient(rgba(250,90,90,1) 0%, rgba(232,81,81,1) 100%);
     background: -moz-linear-gradient(rgba(250,90,90,1) 0%, rgba(232,81,81,1) 100%);

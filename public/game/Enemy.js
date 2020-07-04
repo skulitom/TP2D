@@ -73,7 +73,7 @@ class Enemy {
         if (this.bDead) {
             return;
         }
-
+        textFont(fontOxygenMono);
         this.drawManager.putInputText(this.words, this.typedWords, [this.x, this.y], this.size, this.fillRGB);
     };
   
