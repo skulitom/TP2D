@@ -89,6 +89,7 @@ button[class*="btn"] {border: 0;}
 
 /* Gradient buttons */
 .btn-gradient {
+    outline: none!important;
     font-family: 'Neucha'!important;
     text-decoration: none;
     color: white;
@@ -118,6 +119,11 @@ button[class*="btn"] {border: 0;}
     background: linear-gradient(rgba(250,90,90,1) 0%, rgba(232,81,81,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fa5a5a', endColorstr='#e85151', GradientType=0 );
 }
+
+.btn-gradient.red:active{
+    background: rgba(140,30,30,1)!important;
+}
+
 .btn-gradient.orange {
     background: rgba(255,105,30,1);
     background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(255,105,30,1)), to(rgba(230,95,28,1)));
@@ -175,7 +181,9 @@ button[class*="btn"] {border: 0;}
 .btn-gradient.green:active  {background: #72B08E;}
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
+
     input[type='range'] {
+        outline: none!important;
         overflow: hidden;
         width: 80px;
         -webkit-appearance: none;
