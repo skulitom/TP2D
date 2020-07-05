@@ -2,6 +2,7 @@ let playerSkin;
 let deadPlayerSkin;
 let deadPlayerAnim;
 let rocketSkin;
+let rocketExplodeAnim;
 let themeSound;
 let tracer;
 let bg;
@@ -53,6 +54,7 @@ class FileManager {
         playerFireAnim = this.loadAnimation('assets/textures/player/FireAnim/fire0001.png', 'assets/textures/player/FireAnim/fire0013.png');
         rocketAnimation = this.loadAnimation('assets/textures/rocket/LandAnim/land0001.png','assets/textures/rocket/LandAnim/land0022.png');
         frodoDead1 = this.loadAnimation('assets/textures/npcs/frodo/deadAnim/dead0001.png','assets/textures/npcs/frodo/deadAnim/dead0016.png');
+        rocketExplodeAnim = this.loadAnimation('assets/textures/rocket/explAnim/expl0001.png','assets/textures/rocket/explAnim/expl0024.png');
         frodoDeadImg = loadImage('assets/textures/npcs/frodo/deadAnim/dead0016.png');
     };
 
