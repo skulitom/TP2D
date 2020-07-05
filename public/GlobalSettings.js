@@ -15,8 +15,8 @@ changeGlobalRes = (newRes) => {
     resolution = newRes;
     resolutionMultipleX = resolution[0]/1920;
     resolutionMultipleY = resolution[1]/1080;
-    buttonHeight = resolution[1]/10;
-    buttonDistance = resolution[1]/8;
+    buttonHeight = resolution[1]/11;
+    buttonDistance = resolution[1]/6;
     menuDimentions = resolution.map(x => x / 1.2);
     menuLoc = resolution.map(x => x / 12);
     buttonWidth = menuDimentions[0]/2;
