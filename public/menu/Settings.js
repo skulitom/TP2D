@@ -55,6 +55,7 @@ class Settings {
         changeFullScreen(this.checkBoxFullscreen.checked());
         if(this.checkBoxFullscreen.checked()) {
             this.changeResolution(getScreenSize());
+            this.removeSettings();
         } else {
             this.selectResolution();
         }

@@ -15,24 +15,24 @@ module.exports = Object.freeze( new function() {
     this.DAMAGE_COEF= 10;
     this.PLAYER_HIT_RADIUS= 60;
     this.RED= {
-        r: 255,
-        g: 0,
-        b: 0,
+        r: 220,
+        g: 30,
+        b: 30,
     };
     this.GREEN= {
-        r: 0,
-        g: 255,
-        b: 0,
+        r: 30,
+        g: 220,
+        b: 30,
     };
     this.BLUE= {
-        r: 0,
-        g: 0,
+        r: 100,
+        g: 100,
         b: 255,
     };
     this.YELLOW= {
-        r: 255,
-        g: 255,
-        b: 0,
+        r: 220,
+        g: 220,
+        b: 30,
     };
     this.EXPLOSION_RADIUS= 100;
     this.GAME_WIDTH= 1920;

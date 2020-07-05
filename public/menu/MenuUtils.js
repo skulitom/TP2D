@@ -22,8 +22,8 @@ class MenuUtils {
     createSlider = (slid, minVal, maxVal, curVal, position) => {
         if(!slid) {
             slid = createSlider(minVal, maxVal, curVal);
-            slid.position(...this.calculatePosition(position));
-            slid.size(buttonWidth, buttonHeight);
+            slid.position(...this.calculatePosition(position+0.2));
+            slid.size(buttonWidth, buttonHeight/5);
         }
         return slid;
     };
@@ -35,6 +35,7 @@ class MenuUtils {
             chk.position(...this.calculatePosition(position));
             chk.style("font-size", buttonFontSize+"px");
             chk.size(buttonWidth, buttonHeight);
+            chk.addClass('btn-gradient red');
         }
         return chk;
     };
