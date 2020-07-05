@@ -13,7 +13,7 @@ class Loot {
         this.timer = 0;
         this.drawManager = new DrawManager();
         this.size = this.drawManager.getAdjustedSize(loot.size);
-        this.drawManager.uploadAnimation("rocketLand", rocketAnimation, 0.025, false);
+        this.drawManager.uploadAnimation("rocketLand", rocketAnimation, 0.032, false);
         this.drawManager.startAnimation("rocketLand");
     }
 
