@@ -54,18 +54,22 @@ class Enemy {
     };
   
     drawBody = () => {
-//        this.drawManager.putImageWithDirection(frodo, [this.x, this.y], this.direction, this.size*4);
-        if(!this.bDead) {
-            this.drawManager.putAnimationWithDirection('move', [this.x, this.y], this.direction, this.size);
-            this.drawUI();
-        } else {
-            if(this.drawManager.getIsAcriveAnimations('dead')) {
-                this.drawManager.putAnimationWithDirection('dead', [this.x, this.y], this.direction, this.size);
-            } else {
-                this.drawManager.putImageWithDirection(frodoDeadImg,[this.x, this.y], this.direction, this.size);
-            }
+        if(this.bDead) {
+            return;
         }
+        this.drawManager.putAnimationWithDirection('move', [this.x, this.y], this.direction, this.size);
     
+    };
+
+    drawDead = () => {
+        if(!this.bDead) {
+            return;
+        }
+        if(this.drawManager.getIsAcriveAnimations('dead')) {
+            this.drawManager.putAnimationWithDirection('dead', [this.x, this.y], this.direction, this.size);
+        } else {
+            this.drawManager.putImageWithDirection(frodoDeadImg,[this.x, this.y], this.direction, this.size);
+        }
     };
     
     drawUI = () => {

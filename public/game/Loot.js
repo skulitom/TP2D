@@ -45,7 +45,6 @@ class Loot {
                 this.drawManager.putAnimation("rocketLand", [this.x, this.y], this.size*3);
             } else {
                 this.drawManager.putImage(rocketSkin, [this.x, this.y], this.size*3);
-                this.drawUI();
             }
         } else if(this.timer < 10) {
             fill(this.killerColor.r, this.killerColor.g, this.killerColor.b);
@@ -55,6 +54,9 @@ class Loot {
     };
 
     drawUI = () =>  {
+        if (this.isOpen || this.drawManager.getIsAcriveAnimations("rocketLand")) {
+            return;
+        }
         textFont(fontOxygenMono);
         this.drawManager.putInputText(this.words, this.typedWords,[this.x, this.y], this.size, this.fillRGB);
     };
