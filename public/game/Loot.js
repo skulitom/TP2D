@@ -52,7 +52,7 @@ class Loot {
             }
         } else {
             if(this.drawManager.getIsAcriveAnimations('rocketExplode')) {
-                this.drawManager.putAnimation('rocketExplode', [this.x, this.y], this.size*3);
+                this.drawManager.putAnimation('rocketExplode', [this.x, this.y], this.size*6);
             }
         }
     };

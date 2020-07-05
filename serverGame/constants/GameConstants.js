@@ -34,7 +34,7 @@ module.exports = Object.freeze( new function() {
         g: 220,
         b: 30,
     };
-    this.EXPLOSION_RADIUS= 100;
+    this.EXPLOSION_RADIUS= 400;
     this.GAME_WIDTH= 1920;
     this.GAME_HEIGHT= 1080;
     this.POSITION_SHIFT= 100;
