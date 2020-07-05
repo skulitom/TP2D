@@ -13,8 +13,9 @@ class Loot {
         this.timer = 0;
         this.drawManager = new DrawManager();
         this.size = this.drawManager.getAdjustedSize(loot.size);
-        this.drawManager.uploadAnimation("rocketLand", rocketAnimation, 0.032, false);
-        this.drawManager.startAnimation("rocketLand");
+        this.drawManager.uploadAnimation('rocketLand', rocketAnimation, 0.032, false);
+        this.drawManager.startAnimation('rocketLand');
+        this.drawManager.uploadAnimation('rocketExplode',rocketExplodeAnim, 0.02, false);
     }
 
     modify = (loot) => {
@@ -23,6 +24,9 @@ class Loot {
         this.size = this.drawManager.getAdjustedSize(loot.size);
         this.typedWords = loot.typedWords;
         this.fillRGB = loot.fillRGB;
+        if(this.isOpen !== loot.isOpen) {
+            this.drawManager.startAnimation('rocketExplode');
+        }
         this.isOpen = loot.isOpen;
         this.killerColor = loot.killerColor;
     };
@@ -41,20 +45,20 @@ class Loot {
 
     drawBody = () => {
         if (!this.isOpen) {
-            if (this.drawManager.getIsAcriveAnimations("rocketLand")) {
-                this.drawManager.putAnimation("rocketLand", [this.x, this.y], this.size*3);
+            if (this.drawManager.getIsAcriveAnimations('rocketLand')) {
+                this.drawManager.putAnimation('rocketLand', [this.x, this.y], this.size*3);
             } else {
                 this.drawManager.putImage(rocketSkin, [this.x, this.y], this.size*3);
             }
-        } else if(this.timer < 10) {
-            fill(this.killerColor.r, this.killerColor.g, this.killerColor.b);
-            circle(this.x, this.y, this.radius * (this.timer/10));
-            this.timer+=1;
+        } else {
+            if(this.drawManager.getIsAcriveAnimations('rocketExplode')) {
+                this.drawManager.putAnimation('rocketExplode', [this.x, this.y], this.size*3);
+            }
         }
     };
 
     drawUI = () =>  {
-        if (this.isOpen || this.drawManager.getIsAcriveAnimations("rocketLand")) {
+        if (this.isOpen || this.drawManager.getIsAcriveAnimations('rocketLand')) {
             return;
         }
         textFont(fontOxygenMono);
