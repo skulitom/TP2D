@@ -45,9 +45,12 @@ setup = () => {
 drawMainGame = () => {
     background(bg);
     update();
+    enemies.forEach(enemy => {enemy.drawDead()});
     players.forEach(player => player.draw());
     enemies.forEach(enemy => {enemy.drawBody()});
     lootList.forEach(loot => {loot.drawBody()});
+    enemies.forEach(enemy => {enemy.drawUI()});
+    lootList.forEach(loot => {loot.drawUI()});
 };
 
 drawLoadingAnimation = () =>  {
