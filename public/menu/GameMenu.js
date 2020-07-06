@@ -18,7 +18,6 @@ class GameMenu {
     draw = () => {
         if(this.menuShow) {
             let menuColor = color(40,40,40);
-            //menuColor.setAlpha(120);
             fill(menuColor);
             rect(...menuLoc, ...menuDimentions);
             this.displayCurrentMenuItems();

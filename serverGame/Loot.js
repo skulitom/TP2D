@@ -3,7 +3,7 @@ let Typeble = require('./Typeble');
 const gameConsts = require('./constants/GameConstants');
 
 class Loot extends Typeble {
-    constructor(id) {
+    constructor(id, enemies) {
         super(id);
         this.y = Math.random()*gameConsts.GAME_HEIGHT;
         this.x = Math.random()*gameConsts.GAME_WIDTH;
@@ -15,6 +15,11 @@ class Loot extends Typeble {
         this.fillRGB = gameConsts.YELLOW;
         this.rgb = gameConsts.YELLOW;
         this.killerColor = gameConsts.RED;
+        enemies.forEach(enemy => {
+            if(Math.abs(enemy.getX()-this.x)< this.size*2 && Math.abs(enemy.getY()-this.y)< this.size*2) {
+                enemy.destroy();
+            }
+        });
     }
 
     getToExplode = () => {

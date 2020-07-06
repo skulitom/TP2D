@@ -63,7 +63,7 @@ class Game {
     };
 
     addLoot = () => {
-        let newLoot = new Loot(shortid.generate());
+        let newLoot = new Loot(shortid.generate(), this.enemies);
         this.loot.push(newLoot);
         this.tManager.registerTypeble(newLoot);
     };
