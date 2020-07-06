@@ -33,7 +33,7 @@ class Settings {
             this.checkBoxFullscreen,
             'Fullscreen',
             this.checkFullscreenClicked,
-            false,
+            fullScreenVal,
             2
         );
         textSize(32);
@@ -55,8 +55,10 @@ class Settings {
         changeFullScreen(this.checkBoxFullscreen.checked());
         if(this.checkBoxFullscreen.checked()) {
             this.changeResolution(getScreenSize());
+            fullScreenVal = true;
             this.removeSettings();
         } else {
+            fullScreenVal = false;
             this.selectResolution();
         }
     };
