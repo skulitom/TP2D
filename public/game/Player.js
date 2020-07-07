@@ -22,6 +22,7 @@ class Player {
         this.health = player.health;
         if(player.bDead !== this.bDead) {
             this.drawManager.startAnimation('playerDead');
+            dyingManSound.play();
         }
         this.bDead = player.bDead;
         this.x = player.x*resolutionMultipleX;
