@@ -14,20 +14,22 @@ let gunSound;
 let explosionSound;
 let enemySplatSound;
 let dyingManSound;
+let landingRocketSound;
 let testAnimation;
 let fontNeucha;
 let fontOxygenMono;
 let playerFireAnim;
 let rocketAnimation;
 let currentLoadedAssets = 0;
-const NUMBER_OF_ASSETS = 11;
+const NUMBER_OF_ASSETS = 12;
 
 adjustSounds = () => {
     themeSound.setVolume(0.2*(soundLevel/100));
     gunSound.setVolume(0.1*(soundLevel/100));
     explosionSound.setVolume(0.1*(soundLevel/100));
-    enemySplatSound.setVolume(0.1*(soundLevel/100));
+    enemySplatSound.setVolume(0.2*(soundLevel/100));
     dyingManSound.setVolume(0.1*(soundLevel/100));
+    landingRocketSound.setVolume(0.2*(soundLevel/100));
 };
 
 class FileManager {
@@ -44,6 +46,12 @@ class FileManager {
         currentLoadedAssets+=1;
     };
 
+    sfxSoundfun2 = (sound) => {
+        sound.setVolume(0.2);
+        sound.loop = false;
+        currentLoadedAssets+=1;
+    };
+
     somethingLoaded = () => {
         currentLoadedAssets+=1;
     };
@@ -54,7 +62,8 @@ class FileManager {
         bg = loadImage('assets/textures/background/Ground.jpg', this.somethingLoaded);
         explosionSound = loadSound('assets/sfx/explosion.mp3', this.sfxSoundfun);
         gunSound = loadSound('assets/sfx/gun-shot.mp3', this.sfxSoundfun);
-        enemySplatSound = loadSound('assets/sfx/enemySplat.mp3', this.sfxSoundfun);
+        enemySplatSound = loadSound('assets/sfx/enemySplat.mp3', this.sfxSoundfun2);
+        landingRocketSound = loadSound('assets/sfx/landingRocket.mp3', this.sfxSoundfun2);
         dyingManSound = loadSound('assets/sfx/dyingMan.mp3', this.sfxSoundfun);
         themeSound = loadSound('assets/music/DST-BetaTron.mp3', this.songLoaded);
         frodo = loadImage('assets/textures/npcs/frodo/frodo.png', this.somethingLoaded);

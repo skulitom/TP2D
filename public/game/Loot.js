@@ -15,6 +15,7 @@ class Loot {
         this.size = this.drawManager.getAdjustedSize(loot.size);
         this.drawManager.uploadAnimation('rocketLand', rocketAnimation, 0.032, false);
         this.drawManager.startAnimation('rocketLand');
+        landingRocketSound.play();
         this.drawManager.uploadAnimation('rocketExplode',rocketExplodeAnim, 0.02, false);
     }
 
