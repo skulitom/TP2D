@@ -11,13 +11,22 @@ let frodoMove;
 let frodoDead1;
 let frodoDeadImg;
 let gunSound;
+let explosionSound;
+let enemySplatSound;
 let testAnimation;
 let fontNeucha;
 let fontOxygenMono;
 let playerFireAnim;
 let rocketAnimation;
 let currentLoadedAssets = 0;
-const NUMBER_OF_ASSETS = 8;
+const NUMBER_OF_ASSETS = 10;
+
+adjustSounds = () => {
+    themeSound.setVolume(0.2*(soundLevel/100));
+    gunSound.setVolume(0.1*(soundLevel/100));
+    explosionSound.setVolume(0.1*(soundLevel/100));
+    enemySplatSound.setVolume(0.1*(soundLevel/100));
+};
 
 class FileManager {
 
@@ -27,7 +36,7 @@ class FileManager {
         currentLoadedAssets+=1;
     };
 
-    gunSoundfun = (sound) => {
+    sfxSoundfun = (sound) => {
         sound.setVolume(0.1);
         sound.loop = false;
         currentLoadedAssets+=1;
@@ -41,7 +50,9 @@ class FileManager {
         fontOxygenMono = loadFont('assets/fonts/OxygenMono-Regular.ttf');
         fontNeucha = loadFont('assets/fonts/Neucha-Regular.ttf');
         bg = loadImage('assets/textures/background/Ground.jpg', this.somethingLoaded);
-        gunSound = loadSound('assets/sfx/gun-shot.mp3', this.gunSoundfun);
+        explosionSound = loadSound('assets/sfx/explosion.mp3', this.sfxSoundfun);
+        gunSound = loadSound('assets/sfx/gun-shot.mp3', this.sfxSoundfun);
+        enemySplatSound = loadSound('assets/sfx/enemySplat.mp3', this.sfxSoundfun);
         themeSound = loadSound('assets/music/DST-BetaTron.mp3', this.songLoaded);
         frodo = loadImage('assets/textures/npcs/frodo/frodo.png', this.somethingLoaded);
         frodoMove = this.loadAnimation('assets/textures/npcs/frodo/moveAnim/move0001.png', 'assets/textures/npcs/frodo/moveAnim/move0016.png');

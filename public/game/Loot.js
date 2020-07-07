@@ -25,6 +25,7 @@ class Loot {
         this.typedWords = loot.typedWords;
         this.fillRGB = loot.fillRGB;
         if(this.isOpen !== loot.isOpen) {
+            explosionSound.play();
             this.drawManager.startAnimation('rocketExplode');
         }
         this.isOpen = loot.isOpen;

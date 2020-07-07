@@ -10,7 +10,6 @@ class Enemy {
         this.speed = enemy.speed;
         this.bDead = enemy.bDead;
         this.shot = false;
-        this.fxManager = fxManager;
         this.killerColor = enemy.killerColor;
         this.texture = enemy.texture;
         this.direction = enemy.direction;
@@ -34,8 +33,8 @@ class Enemy {
         this.direction = enemy.direction;
         if (enemy.bDead && !this.bDead) {
             this.bDead = enemy.bDead;
+            enemySplatSound.play();
             this.drawManager.startAnimation('dead');
-            //this.fxManager.createExplosion(this.x, this.y, this.killerColor, this.size);
         }
     };
 

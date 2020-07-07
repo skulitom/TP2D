@@ -12,8 +12,7 @@ class Settings {
         if(this.volumeSlider) {
             soundLevel = this.volumeSlider.value();
         }
-        themeSound.setVolume(0.2*(soundLevel/100));
-        gunSound.setVolume(0.1*(soundLevel/100));
+        adjustSounds();
         this.backBtn = this.menuUtils.removeItem(this.backBtn);
         this.resolutionDropdown = this.menuUtils.removeItem(this.resolutionDropdown);
         this.checkBoxFullscreen = this.menuUtils.removeItem(this.checkBoxFullscreen);
