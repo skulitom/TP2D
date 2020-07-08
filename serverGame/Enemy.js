@@ -30,6 +30,7 @@ class Enemy extends Typeble {
         this.playerY = player.y;
         this.playerId = player.id;
         this.rotate();
+        this.speedTop = this.speed;
         this.texture = 'frodo';
         this.fillRGB = gameConsts.RED;
         this.rgb = gameConsts.RED;
@@ -78,6 +79,10 @@ class Enemy extends Typeble {
     update = () => {
         if(this.bDead) {
             return;
+        }
+
+        if(this.speedTop >= this.speed) {
+            this.speed+=0.1;
         }
 
         if(Math.abs(this.playerY-this.y) < gameConsts.PLAYER_HIT_RADIUS && Math.abs(this.playerX-this.x) < gameConsts.PLAYER_HIT_RADIUS) {

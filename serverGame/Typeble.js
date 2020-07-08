@@ -7,6 +7,7 @@ class Typeble {
         this.typedWords = "";
         this.textEnd = false;
         this.fillRGB = gameConsts.RED;
+        this.speed = 0;
     }
 
     getId = () => {
@@ -23,6 +24,7 @@ class Typeble {
 
     setTypedText = (text) => {
         this.typedWords = text;
+        this.speed = 0;
     };
 
     getTextEnd = () => {
