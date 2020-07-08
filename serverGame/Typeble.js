@@ -24,7 +24,9 @@ class Typeble {
 
     setTypedText = (text) => {
         this.typedWords = text;
-        this.speed = 0;
+        if(text !== '') {
+            this.speed = 0;
+        }
     };
 
     getTextEnd = () => {
