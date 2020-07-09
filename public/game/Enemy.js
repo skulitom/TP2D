@@ -22,6 +22,9 @@ class Enemy {
     modify = (enemy) => {
         if(this.typedWords.length < enemy.typedWords.length) {
             this.shot = true;
+            if(!enemy.bDead) {
+                enemyHitSound.play();
+            }
         }
         this.size = this.drawManager.getAdjustedSize(enemy.size);
         this.typedWords = enemy.typedWords;
