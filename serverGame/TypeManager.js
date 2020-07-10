@@ -25,7 +25,6 @@ class TypeManager {
         }
     };
 
-    //TODO: Break down into smaller functions
     setTyping = (rgb, text, playerId) => {
         let inText = text.join('').trim();
         let player = this.playersList.get(playerId);
@@ -39,62 +38,59 @@ class TypeManager {
             const enWords = typeble.getWords();
             const key = typeble.getId();
             if ((enWords === inText) && ((this.playerTypeblesList.get(playerId) === key))) {
-                this.numOfTypos = 0;
-
-                typeble.setTypedText(inText);
-                player.rotate(typeble.x, typeble.y);
-                typeble.kill(player);
-                this.playerTypeblesList.delete(playerId);
-                this.typebleList.delete(key);
-                return consts.TM_TYPING_FULLMATCH;
+                return this.killTypeble(typeble, player, inText);
             } else if (enWords.startsWith(inText) && ((this.playerTypeblesList.get(playerId) === key))) {
-
-                this.numOfTypos = 0;
-                player.rotate(typeble.x, typeble.y);
-
-                typeble.setFillRgb(rgb);
-                typeble.setTypedText(inText);
-                return consts.TM_TYPING_PARTMATCH;
-
+                return this.partmatchTypeble(typeble, player, rgb, inText);
             } else if (this.playerTypeblesList.get(playerId) === key) {
-
-                this.numOfTypos = this.numOfTypos + 1;
-                if (this.numOfTypos >= 3) {
-                    this.numOfTypos = 0;
-                    this.resetTyping(playerId);
-                    this.playerTypeblesList.delete(playerId);
-                    return consts.TM_TYPING_TYPO_RESET;
-                }
-                return consts.TM_TYPING_TYPO;
-
+                return this.typoTypeble(playerId);
             }
 
         } else {
             for (let [key, typeble] of this.typebleList.entries()) {
                 if(typeble.getWords() === inText) {
-                    this.numOfTypos = 0;
-
-                    typeble.setTypedText(inText);
-                    player.rotate(typeble.x, typeble.y);
-                    typeble.kill(player);
-                    this.playerTypeblesList.delete(playerId);
-                    this.typebleList.delete(key);
-                    return consts.TM_TYPING_FULLMATCH;
+                    return this.killTypeble(typeble, player, inText);
                 }
                 else if (typeble.getWords().startsWith(inText)) {
-                    this.numOfTypos = 0;
-
-                    typeble.setFillRgb(rgb);
-                    typeble.setTypedText(inText);
-                    player.rotate(typeble.x, typeble.y);
-                    this.playerTypeblesList.set(playerId, typeble.getId());
-                    return consts.TM_TYPING_PARTMATCH;
-
+                    return this.assignTypebleToPlayer(typeble, player, rgb, inText);
                 }
             }
         }
         return consts.TM_TYPING_TYPO_NO_MATCH;
 
+    };
+
+    typoTypeble = (playerId) => {
+        this.numOfTypos = this.numOfTypos + 1;
+        if (this.numOfTypos >= 3) {
+            this.numOfTypos = 0;
+            this.resetTyping(playerId);
+            this.playerTypeblesList.delete(playerId);
+            return consts.TM_TYPING_TYPO_RESET;
+        }
+        return consts.TM_TYPING_TYPO;
+    };
+
+    killTypeble = (typeble, player, inText) => {
+        this.numOfTypos = 0;
+        typeble.setTypedText(inText);
+        player.rotate(typeble.x, typeble.y);
+        typeble.kill(player);
+        this.playerTypeblesList.delete(player.getId());
+        this.typebleList.delete(typeble.getId());
+        return consts.TM_TYPING_FULLMATCH;
+    };
+
+    assignTypebleToPlayer = (typeble, player, rgb, inText) => {
+        this.playerTypeblesList.set(player.getId(), typeble.getId());
+        return this.partmatchTypeble(typeble, player,rgb,inText);
+    };
+
+    partmatchTypeble = (typeble, player, rgb, inText) => {
+        this.numOfTypos = 0;
+        typeble.setFillRgb(rgb);
+        typeble.setTypedText(inText);
+        player.rotate(typeble.x, typeble.y);
+        return consts.TM_TYPING_PARTMATCH;
     };
 
     logout = (enemy) => {

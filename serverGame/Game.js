@@ -33,7 +33,7 @@ class Game {
                 this.players[playerIndex].registerKill(gameConsts.POINTS_ENEMY_KILLED);
                 break;
             case typingConsts.TM_TYPING_PARTMATCH:
-                this.players[playerIndex].registerKill(gameConsts.POINTS_NOBODY_HIT);
+                this.players[playerIndex].registerKill(gameConsts.POINTS_ENEMY_INJURED);
                 break;
             case typingConsts.TM_TYPING_TYPO:
                 this.players[playerIndex].registerKill(gameConsts.POINTS_ENEMY_MISSED);
