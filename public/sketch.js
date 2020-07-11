@@ -8,6 +8,7 @@ let gui = new GUI(players);
 let fxManger = new EffectsManager();
 let menuGUI = new GameMenu();
 let gameOver = false;
+let winner = 1;
 let gameMap = 'Ice Peaks';
 let fileManager = new FileManager();
 
@@ -26,6 +27,7 @@ socket.on("heartbeat", (game) => {
         updateLoot(game.loot);
         gameOver = game.gamestatus;
         gameMap = game.gamemap;
+        winner = game.winner;
     }
 });
 
@@ -75,7 +77,11 @@ draw = () =>  {
         fill(255,0,0);
         textSize(100);
         textAlign(CENTER, BOTTOM);
-        text('Game Over!', ...resolution.map(x => x/2));
+        if(players.size <= 1) {
+            text('Game Over!', ...resolution.map(x => x / 2));
+        } else {
+            text('Player: ' + winner + ' Wins!!!', ...resolution.map(x => x / 2));
+        }
         textAlign(LEFT, TOP);
     }
     menuGUI.draw();

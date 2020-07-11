@@ -13,6 +13,7 @@ class Player {
         this.size = 25;
         this.direction = 3;
         this.shotsMade = 0;
+        this.side = side;
 
         this.rgb = gameConsts.PLAYER_SIDE_COLOR[side];
     }
@@ -27,6 +28,14 @@ class Player {
 
     getId = () =>  {
         return this.id;
+    };
+
+    getScore = () => {
+        return this.score;
+    };
+
+    getSide = () => {
+        return this.side;
     };
 
     getColor = () =>  {

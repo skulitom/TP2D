@@ -18,6 +18,7 @@ class Game {
         this.timer = 0;
         this.freqCoef = gameConsts.INITIAL_FREQUENCY;
         this.gameOver = false;
+        this.winner = 1;
         this.gameMap = "Green Desert";
     }
 
@@ -45,6 +46,14 @@ class Game {
                 this.players[playerIndex].registerKill(gameConsts.POINTS_NOBODY_HIT);
                 break;
         }
+    };
+
+    determineWinner = () => {
+        const playerWinner = this.players.reduce((prevPlayer, curPlayer) => {
+            return prevPlayer.getScore() > curPlayer.getScore() ? prevPlayer : curPlayer;
+        });
+
+        this.winner = playerWinner.getSide() + 1;
     };
 
     removePlayer = (id) => {
@@ -109,7 +118,8 @@ class Game {
             'enemies': this.enemies,
             'loot': this.loot,
             'gamestatus': this.gameOver,
-            'gamemap': this.gameMap
+            'gamemap': this.gameMap,
+            'winner': this.winner
         }
     };
 
@@ -155,6 +165,7 @@ class Game {
             });
             if(allDead){
                 this.gameOver = true;
+                this.determineWinner();
             }
 
             if (this.isCreationTime(gameConsts.BOSS_ENEMY_COEF)) {
