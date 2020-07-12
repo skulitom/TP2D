@@ -70,6 +70,7 @@ class Game {
                 this.players[2].updatePosition(gameConsts.PLAYER_POSITIONS_3[2]);
                 break;
         }
+        this.enemies.forEach(enemy => enemy.updatePlayer(this.getRandomItem(this.players)));
     };
 
     addPlayer = (id) => {
@@ -95,6 +96,7 @@ class Game {
         let newPlayer = new Player(id, newPlayerPos, this.players.length, this.tManager);
         this.tManager.registerPlayer(newPlayer);
         this.players.push(newPlayer);
+        this.enemies.forEach(enemy => enemy.updatePlayer(this.getRandomItem(this.players)));
     };
 
     addLoot = () => {
