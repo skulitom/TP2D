@@ -18,6 +18,11 @@ class Player {
         this.rgb = gameConsts.PLAYER_SIDE_COLOR[side];
     }
 
+    updatePosition = (position) => {
+        this.x = position[0];
+        this.y = position[1];
+    };
+
     getIsDead = () => {
         return this.bDead;
     };

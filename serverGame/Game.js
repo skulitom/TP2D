@@ -12,8 +12,6 @@ class Game {
         this.players = [];
         this.enemies = [];
         this.loot = [];
-        this.availablePositions = [0,1,2,3];
-        this.takenPositions = new Map();
         this.tManager = new TypeManager();
         this.timer = 0;
         this.freqCoef = gameConsts.INITIAL_FREQUENCY;
@@ -57,16 +55,44 @@ class Game {
     };
 
     removePlayer = (id) => {
-        this.availablePositions.push(this.takenPositions.get(id));
-        this.takenPositions.delete(id);
         this.players = this.players.filter(player => player.id !== id);
+        switch (this.players.length) {
+            case 1:
+                this.players[0].updatePosition(gameConsts.SINGLE_PLAYER_POSITION);
+                break;
+            case 2:
+                this.players[0].updatePosition(gameConsts.PLAYER_POSITIONS_2[0]);
+                this.players[1].updatePosition(gameConsts.PLAYER_POSITIONS_2[1]);
+                break;
+            case 3:
+                this.players[0].updatePosition(gameConsts.PLAYER_POSITIONS_3[0]);
+                this.players[1].updatePosition(gameConsts.PLAYER_POSITIONS_3[1]);
+                this.players[2].updatePosition(gameConsts.PLAYER_POSITIONS_3[2]);
+                break;
+        }
     };
 
     addPlayer = (id) => {
-        const positionIndex = this.availablePositions.pop();
-        this.takenPositions.set(id, positionIndex);
-        console.log(gameConsts.PLAYER_POSITIONS[positionIndex]);
-        let newPlayer = new Player(id, gameConsts.PLAYER_POSITIONS[positionIndex], this.players.length, this.tManager);
+        let newPlayerPos = gameConsts.SINGLE_PLAYER_POSITION;
+        switch (this.players.length) {
+            case 1:
+                this.players[0].updatePosition(gameConsts.PLAYER_POSITIONS_2[0]);
+                newPlayerPos = gameConsts.PLAYER_POSITIONS_2[1];
+                break;
+            case 2:
+                for(let i=0;i<2;i++) {
+                    this.players[i].updatePosition(gameConsts.PLAYER_POSITIONS_3[i]);
+                }
+                newPlayerPos = gameConsts.PLAYER_POSITIONS_3[2];
+                break;
+            case 3:
+                for(let i=0;i<3;i++) {
+                    this.players[i].updatePosition(gameConsts.PLAYER_POSITIONS_4[i]);
+                }
+                newPlayerPos = gameConsts.PLAYER_POSITIONS_4[3];
+                break;
+        }
+        let newPlayer = new Player(id, newPlayerPos, this.players.length, this.tManager);
         this.tManager.registerPlayer(newPlayer);
         this.players.push(newPlayer);
     };

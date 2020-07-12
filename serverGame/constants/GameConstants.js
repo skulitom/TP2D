@@ -38,7 +38,17 @@ module.exports = Object.freeze( new function() {
     this.GAME_WIDTH= 1920;
     this.GAME_HEIGHT= 1080;
     this.POSITION_SHIFT= 100;
-    this.PLAYER_POSITIONS= [
+    this.SINGLE_PLAYER_POSITION = [Math.floor(this.GAME_WIDTH/2), Math.floor(this.GAME_HEIGHT/2)];
+    this.PLAYER_POSITIONS_2 = [
+        [Math.floor(this.GAME_WIDTH/2 - this.POSITION_SHIFT), Math.floor(this.GAME_HEIGHT/2)],
+        [Math.floor(this.GAME_WIDTH/2 + this.POSITION_SHIFT), Math.floor(this.GAME_HEIGHT/2)],
+    ];
+    this.PLAYER_POSITIONS_3 = [
+        [Math.floor(this.GAME_WIDTH/2 - this.POSITION_SHIFT), Math.floor(this.GAME_HEIGHT/2 - this.POSITION_SHIFT)],
+        [Math.floor(this.GAME_WIDTH/2 + this.POSITION_SHIFT), Math.floor(this.GAME_HEIGHT/2 - this.POSITION_SHIFT)],
+        [Math.floor(this.GAME_WIDTH/2), Math.floor(this.GAME_HEIGHT/2 + this.POSITION_SHIFT)]
+    ];
+    this.PLAYER_POSITIONS_4 = [
         [Math.floor(this.GAME_WIDTH/2 - this.POSITION_SHIFT), Math.floor(this.GAME_HEIGHT/2 - this.POSITION_SHIFT)],
         [Math.floor(this.GAME_WIDTH/2 - this.POSITION_SHIFT), Math.floor(this.GAME_HEIGHT/2 + this.POSITION_SHIFT)],
         [Math.floor(this.GAME_WIDTH/2 + this.POSITION_SHIFT), Math.floor(this.GAME_HEIGHT/2 - this.POSITION_SHIFT)],
