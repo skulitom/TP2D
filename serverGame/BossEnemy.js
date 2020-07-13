@@ -10,6 +10,10 @@ class BossEnemy extends Enemy {
         this.speed = 1;
         this.rgb = gameConsts.GREEN;
     }
+
+    giveBirth = (enemy) => {
+        enemy.setPosition([this.x, this.y]);
+    };
 }
 
 module.exports = BossEnemy;

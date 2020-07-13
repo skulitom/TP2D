@@ -34,6 +34,7 @@ class Enemy extends Typeble {
         this.texture = 'frodo';
         this.fillRGB = gameConsts.RED;
         this.rgb = gameConsts.RED;
+        this.inBirth = false;
     }
 
     updatePlayer = (player) => {
@@ -45,6 +46,11 @@ class Enemy extends Typeble {
 
     getX = () => {
         return this.x;
+    };
+
+    setPosition = (position) => {
+        this.x = position[0];
+        this.y = position[1];
     };
 
     getY = () => {
