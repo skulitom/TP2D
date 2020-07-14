@@ -48,9 +48,14 @@ class Enemy extends Typeble {
         return this.x;
     };
 
+    setSpeed = (speed) => {
+        this.speed = speed;
+    };
+
     setPosition = (position) => {
         this.x = position[0];
         this.y = position[1];
+        this.rotate();
     };
 
     getY = () => {

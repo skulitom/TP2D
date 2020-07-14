@@ -12,7 +12,17 @@ class BossEnemy extends Enemy {
     }
 
     giveBirth = (enemy) => {
-        enemy.setPosition([this.x, this.y]);
+        if(this.bDead) {
+            return;
+        }
+        enemy.setPosition(this.getRandomSpawnToss([this.x, this.y]));
+        enemy.setSpeed(0);
+    };
+    
+    getRandomSpawnToss = (position) => {
+        position[0] = position[0] + (Math.random()*10 -5);
+        position[1] = position[1] + (Math.random()*10 -5);
+        return position;
     };
 }
 

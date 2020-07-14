@@ -109,6 +109,7 @@ class Game {
         let enemy = new Enemy(shortid.generate(), this.getRandomItem(this.players));
         this.enemies.push(enemy);
         this.tManager.registerTypeble(enemy);
+        return enemy;
     };
 
     addBossEnemy = () => {
@@ -205,6 +206,12 @@ class Game {
             this.updateEnemies();
 
             if (this.isCreationTime(gameConsts.ENEMY_COEF)) {
+                this.enemies.forEach(enemy => {
+                    console.log(typeof enemy);
+                    if(enemy instanceof BossEnemy) {
+                        enemy.giveBirth(this.addEnemy());
+                    }
+                });
                 this.addEnemy();
             }
         }
