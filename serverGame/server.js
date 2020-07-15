@@ -24,6 +24,10 @@ io.sockets.on('connection', socket => {
             gameManager.onKey(room, msg.id, msg.key);
         });
 
+        socket.on('restart', () => {
+            gameManager.restartGame(room);
+        });
+
         socket.on('disconnect', () => {
             io.sockets.in(room).emit("disconnect", socket.id);
             gameManager.removePlayer(room, socket.id);

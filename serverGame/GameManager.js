@@ -25,6 +25,11 @@ class GameManager {
         this.games.delete(room);
     };
 
+    restartGame = (room) => {
+        this.closeGame(room);
+        this.createGame(room);
+    };
+
     getEmitable = (room) => {
         return this.games.get(room).getEmitable();
     };
