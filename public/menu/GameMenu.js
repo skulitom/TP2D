@@ -52,7 +52,7 @@ class GameMenu {
     };
 
     restartButtonClicked = () => {
-        socket.emit('restart');
+        socket.emit('disconnect');
     };
 
     resumeButtonClicked = () => {
