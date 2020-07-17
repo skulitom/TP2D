@@ -6,20 +6,7 @@ class Enemy extends Typeble {
     constructor(id, player) {
         super(id);
         this.size = 15;
-        let random = Math.random();
-        if(random <= 0.25){
-            this.x = 0 - this.size;
-            this.y = Math.random()*gameConsts.GAME_HEIGHT + 1;
-        } else if(random <= 0.5) {
-            this.x = gameConsts.GAME_WIDTH + 1 + this.size;
-            this.y = Math.random()* gameConsts.GAME_HEIGHT + 1;
-        } else if(random <= 0.75) {
-            this.y = 0 - this.size;
-            this.x = Math.random()*gameConsts.GAME_WIDTH +1;
-        } else {
-            this.y = gameConsts.GAME_HEIGHT + 1 + this.size;
-            this.x = Math.random()*gameConsts.GAME_WIDTH +1;
-        }
+        this.setRandomPositionOnTheEdge();
         this.words = consts.CHARACTERS.charAt(Math.floor(Math.random() * consts.CHARACTERS.length));
         this.speed = 2;
         this.typedWords = "";
@@ -36,6 +23,23 @@ class Enemy extends Typeble {
         this.rgb = gameConsts.RED;
         this.inBirth = false;
     }
+
+    setRandomPositionOnTheEdge = () => {
+        let random = Math.random();
+        if(random <= 0.25){
+            this.x = 0 - this.size;
+            this.y = Math.random()*gameConsts.GAME_HEIGHT + 1;
+        } else if(random <= 0.5) {
+            this.x = gameConsts.GAME_WIDTH + 1 + this.size;
+            this.y = Math.random()* gameConsts.GAME_HEIGHT + 1;
+        } else if(random <= 0.75) {
+            this.y = 0 - this.size;
+            this.x = Math.random()*gameConsts.GAME_WIDTH +1;
+        } else {
+            this.y = gameConsts.GAME_HEIGHT + 1 + this.size;
+            this.x = Math.random()*gameConsts.GAME_WIDTH +1;
+        }
+    };
 
     updatePlayer = (player) => {
         this.playerX = player.x;
@@ -107,14 +111,15 @@ class Enemy extends Typeble {
 
     destroy() {
         super.destroy();
-        this.bDead = true;
-        this.speed = 0;
-        this.hitPower = 0;
-        this.inHitArea = false;
+        this.killEnemy();
     }
 
     kill = (killer) => {
         super.kill(killer);
+        this.killEnemy();
+    };
+
+    killEnemy = () => {
         this.bDead = true;
         this.speed = 0;
         this.hitPower = 0;

@@ -29,6 +29,7 @@ io.sockets.on('connection', socket => {
         });
 
         socket.on('disconnect', () => {
+            console.log('disconnected');
             io.sockets.in(room).emit("disconnect", socket.id);
             gameManager.removePlayer(room, socket.id);
             if(!(io.sockets.adapter.rooms[room])) {
