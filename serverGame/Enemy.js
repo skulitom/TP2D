@@ -8,7 +8,7 @@ class Enemy extends Typeble {
         this.size = 15;
         this.setRandomPositionOnTheEdge();
         this.words = consts.CHARACTERS.charAt(Math.floor(Math.random() * consts.CHARACTERS.length));
-        this.speed = 2;
+        this.speed = gameConsts.ENEMY_SPEED;
         this.typedWords = "";
         this.bDead = false;
         this.inHitArea = false;

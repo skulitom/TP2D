@@ -14,6 +14,8 @@ module.exports = Object.freeze( new function() {
     this.POINTS_NOBODY_HIT= -0.5;
     this.DAMAGE_COEF= 10;
     this.PLAYER_HIT_RADIUS= 60;
+    this.ENEMY_SPEED= 2;
+    this.BOSS_ENEMY_SPEED= 1;
     this.RED= {
         r: 220,
         g: 30,

@@ -27,7 +27,7 @@ class GameManager {
 
     restartGame = (room) => {
         this.closeGame(room);
-        //this.createGame(room);
+        this.createGame(room);
     };
 
     getEmitable = (room) => {

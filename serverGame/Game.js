@@ -183,37 +183,57 @@ class Game {
         return Math.floor(this.timer % coef) === 0;
     };
 
+    getIsAllDead = () => {
+        let allDead = true;
+        this.players.forEach(player => {
+            if(!player.getIsDead()){
+                allDead = false;
+            }
+        });
+        return allDead;
+    };
+
+    updateNPCs = () => {
+        this.createBossEnemiesIfTime();
+        this.createLootIfTime();
+        this.updateEnemies();
+        this.createEnemiesIfTime();
+    };
+
+    createBossEnemiesIfTime = () => {
+        if (this.isCreationTime(gameConsts.BOSS_ENEMY_COEF)) {
+            this.addBossEnemy();
+            this.updateFrequencyCoef();
+        }
+    };
+
+    createLootIfTime = () => {
+        if(this.isCreationTime(gameConsts.LOOT_COEF)) {
+            this.addLoot();
+        }
+    };
+
+    createEnemiesIfTime = () => {
+        if (this.isCreationTime(gameConsts.ENEMY_COEF)) {
+            this.enemies.forEach(enemy => {
+                console.log(typeof enemy);
+                if(enemy instanceof BossEnemy) {
+                    enemy.giveBirth(this.addEnemy());
+                }
+            });
+            this.addEnemy();
+        }
+    };
+
     update = () => {
         this.timer++;
         if (this.players[0]) {
-            let allDead = true;
-            this.players.forEach(player => {
-                if(!player.getIsDead()){
-                    allDead = false;
-                }
-            });
+            const allDead = this.getIsAllDead();
             if(allDead){
                 this.gameOver = true;
                 this.determineWinner();
             }
-
-            if (this.isCreationTime(gameConsts.BOSS_ENEMY_COEF)) {
-                this.addBossEnemy();
-                this.updateFrequencyCoef();
-            }else if(this.isCreationTime(gameConsts.LOOT_COEF)) {
-                this.addLoot();
-            }
-            this.updateEnemies();
-
-            if (this.isCreationTime(gameConsts.ENEMY_COEF)) {
-                this.enemies.forEach(enemy => {
-                    console.log(typeof enemy);
-                    if(enemy instanceof BossEnemy) {
-                        enemy.giveBirth(this.addEnemy());
-                    }
-                });
-                this.addEnemy();
-            }
+            this.updateNPCs();
         }
         if (this.timer > gameConsts.MAX_TIME) {
             this.timer -= gameConsts.MAX_TIME;
