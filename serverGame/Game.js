@@ -153,25 +153,32 @@ class Game {
     };
 
     updateEnemies = () => {
-        this.loot.forEach((lootLoc) => {
-            if(lootLoc.getToExplode()){
-                lootLoc.explode(this.enemies);
-            }
-        });
         this.enemies.forEach((enemy) => {
-            let enemyHasPlayer = false;
-            this.players.forEach(player => {
-               if(player.getId() === enemy.getPlayerId()){
-                   if(!player.getIsDead()) {
-                       enemyHasPlayer = true;
-                   }
-               }
-            });
-            if(!enemyHasPlayer && !this.gameOver){
+            if(!this.enemyHasPlayer(enemy) && !this.gameOver){
                 enemy.updatePlayer(this.getRandomItem(this.players));
             }
             enemy.update();
             this.distributeDamage(enemy);
+        });
+    };
+
+    enemyHasPlayer = (enemy) => {
+        let enemyHasPlayer = false;
+        this.players.forEach(player => {
+            if(player.getId() === enemy.getPlayerId()){
+                if(!player.getIsDead()) {
+                    enemyHasPlayer = true;
+                }
+            }
+        });
+        return enemyHasPlayer;
+    };
+
+    updateLoot = () => {
+        this.loot.forEach((lootLoc) => {
+            if(lootLoc.getToExplode()){
+                lootLoc.explode(this.enemies);
+            }
         });
     };
 
@@ -196,6 +203,7 @@ class Game {
     updateNPCs = () => {
         this.createBossEnemiesIfTime();
         this.createLootIfTime();
+        this.updateLoot();
         this.updateEnemies();
         this.createEnemiesIfTime();
     };
@@ -216,7 +224,6 @@ class Game {
     createEnemiesIfTime = () => {
         if (this.isCreationTime(gameConsts.ENEMY_COEF)) {
             this.enemies.forEach(enemy => {
-                console.log(typeof enemy);
                 if(enemy instanceof BossEnemy) {
                     enemy.giveBirth(this.addEnemy());
                 }
