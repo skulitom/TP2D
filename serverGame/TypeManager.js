@@ -93,11 +93,6 @@ class TypeManager {
         return consts.TM_TYPING_PARTMATCH;
     };
 
-    logout = (enemy) => {
-        //for (let k)
-
-    }
-
 }
 
 module.exports = TypeManager;
