@@ -1,18 +1,12 @@
 class Loot {
     constructor(loot) {
-        this.x = loot.x*resolutionMultipleX;
-        this.y = loot.y*resolutionMultipleY;
         this.id = loot.id;
+        this.drawManager = new DrawManager();
+        this.modifyCommonParameters(loot);
         this.rgb = loot.rgb;
-        this.fillRGB = loot.fillRGB;
         this.words = loot.words;
-        this.typedWords = loot.typedWords;
-        this.isOpen = loot.isOpen;
-        this.killerColor = loot.killerColor;
         this.radius = loot.radius;
         this.timer = 0;
-        this.drawManager = new DrawManager();
-        this.size = this.drawManager.getAdjustedSize(loot.size);
         this.drawManager.uploadAnimation('rocketLand', rocketAnimation, 0.032, false);
         this.drawManager.startAnimation('rocketLand');
         landingRocketSound.play();
@@ -20,15 +14,19 @@ class Loot {
     }
 
     modify = (loot) => {
+        if(this.isOpen !== loot.isOpen) {
+            explosionSound.play();
+            this.drawManager.startAnimation('rocketExplode');
+        }
+        this.modifyCommonParameters(loot);
+    };
+
+    modifyCommonParameters = (loot) => {
         this.x = loot.x*resolutionMultipleX;
         this.y = loot.y*resolutionMultipleY;
         this.size = this.drawManager.getAdjustedSize(loot.size);
         this.typedWords = loot.typedWords;
         this.fillRGB = loot.fillRGB;
-        if(this.isOpen !== loot.isOpen) {
-            explosionSound.play();
-            this.drawManager.startAnimation('rocketExplode');
-        }
         this.isOpen = loot.isOpen;
         this.killerColor = loot.killerColor;
     };

@@ -1,20 +1,13 @@
 class Enemy {
     constructor(enemy, fxManager) {
-        this.x = enemy.x*resolutionMultipleX;
-        this.y = enemy.y*resolutionMultipleY;
         this.id = enemy.id;
+        this.drawManager = new DrawManager();
+        this.modifyComonParameters(enemy);
         this.rgb = enemy.rgb;
-        this.fillRGB = enemy.fillRGB;
         this.words = enemy.words;
-        this.typedWords = enemy.typedWords;
-        this.speed = enemy.speed;
         this.bDead = enemy.bDead;
         this.shot = false;
-        this.killerColor = enemy.killerColor;
         this.texture = enemy.texture;
-        this.direction = enemy.direction;
-        this.drawManager = new DrawManager();
-        this.size = this.drawManager.getAdjustedSize(enemy.size);
         this.drawManager.uploadAnimation('move', frodoMove, 0.01, true, true);
         this.drawManager.uploadAnimation('dead', frodoDead1, 0.01, false, false);
     }
@@ -26,6 +19,15 @@ class Enemy {
                 enemyHitSound.play();
             }
         }
+        if (enemy.bDead && !this.bDead) {
+            this.bDead = enemy.bDead;
+            enemySplatSound.play();
+            this.drawManager.startAnimation('dead');
+        }
+        this.modifyComonParameters(enemy);
+    };
+
+    modifyComonParameters = (enemy) => {
         this.size = this.drawManager.getAdjustedSize(enemy.size);
         this.typedWords = enemy.typedWords;
         this.fillRGB = enemy.fillRGB;
@@ -34,11 +36,6 @@ class Enemy {
         this.y = enemy.y*resolutionMultipleY;
         this.killerColor = enemy.killerColor;
         this.direction = enemy.direction;
-        if (enemy.bDead && !this.bDead) {
-            this.bDead = enemy.bDead;
-            enemySplatSound.play();
-            this.drawManager.startAnimation('dead');
-        }
     };
 
     getId = () =>  {
