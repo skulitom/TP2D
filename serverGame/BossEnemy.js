@@ -20,8 +20,8 @@ class BossEnemy extends Enemy {
     };
     
     getRandomSpawnToss = (position) => {
-        position[0] = position[0] + (Math.random()*10 -5);
-        position[1] = position[1] + (Math.random()*10 -5);
+        position[0] = position[0] + (Math.random()*gameConsts.SPAWN_LOCATION_MINION -gameConsts.SPAWN_LOCATION_MINION/2);
+        position[1] = position[1] + (Math.random()*gameConsts.SPAWN_LOCATION_MINION -gameConsts.SPAWN_LOCATION_MINION/2);
         return position;
     };
 }

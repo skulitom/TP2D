@@ -15,6 +15,7 @@ module.exports = Object.freeze( new function() {
     this.DAMAGE_COEF= 10;
     this.PLAYER_HIT_RADIUS= 60;
     this.ENEMY_SPEED= 2;
+    this.SPAWN_LOCATION_MINION=10;
     this.BOSS_ENEMY_SPEED= 1;
     this.RED= {
         r: 220,
