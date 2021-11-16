@@ -16,7 +16,7 @@
     "random-words": "^1.1.1",
     "shortid": "^2.2.15",
     "socket.io": "^2.2.0",
-    "aws-sdk": ">= 2.0.9",
+    "aws-sdk": ">= 2.814.0",
     "node-uuid": ">= 1.4.1"
   },
   "devDependencies": {
